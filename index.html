@@ -400,47 +400,52 @@ canvas{max-width:100%;border-radius:10px;display:block;margin:0 auto;box-shadow:
 .color-item label{color:#C8960C;font-size:0.58rem;display:block;margin-bottom:3px;text-align:center;}
 .color-item input[type=color]{width:100%;height:36px;border:2px solid #3a0000;border-radius:6px;cursor:pointer;background:none;}
 .pos-pad{background:#1a0800;border-radius:8px;padding:8px;text-align:center;}
-/* ═══ AUTH GATE ═══ */
+/* ═══ AUTH GATE — HolyVerse Bible Studio theme ═══ */
 #authGate{
   position:fixed;inset:0;z-index:9999;padding:24px;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   background:
-    radial-gradient(ellipse 600px 400px at 50% -10%, rgba(255,215,0,0.10), transparent 60%),
-    repeating-linear-gradient(115deg, rgba(255,215,0,0.025) 0px, rgba(255,215,0,0.025) 1px, transparent 1px, transparent 46px),
-    linear-gradient(170deg,#0a0000 0%,#150008 55%,#1c0010 100%);
+    radial-gradient(ellipse 700px 500px at 50% -5%, rgba(147,51,234,0.22), transparent 62%),
+    radial-gradient(ellipse 500px 350px at 90% 15%, rgba(255,215,0,0.08), transparent 60%),
+    repeating-linear-gradient(115deg, rgba(255,215,0,0.02) 0px, rgba(255,215,0,0.02) 1px, transparent 1px, transparent 46px),
+    linear-gradient(170deg,#0a0612 0%,#150a1c 45%,#1c0f0a 100%);
   overflow:hidden;
 }
 #authGate.hidden{display:none;}
 #authGate::before{
-  content:'';position:absolute;top:-120px;left:50%;transform:translateX(-50%);
-  width:480px;height:480px;border-radius:50%;
-  background:radial-gradient(circle, rgba(255,215,0,0.16) 0%, transparent 68%);
+  content:'';position:absolute;top:-140px;left:50%;transform:translateX(-50%);
+  width:560px;height:560px;border-radius:50%;
+  background:radial-gradient(circle, rgba(255,215,0,0.14) 0%, rgba(147,51,234,0.08) 45%, transparent 68%);
   pointer-events:none;
 }
-.auth-eyebrow{position:relative;color:#a0793a;font-size:0.6rem;letter-spacing:0.22em;text-transform:uppercase;margin-bottom:14px;text-align:center;}
+.auth-eyebrow{position:relative;color:#c9a15a;font-size:0.62rem;letter-spacing:0.3em;text-transform:uppercase;margin-bottom:16px;text-align:center;}
 .auth-badge{
-  position:relative;width:64px;height:64px;border-radius:50%;margin:0 auto 14px;
-  display:flex;align-items:center;justify-content:center;font-size:1.7rem;
-  background:radial-gradient(circle at 35% 30%, #3a2400, #180f00 75%);
-  border:1px solid #6a4400;
-  box-shadow:0 0 0 1px rgba(255,215,0,0.08), 0 0 28px rgba(255,215,0,0.30), inset 0 1px 0 rgba(255,255,255,0.06);
+  position:relative;width:104px;height:104px;border-radius:26px;margin:0 auto 16px;
+  display:flex;align-items:center;justify-content:center;overflow:hidden;
+  background:radial-gradient(circle at 35% 30%, #2a1a00, #0e0a14 75%);
+  border:1.5px solid #a5772a;
+  box-shadow:0 0 0 1px rgba(255,215,0,0.10), 0 0 32px rgba(255,215,0,0.28), inset 0 1px 0 rgba(255,255,255,0.08);
   animation:authGlow 3.4s ease-in-out infinite;
 }
+.auth-badge img{width:100%;height:100%;object-fit:cover;}
 @keyframes authGlow{
-  0%,100%{box-shadow:0 0 0 1px rgba(255,215,0,0.08),0 0 20px rgba(255,215,0,0.22),inset 0 1px 0 rgba(255,255,255,0.06);}
-  50%{box-shadow:0 0 0 1px rgba(255,215,0,0.14),0 0 34px rgba(255,215,0,0.42),inset 0 1px 0 rgba(255,255,255,0.08);}
+  0%,100%{box-shadow:0 0 0 1px rgba(255,215,0,0.10),0 0 22px rgba(255,215,0,0.22),inset 0 1px 0 rgba(255,255,255,0.08);}
+  50%{box-shadow:0 0 0 1px rgba(255,215,0,0.18),0 0 40px rgba(255,215,0,0.44),inset 0 1px 0 rgba(255,255,255,0.1);}
 }
-.auth-title{position:relative;text-align:center;color:var(--gold);font-size:1.3rem;font-weight:700;letter-spacing:0.02em;margin-bottom:4px;font-family:Georgia,'Noto Serif Tamil',serif;}
-.auth-sub{position:relative;text-align:center;color:#9a8a7a;font-size:0.72rem;line-height:1.5;margin:0 auto 18px;max-width:280px;}
+.auth-title{position:relative;text-align:center;color:var(--gold);font-size:1.55rem;font-weight:700;letter-spacing:0.02em;margin-bottom:2px;font-family:Georgia,'Noto Serif Tamil',serif;}
+.auth-title-sub{position:relative;text-align:center;color:#c9a15a;font-size:0.68rem;letter-spacing:0.35em;text-transform:uppercase;margin-bottom:14px;}
+.auth-sub{position:relative;text-align:center;color:#a89684;font-size:0.72rem;line-height:1.5;margin:0 auto 18px;max-width:280px;}
 .auth-features{position:relative;display:flex;gap:8px;justify-content:center;margin-bottom:22px;flex-wrap:wrap;}
-.auth-feature-chip{display:flex;align-items:center;gap:5px;background:rgba(255,215,0,0.06);border:1px solid rgba(255,215,0,0.18);color:#d9b96a;font-size:0.6rem;padding:5px 10px;border-radius:20px;white-space:nowrap;}
+.auth-feature-chip{display:flex;align-items:center;gap:5px;background:rgba(255,215,0,0.06);border:1px solid rgba(255,215,0,0.2);color:#d9b96a;font-size:0.6rem;padding:5px 10px;border-radius:20px;white-space:nowrap;}
 .auth-card{
   position:relative;width:100%;max-width:340px;
-  background:linear-gradient(180deg,#150009,#0d0006);
-  border:1px solid #3a0020;border-radius:18px;padding:24px 22px;
-  box-shadow:0 20px 60px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,215,0,0.04);
+  background:linear-gradient(180deg,#170f0a,#0d0a08);
+  border:1px solid #4a3010;border-radius:20px;padding:24px 22px;
+  box-shadow:0 20px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,215,0,0.06);
   animation:authCardIn 0.55s cubic-bezier(0.16,1,0.3,1) both;
 }
+.auth-welcome{position:relative;text-align:center;color:var(--gold);font-size:0.82rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:4px;}
+.auth-welcome-sub{position:relative;text-align:center;color:#8a7a68;font-size:0.68rem;margin-bottom:18px;}
 @keyframes authCardIn{from{opacity:0;transform:translateY(14px) scale(0.98);}to{opacity:1;transform:translateY(0) scale(1);}}
 @media (prefers-reduced-motion: reduce){
   .auth-badge{animation:none;}
@@ -474,14 +479,78 @@ canvas{max-width:100%;border-radius:10px;display:block;margin:0 auto;box-shadow:
 .acct-mode{color:#a855f7;font-size:0.62rem;}
 .acct-sync-badge{font-size:0.6rem;padding:2px 8px;border-radius:10px;background:#22c55e33;color:#4ade80;white-space:nowrap;}
 .acct-sync-badge.syncing{background:#f59e0b33;color:#fbbf24;}
+
+/* ═══ CHURCH INFO ONBOARDING (shown once, after login) ═══ */
+#churchOnboard{
+  position:fixed;inset:0;z-index:9998;padding:24px 20px;overflow-y:auto;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:
+    radial-gradient(ellipse 500px 400px at 85% 0%, rgba(255,215,0,0.16), transparent 60%),
+    linear-gradient(170deg,#0d0904 0%,#150e08 50%,#0a0603 100%);
+}
+#churchOnboard.hidden{display:none;}
+.co-eyebrow{color:#c9a15a;font-size:0.62rem;letter-spacing:0.25em;text-transform:uppercase;margin-bottom:6px;text-align:center;}
+.co-title{color:var(--gold);font-size:1.5rem;font-weight:700;text-align:center;font-family:Georgia,'Noto Serif Tamil',serif;margin-bottom:6px;}
+.co-sub{color:#a89684;font-size:0.72rem;text-align:center;max-width:300px;margin:0 auto 20px;line-height:1.5;}
+.co-icon-ring{
+  width:70px;height:70px;border-radius:50%;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;
+  font-size:1.7rem;background:radial-gradient(circle at 35% 30%,#2a1a00,#0e0a05 75%);
+  border:1.5px solid #a5772a;box-shadow:0 0 24px rgba(255,215,0,0.25), inset 0 1px 0 rgba(255,255,255,0.08);
+}
+.co-card{
+  position:relative;width:100%;max-width:340px;
+  background:linear-gradient(180deg,#17110a,#0d0a06);
+  border:1px solid #4a3010;border-radius:20px;padding:22px 20px;
+  box-shadow:0 20px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,215,0,0.06);
+}
+.co-card-heading{color:var(--gold);font-size:0.9rem;font-weight:700;text-align:center;margin-bottom:4px;}
+.co-card-sub{color:#8a7a68;font-size:0.66rem;text-align:center;margin-bottom:16px;}
+.co-field{position:relative;background:#0a0704;border:1px solid #4a3010;border-radius:12px;padding:10px 12px;margin-bottom:10px;display:flex;align-items:center;gap:10px;}
+.co-field.required{border-color:#a5772a;}
+.co-field-icon{font-size:1.1rem;flex-shrink:0;width:26px;text-align:center;}
+.co-field-body{flex:1;min-width:0;}
+.co-field-label{color:#d9b96a;font-size:0.68rem;font-weight:700;display:flex;align-items:center;gap:5px;}
+.co-field-label .req{color:#e05252;}
+.co-field-label .opt{color:#7a6a58;font-weight:400;font-size:0.6rem;}
+.co-field input{width:100%;background:transparent;border:none;color:#fff;font-size:0.78rem;padding:3px 0 0;outline:none;}
+.co-field input::placeholder{color:#5a4c3c;}
+.co-hint{display:flex;align-items:center;gap:8px;color:#7a6a58;font-size:0.62rem;line-height:1.4;margin:12px 0 16px;}
+.co-continue-btn{width:100%;background:linear-gradient(135deg,#c9922e,#e8b84b);color:#1a1000;border:none;border-radius:12px;padding:13px;font-size:0.84rem;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 6px 18px rgba(201,146,46,0.35);}
+.co-continue-btn:active{transform:translateY(1px);}
+.co-skip{width:100%;background:none;border:none;color:#786858;font-size:0.64rem;text-align:center;margin-top:10px;cursor:pointer;}
+
+/* ═══ HEADER HAMBURGER + SIDE DRAWER ═══ */
+.header{position:relative;}
+.menu-hamburger{
+  position:absolute;top:12px;right:12px;width:38px;height:38px;border-radius:10px;
+  background:rgba(255,215,0,0.08);border:1px solid rgba(255,215,0,0.25);color:var(--gold);
+  font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:5;
+}
+.drawer-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:10000;opacity:0;pointer-events:none;transition:opacity 0.25s;}
+.drawer-overlay.show{opacity:1;pointer-events:auto;}
+.church-drawer{
+  position:fixed;top:0;right:0;bottom:0;width:82%;max-width:320px;z-index:10001;
+  background:linear-gradient(180deg,#150e08,#0a0603);border-left:1px solid #4a3010;
+  box-shadow:-10px 0 40px rgba(0,0,0,0.5);
+  transform:translateX(100%);transition:transform 0.28s cubic-bezier(0.16,1,0.3,1);
+  display:flex;flex-direction:column;
+}
+.church-drawer.open{transform:translateX(0);}
+.drawer-head{display:flex;align-items:center;justify-content:space-between;padding:16px;border-bottom:1px solid #3a2510;}
+.drawer-head span{color:var(--gold);font-size:0.9rem;font-weight:700;}
+.drawer-head button{background:none;border:none;color:#a89684;font-size:1.1rem;cursor:pointer;}
+.drawer-body{flex:1;overflow-y:auto;padding:16px;}
+.drawer-footer{padding:16px;border-top:1px solid #3a2510;}
+.drawer-footer button{width:100%;background:linear-gradient(135deg,#7a1f1f,#a52a2a);color:#fff;border:none;border-radius:11px;padding:12px;font-size:0.8rem;font-weight:700;cursor:pointer;}
 </style>
 </head>
 <body>
 
 <div id="authGate">
-  <div class="auth-eyebrow">✝ Verse Studio</div>
-  <div class="auth-badge">✝️</div>
-  <div class="auth-title">உங்க வசனங்கள், எங்கும் உங்களோடு</div>
+  <div class="auth-eyebrow">✝ HolyVerse</div>
+  <div class="auth-badge"><img src="data:image/webp;base64,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" alt="HolyVerse Bible Studio"></div>
+  <div class="auth-title">HolyVerse</div>
+  <div class="auth-title-sub">Bible Studio</div>
   <div class="auth-sub">Login பண்ணா உங்க வசனங்கள், settings, backgrounds எல்லாம் எந்த phone-லயும் பாதுகாப்பா இருக்கும்</div>
   <div class="auth-features">
     <span class="auth-feature-chip">☁️ Cloud Sync</span>
@@ -490,6 +559,8 @@ canvas{max-width:100%;border-radius:10px;display:block;margin:0 auto;box-shadow:
   </div>
 
   <div class="auth-card">
+    <div class="auth-welcome">🌿 Welcome Back 🌿</div>
+    <div class="auth-welcome-sub">Sign in to continue your spiritual journey</div>
     <div id="authLoading" style="display:none;"><div class="ai-spinner"></div><span>Loading...</span></div>
 
     <div id="authForm">
@@ -522,10 +593,100 @@ canvas{max-width:100%;border-radius:10px;display:block;margin:0 auto;box-shadow:
   </div>
 </div>
 
+<!-- ═══ CHURCH INFO ONBOARDING — shown once after login/skip ═══ -->
+<div id="churchOnboard" class="hidden">
+  <div class="co-eyebrow">✝ HolyVerse</div>
+  <div class="co-icon-ring">⛪</div>
+  <div class="co-title">Church Information</div>
+  <div class="co-sub">Add your church details to personalize your posters and designs.</div>
+
+  <div class="co-card">
+    <div class="co-card-heading">🌿 Tell us about your church 🌿</div>
+    <div class="co-card-sub">This helps us automatically add your details to your creations.</div>
+
+    <div class="co-field required">
+      <div class="co-field-icon">⛪</div>
+      <div class="co-field-body">
+        <div class="co-field-label">Church Name <span class="req">*</span></div>
+        <input id="ocChurch" placeholder="Enter your church name">
+      </div>
+    </div>
+
+    <div class="co-field">
+      <div class="co-field-icon">📷</div>
+      <div class="co-field-body">
+        <div class="co-field-label">Instagram Username <span class="opt">(Optional)</span></div>
+        <input id="ocInstagram" placeholder="e.g. @yourchurch">
+      </div>
+    </div>
+
+    <div class="co-field">
+      <div class="co-field-icon">▶️</div>
+      <div class="co-field-body">
+        <div class="co-field-label">YouTube Channel <span class="opt">(Optional)</span></div>
+        <input id="ocYoutube" placeholder="e.g. Your Church Name">
+      </div>
+    </div>
+
+    <div class="co-hint">💡 You can add or update these details anytime from the ☰ menu.</div>
+
+    <button class="co-continue-btn" onclick="completeChurchOnboarding()">✨ Continue →</button>
+    <button class="co-skip" onclick="skipChurchOnboarding()">பிறகு பண்ணிக்கறேன், Skip பண்ணு</button>
+  </div>
+</div>
+
 <div class="header">
+  <button class="menu-hamburger" onclick="openChurchDrawer()">☰</button>
   <h1 id="churchName">✝ இன்றைய வசனம்</h1>
   <p id="churchSub">St. Stephen's Church · Pulavankudiyiruppu</p>
   <button id="pwaInstallBtn" onclick="pwaInstall()" style="display:none;margin-top:8px;background:linear-gradient(135deg,#7c3aed,#a855f7);color:#fff;border:none;border-radius:20px;padding:7px 16px;font-size:0.7rem;font-weight:700;cursor:pointer;">📲 App-ஆ Install பண்ணு</button>
+</div>
+
+<div class="drawer-overlay" id="drawerOverlay" onclick="closeChurchDrawer()"></div>
+<div class="church-drawer" id="churchDrawer">
+  <div class="drawer-head">
+    <span>⛪ Church Info</span>
+    <button onclick="closeChurchDrawer()">✕</button>
+  </div>
+  <div class="drawer-body">
+    <!-- ACCOUNT -->
+    <div class="sbox" style="border-color:#22c55e;">
+      <h4>👤 Account</h4>
+      <div class="acct-row">
+        <div class="acct-avatar" id="acctAvatar">👤</div>
+        <div class="acct-info">
+          <div class="acct-name" id="acctName">Login இல்ல</div>
+          <div class="acct-mode" id="acctMode">Local-only mode</div>
+        </div>
+        <span class="acct-sync-badge" id="acctSyncBadge" style="display:none;">☁️ Synced</span>
+      </div>
+      <button class="vb-btn" id="acctActionBtn" style="width:100%;" onclick="authShowGateAgain()">🔑 Login பண்ணு</button>
+    </div>
+
+    <!-- CHURCH INFO -->
+    <div class="sbox">
+      <h4>⛪ Church Info</h4>
+      <div class="srow">
+        <label>Church Name:</label>
+        <input class="cust-input" id="cChurch" value="✝ இன்றைய வசனம் | CSI St. Stephen's Church" oninput="updateChurch()">
+      </div>
+      <div class="srow">
+        <label>Subtitle:</label>
+        <input class="cust-input" id="cSub" value="CSI St. Stephen's Church, Pulavankudiyiruppu" oninput="updateChurch()">
+      </div>
+      <div class="srow">
+        <label>📷 Instagram Username:</label>
+        <input class="cust-input" id="cInstagram" placeholder="@yourchurch" oninput="saveSettingsToDB('churchInstagram', this.value)">
+      </div>
+      <div class="srow">
+        <label>▶️ YouTube Channel:</label>
+        <input class="cust-input" id="cYoutube" placeholder="Your Church Name" oninput="saveSettingsToDB('churchYoutube', this.value)">
+      </div>
+    </div>
+  </div>
+  <div class="drawer-footer">
+    <button onclick="authLogout()">🚪 Logout</button>
+  </div>
 </div>
 
 <div class="tabs">
@@ -709,20 +870,6 @@ canvas{max-width:100%;border-radius:10px;display:block;margin:0 auto;box-shadow:
     <!-- CONTROLS: full width below -->
     <div class="settings-controls-col">
 
-      <!-- ACCOUNT -->
-      <div class="sbox" style="border-color:#22c55e;">
-        <h4>👤 Account</h4>
-        <div class="acct-row">
-          <div class="acct-avatar" id="acctAvatar">👤</div>
-          <div class="acct-info">
-            <div class="acct-name" id="acctName">Login இல்ல</div>
-            <div class="acct-mode" id="acctMode">Local-only mode</div>
-          </div>
-          <span class="acct-sync-badge" id="acctSyncBadge" style="display:none;">☁️ Synced</span>
-        </div>
-        <button class="vb-btn" id="acctActionBtn" style="width:100%;" onclick="authShowGateAgain()">🔑 Login பண்ணு</button>
-      </div>
-
       <!-- VERSE EDIT -->
       <div class="sbox">
         <h4>✏️ இன்றைய வசனம் மாற்று</h4>
@@ -739,19 +886,6 @@ canvas{max-width:100%;border-radius:10px;display:block;margin:0 auto;box-shadow:
           <div class="edit-actions" style="margin-top:8px;">
             <button class="save-btn" onclick="saveSettingsEdit()">✓ Save</button>
           </div>
-        </div>
-      </div>
-
-      <!-- CHURCH INFO -->
-      <div class="sbox">
-        <h4>⛪ Church Info</h4>
-        <div class="srow">
-          <label>Church Name:</label>
-          <input class="cust-input" id="cChurch" value="✝ இன்றைய வசனம் | CSI St. Stephen's Church" oninput="updateChurch()">
-        </div>
-        <div class="srow">
-          <label>Subtitle:</label>
-          <input class="cust-input" id="cSub" value="CSI St. Stephen's Church, Pulavankudiyiruppu" oninput="updateChurch()">
         </div>
       </div>
 
@@ -1502,6 +1636,12 @@ function loadSettingsFromDB(){
       if(el){el.value=e.target.result.value;updateChurch();}
     }
   };
+  store.get("churchInstagram").onsuccess=e=>{
+    if(e.target.result){ const el=document.getElementById("cInstagram"); if(el) el.value=e.target.result.value; }
+  };
+  store.get("churchYoutube").onsuccess=e=>{
+    if(e.target.result){ const el=document.getElementById("cYoutube"); if(el) el.value=e.target.result.value; }
+  };
   store.get("allSettings").onsuccess=e=>{
     if(!e.target.result)return;
     try{
@@ -2198,6 +2338,53 @@ function updateChurch(){
   if(cs)saveSettingsToDB('churchSub',cs);
   document.getElementById("churchName").textContent=document.getElementById("cChurch").value;
   document.getElementById("churchSub").textContent=document.getElementById("cSub").value;
+}
+
+// ─── HEADER DRAWER (Account + Church Info + Logout) ────
+function openChurchDrawer(){
+  document.getElementById('churchDrawer').classList.add('open');
+  document.getElementById('drawerOverlay').classList.add('show');
+}
+function closeChurchDrawer(){
+  document.getElementById('churchDrawer').classList.remove('open');
+  document.getElementById('drawerOverlay').classList.remove('show');
+}
+
+// ─── CHURCH INFO ONBOARDING (shown once, after login/skip) ───
+const CHURCH_ONBOARD_DEFAULT = "✝ இன்றைய வசனம் | CSI St. Stephen's Church";
+function maybeShowChurchOnboarding(){
+  try{ if(localStorage.getItem('vs_churchOnboarded')==='1') return; }catch(_){}
+  const cn=(document.getElementById('cChurch')?.value||'').trim();
+  if(cn && cn!==CHURCH_ONBOARD_DEFAULT){
+    try{ localStorage.setItem('vs_churchOnboarded','1'); }catch(_){}
+    return;
+  }
+  const el=document.getElementById('churchOnboard');
+  if(el) el.classList.remove('hidden');
+}
+function completeChurchOnboarding(){
+  const cn=(document.getElementById('ocChurch')?.value||'').trim();
+  if(!cn){ alert('⚠️ Church Name தேவை!'); return; }
+  const ig=(document.getElementById('ocInstagram')?.value||'').trim();
+  const yt=(document.getElementById('ocYoutube')?.value||'').trim();
+
+  const chEl=document.getElementById('cChurch');
+  if(chEl) chEl.value = '✝ இன்றைய வசனம் | '+cn;
+  const subEl=document.getElementById('cSub');
+  if(subEl) subEl.value = cn;
+  const igEl=document.getElementById('cInstagram'); if(igEl) igEl.value=ig;
+  const ytEl=document.getElementById('cYoutube'); if(ytEl) ytEl.value=yt;
+
+  updateChurch();
+  if(ig) saveSettingsToDB('churchInstagram', ig);
+  if(yt) saveSettingsToDB('churchYoutube', yt);
+
+  try{ localStorage.setItem('vs_churchOnboarded','1'); }catch(_){}
+  document.getElementById('churchOnboard').classList.add('hidden');
+}
+function skipChurchOnboarding(){
+  try{ localStorage.setItem('vs_churchOnboarded','1'); }catch(_){}
+  document.getElementById('churchOnboard').classList.add('hidden');
 }
 
 // ─── TABS ─────────────────────────────────────────
@@ -3827,6 +4014,7 @@ function fontInitLoad() {
     localOnlyMode = true;
     try { localStorage.setItem('vs_localOnly', '1'); } catch (_) {}
     hideGate();
+    maybeShowChurchOnboarding();
   };
 
   // ─── Logout ─────────────────────────────────────
@@ -3972,11 +4160,12 @@ function fontInitLoad() {
     if (user) {
       hideGate();
       await pullFromCloud(user.uid);
+      maybeShowChurchOnboarding();
     } else {
       // Not logged in — show the gate unless the person already chose "continue local"
       let skip = false;
       try { skip = localStorage.getItem('vs_localOnly') === '1'; } catch (_) {}
-      if (skip) hideGate(); else document.getElementById('authGate').classList.remove('hidden');
+      if (skip) { hideGate(); maybeShowChurchOnboarding(); } else document.getElementById('authGate').classList.remove('hidden');
     }
   });
 })();

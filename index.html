@@ -165,6 +165,7 @@ import {
 import {
   getFirestore, doc, setDoc, getDoc
 } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
+import { withTimeout } from "./utils.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyB7IPJN4DIxSTtrclOXftvdAZ6AKgFkKRQ",
@@ -274,12 +275,6 @@ window.forgotPassword = async function(){
   }
 };
 
-function withTimeout(promise, ms, label){
-  return Promise.race([
-    promise,
-    new Promise((_,reject)=> setTimeout(()=> reject(new Error(label+' - Timeout (network/rules problem)')), ms))
-  ]);
-}
 
 window.saveChurchInfo = async function(){
   const user = auth.currentUser;

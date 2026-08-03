@@ -180,6 +180,8 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
+let churchPhotoDataUrl = null;
+
 function showMsg(text, ms=3000){
   const box = document.getElementById('msgBox');
   box.textContent = text;
@@ -206,7 +208,7 @@ window.previewChurchPhoto = function(input){
       const img = document.getElementById('churchPhotoPreview');
       img.src = e.target.result;
       img.style.display = 'block';
-      window._churchPhotoDataUrl = e.target.result;
+      churchPhotoDataUrl = e.target.result;
     };
     reader.readAsDataURL(input.files[0]);
   }
@@ -294,6 +296,7 @@ window.saveChurchInfo = async function(){
   try{
     await withTimeout(setDoc(doc(db, 'users', user.uid), {
       churchName, location: loc, instagram: insta, youtube: yt, website: web,
+      photoDataUrl: churchPhotoDataUrl || null,
       email: user.email || null,
       updatedAt: new Date().toISOString()
     }, { merge: true }), 10000, 'Save');
@@ -307,6 +310,7 @@ window.saveChurchInfo = async function(){
 
 onAuthStateChanged(auth, async (user)=>{
   setLoading(false);
+  churchPhotoDataUrl = null;
   if(user){
     showMsg('✅ Login வெற்றி: ' + (user.email || user.phoneNumber || 'User'));
     try{
@@ -321,6 +325,7 @@ onAuthStateChanged(auth, async (user)=>{
         if(d.photoDataUrl){
           const img = document.getElementById('churchPhotoPreview');
           img.src = d.photoDataUrl; img.style.display='block';
+          churchPhotoDataUrl = d.photoDataUrl;
         }
       }
     }catch(e){}

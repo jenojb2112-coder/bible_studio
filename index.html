@@ -182,8 +182,10 @@ function showMsg(text, ms=3000){
   clearTimeout(window._msgTimer);
   window._msgTimer = setTimeout(()=>{ box.style.display='none'; }, ms);
 }
+let _loaderEl = null;
 function setLoading(on){
-  document.getElementById('loader').style.display = on ? 'flex' : 'none';
+  if(!_loaderEl) _loaderEl = document.getElementById('loader');
+  _loaderEl.style.display = on ? 'flex' : 'none';
 }
 function goTo(id){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));

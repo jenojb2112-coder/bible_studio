@@ -1,0 +1,16 @@
+{
+  "name": "bible-studio",
+  "version": "1.0.0",
+  "description": "Bible Studio tests",
+  "main": "index.html",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0"
+  },
+  "jest": {
+    "testEnvironment": "jsdom"
+  }
+}

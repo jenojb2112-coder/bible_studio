@@ -1,0 +1,37 @@
+
+<!DOCTYPE html>
+<html>
+<body>
+<div id="loader"></div>
+<script>
+  let _loaderEl = null;
+  function setLoadingOptimized(on){
+    if(!_loaderEl) _loaderEl = document.getElementById('loader');
+    _loaderEl.style.display = on ? 'flex' : 'none';
+  }
+
+  function setLoadingOriginal(on){
+    document.getElementById('loader').style.display = on ? 'flex' : 'none';
+  }
+
+  const iters = 1000000;
+
+  let t0 = performance.now();
+  for (let i = 0; i < iters; i++) {
+    setLoadingOriginal(i % 2 === 0);
+  }
+  let t1 = performance.now();
+
+  let t2 = performance.now();
+  for (let i = 0; i < iters; i++) {
+    setLoadingOptimized(i % 2 === 0);
+  }
+  let t3 = performance.now();
+
+  window.benchResults = {
+    original: t1 - t0,
+    optimized: t3 - t2
+  };
+</script>
+</body>
+</html>

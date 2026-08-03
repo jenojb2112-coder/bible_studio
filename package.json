@@ -1,0 +1,14 @@
+{
+  "name": "bible-studio",
+  "version": "1.0.0",
+  "description": "HolyVerse Bible Studio",
+  "main": "index.html",
+  "scripts": {
+    "build": "node build.js",
+    "postinstall": "node -e \"const fs = require('fs'); if (!fs.existsSync('.env') && fs.existsSync('.env.example')) { fs.copyFileSync('.env.example', '.env'); console.log('.env created from .env.example'); }\" && npm run build",
+    "test": "node test.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

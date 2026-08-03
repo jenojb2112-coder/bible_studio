@@ -1,0 +1,14 @@
+{
+  "name": "bible_studio",
+  "version": "1.0.0",
+  "description": "HolyVerse Bible Studio - Login page tests",
+  "type": "module",
+  "scripts": {
+    "test": "node --experimental-vm-modules $(which jest 2>/dev/null || echo node_modules/jest/bin/jest.js) --forceExit"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^30.2.0"
+  }
+}

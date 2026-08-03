@@ -181,8 +181,10 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
+let _cachedMsgBox = null;
 function showMsg(text, ms=3000){
-  const box = document.getElementById('msgBox');
+  _cachedMsgBox = _cachedMsgBox || document.getElementById('msgBox');
+  const box = _cachedMsgBox;
   box.textContent = text;
   box.style.display = 'block';
   clearTimeout(window._msgTimer);

@@ -36,4 +36,8 @@ describe('withTimeout', () => {
 
     await expect(timeoutPromise).rejects.toThrow('Network - Timeout (network/rules problem)');
   });
+  it('should resolve immediately if a non-promise value is passed', async () => {
+    const result = await withTimeout('primitive', 1000, 'Test');
+    expect(result).toBe('primitive');
+  });
 });

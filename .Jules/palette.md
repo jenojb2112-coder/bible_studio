@@ -1,0 +1,3 @@
+## 2023-10-25 - Transparent UI Overlay Accessibility
+**Learning:** This app implements interactive "buttons" and inputs as transparent overlay elements (`hitzone`) positioned over a single background image. While visually matching the design, these are completely invisible to screen readers since they have no inner text, visible labels, or text content.
+**Action:** Always verify if visually empty/transparent interactive elements (`<button>`, `<input>`) have `aria-label` attributes to ensure screen readers can announce their purpose.

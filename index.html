@@ -182,8 +182,11 @@ function showMsg(text, ms=3000){
   clearTimeout(window._msgTimer);
   window._msgTimer = setTimeout(()=>{ box.style.display='none'; }, ms);
 }
+let _cachedLoader = null;
 function setLoading(on){
-  document.getElementById('loader').style.display = on ? 'flex' : 'none';
+  // ⚡ Bolt: Cache DOM element to avoid redundant queries during frequent loader toggles
+  _cachedLoader = _cachedLoader || document.getElementById('loader');
+  _cachedLoader.style.display = on ? 'flex' : 'none';
 }
 let _activeScreen = null;
 function goTo(id){

@@ -173,14 +173,12 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-let _cachedMsgBox = null;
+const _cachedMsgBox = document.getElementById('msgBox');
 function showMsg(text, ms=3000){
-  _cachedMsgBox = _cachedMsgBox || document.getElementById('msgBox');
-  const box = _cachedMsgBox;
-  box.textContent = text;
-  box.style.display = 'block';
+  _cachedMsgBox.textContent = text;
+  _cachedMsgBox.style.display = 'block';
   clearTimeout(window._msgTimer);
-  window._msgTimer = setTimeout(()=>{ box.style.display='none'; }, ms);
+  window._msgTimer = setTimeout(()=>{ _cachedMsgBox.style.display='none'; }, ms);
 }
 function setLoading(on){
   document.getElementById('loader').style.display = on ? 'flex' : 'none';

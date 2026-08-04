@@ -107,43 +107,43 @@ input.hit:-webkit-autofill:focus{
     <img class="bg" id="loginImg" src="images/login-bg.png" alt="HolyVerse Bible Studio Login">
     <div class="mask m-email"></div>
     <div class="mask m-pass"></div>
-    <input class="hit f-email" id="loginEmail" type="email" placeholder="Enter your email">
-    <input class="hit f-pass"  id="loginPass"  type="password" placeholder="Enter your password">
-    <button class="eye-toggle" id="eyeBtn" onclick="togglePass()">
+    <input class="hit f-email" id="loginEmail" type="email" placeholder="Enter your email" aria-label="Email address">
+    <input class="hit f-pass"  id="loginPass"  type="password" placeholder="Enter your password" aria-label="Password">
+    <button class="eye-toggle" id="eyeBtn" onclick="togglePass()" aria-label="Toggle password visibility">
       <svg id="eyeIcon" viewBox="0 0 24 24"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>
     </button>
-    <button class="hit b-forgot" onclick="forgotPassword()"></button>
-    <button class="hit b-signin" onclick="emailSignIn()"></button>
-    <button class="hit b-google" onclick="googleSignIn()"></button>
-    <button class="hit b-create" onclick="emailSignUp()"></button>
+    <button class="hit b-forgot" onclick="forgotPassword()" aria-label="Forgot password"></button>
+    <button class="hit b-signin" onclick="emailSignIn()" aria-label="Sign in"></button>
+    <button class="hit b-google" onclick="googleSignIn()" aria-label="Sign in with Google"></button>
+    <button class="hit b-create" onclick="emailSignUp()" aria-label="Create account"></button>
   </div>
 </div>
 
 <div class="screen" id="churchScreen">
   <div class="stage" id="churchScreen2">
     <img class="bg" id="churchImg" src="images/church-bg.png" alt="Church Information Step">
-    <button class="hit b-back2" onclick="goToLogin()"></button>
+    <button class="hit b-back2" onclick="goToLogin()" aria-label="Go back"></button>
 
     <div class="mask m-cname"></div>
-    <input class="hit f-cname" id="churchName" type="text" placeholder="Enter your church name">
+    <input class="hit f-cname" id="churchName" type="text" placeholder="Enter your church name" aria-label="Church name">
 
-    <button class="hit b-cphoto" onclick="document.getElementById('churchPhotoFile').click()"></button>
+    <button class="hit b-cphoto" onclick="document.getElementById('churchPhotoFile').click()" aria-label="Upload church photo"></button>
     <input type="file" id="churchPhotoFile" accept="image/*" style="display:none" onchange="previewChurchPhoto(this)">
     <img class="photo-preview" id="churchPhotoPreview" src="" alt="Church Photo Preview">
 
     <div class="mask m-cloc"></div>
-    <input class="hit f-cloc" id="churchLoc" type="text" placeholder="Search your church location">
+    <input class="hit f-cloc" id="churchLoc" type="text" placeholder="Search your church location" aria-label="Church location">
 
     <div class="mask m-cinsta"></div>
-    <input class="hit f-cinsta" id="churchInsta" type="text" placeholder="e.g. @yourchurch">
+    <input class="hit f-cinsta" id="churchInsta" type="text" placeholder="e.g. @yourchurch" aria-label="Church Instagram handle">
 
     <div class="mask m-cyt"></div>
-    <input class="hit f-cyt" id="churchYT" type="text" placeholder="e.g. Your Church Channel">
+    <input class="hit f-cyt" id="churchYT" type="text" placeholder="e.g. Your Church Channel" aria-label="Church YouTube channel">
 
     <div class="mask m-cweb"></div>
-    <input class="hit f-cweb" id="churchWeb" type="text" placeholder="e.g. www.yourchurch.org">
+    <input class="hit f-cweb" id="churchWeb" type="text" placeholder="e.g. www.yourchurch.org" aria-label="Church website">
 
-    <button class="hit b-continue2" onclick="saveChurchInfo()"></button>
+    <button class="hit b-continue2" onclick="saveChurchInfo()" aria-label="Save church information"></button>
   </div>
 </div>
 

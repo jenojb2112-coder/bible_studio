@@ -188,6 +188,7 @@ function setLoading(on){
 let _activeScreen = null;
 function goTo(id){
   if(!_activeScreen) _activeScreen = document.querySelector('.screen.active');
+  if(_activeScreen && _activeScreen.id === id) return;
   if(_activeScreen) _activeScreen.classList.remove('active');
   _activeScreen = document.getElementById(id);
   if(_activeScreen) _activeScreen.classList.add('active');

@@ -231,7 +231,7 @@ window.emailSignIn = async function(){
     if((e.code||'').includes('invalid-credential') || (e.code||'').includes('user-not-found') || (e.code||'').includes('wrong-password')){
       msg = 'இந்த Email/Password சரியில்ல, அல்லது இன்னும் Account create ஆகல. "Create Account" try பண்ணுங்க.';
     }
-    showMsg('❌ ' + msg, 5000);
+    console.error('Login error', e); if (msg === e.message || msg === e.code) { msg = 'Login தோல்வி. Please try again.'; } showMsg('❌ ' + msg, 5000);
   }
 };
 
@@ -245,7 +245,7 @@ window.emailSignUp = async function(){
     showMsg('✅ Account created!');
   }catch(e){
     setLoading(false);
-    showMsg('❌ Sign up தோல்வி: ' + (e.message || e.code));
+    console.error('Sign up error', e); showMsg('❌ Sign up தோல்வி. Please try again.');
   }
 };
 
@@ -256,7 +256,7 @@ window.googleSignIn = async function(){
     await signInWithPopup(auth, provider);
   }catch(e){
     setLoading(false);
-    showMsg('❌ Google Login தோல்வி: ' + (e.message || e.code));
+    console.error('Google Login error', e); showMsg('❌ Google Login தோல்வி. Please try again.');
   }
 };
 
@@ -267,7 +267,7 @@ window.forgotPassword = async function(){
     await sendPasswordResetEmail(auth, email);
     showMsg('📧 Password reset link email-க்கு அனுப்பப்பட்டது');
   }catch(e){
-    showMsg('❌ ' + (e.message || e.code));
+    console.error('Password reset error', e); showMsg('❌ Password reset failed. Please try again.');
   }
 };
 
@@ -292,7 +292,7 @@ window.saveChurchInfo = async function(){
     showMsg('✅ Church details save ஆனது! Welcome ' + churchName);
   }catch(e){
     setLoading(false);
-    showMsg('❌ Save தோல்வி: ' + (e.message || e.code), 6000);
+    console.error('Save error', e); showMsg('❌ Save தோல்வி. Please try again.', 6000);
   }
 };
 

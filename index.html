@@ -187,9 +187,12 @@ function setLoading(on){
   if(!_loaderEl) _loaderEl = document.getElementById('loader');
   _loaderEl.style.display = on ? 'flex' : 'none';
 }
+let _activeScreen = null;
 function goTo(id){
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
+  if(!_activeScreen) _activeScreen = document.querySelector('.screen.active');
+  if(_activeScreen) _activeScreen.classList.remove('active');
+  _activeScreen = document.getElementById(id);
+  if(_activeScreen) _activeScreen.classList.add('active');
 }
 
 window.goToLogin = ()=> goTo('loginScreen');

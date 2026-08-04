@@ -109,25 +109,25 @@ input.hit:-webkit-autofill:focus{
     <div class="mask m-pass"></div>
     <input class="hit f-email" id="loginEmail" type="email" placeholder="Enter your email">
     <input class="hit f-pass"  id="loginPass"  type="password" placeholder="Enter your password">
-    <button class="eye-toggle" id="eyeBtn" onclick="togglePass()">
+    <button aria-label="Toggle password visibility" class="eye-toggle" id="eyeBtn" onclick="togglePass()">
       <svg id="eyeIcon" viewBox="0 0 24 24"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>
     </button>
-    <button class="hit b-forgot" onclick="forgotPassword()"></button>
-    <button class="hit b-signin" onclick="emailSignIn()"></button>
-    <button class="hit b-google" onclick="googleSignIn()"></button>
-    <button class="hit b-create" onclick="emailSignUp()"></button>
+    <button aria-label="Forgot Password" class="hit b-forgot" onclick="forgotPassword()"></button>
+    <button aria-label="Sign In" class="hit b-signin" onclick="emailSignIn()"></button>
+    <button aria-label="Sign In with Google" class="hit b-google" onclick="googleSignIn()"></button>
+    <button aria-label="Create Account" class="hit b-create" onclick="emailSignUp()"></button>
   </div>
 </div>
 
 <div class="screen" id="churchScreen">
   <div class="stage" id="churchScreen2">
     <img class="bg" id="churchImg" src="images/church-bg.png" alt="Church Information Step">
-    <button class="hit b-back2" onclick="goToLogin()"></button>
+    <button aria-label="Go Back" class="hit b-back2" onclick="goToLogin()"></button>
 
     <div class="mask m-cname"></div>
     <input class="hit f-cname" id="churchName" type="text" placeholder="Enter your church name">
 
-    <button class="hit b-cphoto" onclick="document.getElementById('churchPhotoFile').click()"></button>
+    <button aria-label="Upload Church Photo" class="hit b-cphoto" onclick="document.getElementById('churchPhotoFile').click()"></button>
     <input type="file" id="churchPhotoFile" accept="image/*" style="display:none" onchange="previewChurchPhoto(this)">
     <img class="photo-preview" id="churchPhotoPreview" src="" alt="Church Photo Preview">
 
@@ -143,7 +143,7 @@ input.hit:-webkit-autofill:focus{
     <div class="mask m-cweb"></div>
     <input class="hit f-cweb" id="churchWeb" type="text" placeholder="e.g. www.yourchurch.org">
 
-    <button class="hit b-continue2" onclick="saveChurchInfo()"></button>
+    <button aria-label="Save Church Info" class="hit b-continue2" onclick="saveChurchInfo()"></button>
   </div>
 </div>
 

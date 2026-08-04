@@ -315,7 +315,7 @@ onAuthStateChanged(auth, async (user)=>{
           img.src = d.photoDataUrl; img.style.display='block';
         }
       }
-    }catch(e){}
+    }catch(e){ console.error('Error fetching user data:', e); }
     goTo('churchScreen');
   }
 });

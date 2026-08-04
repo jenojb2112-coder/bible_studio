@@ -1,6 +1,13 @@
 export function withTimeout(promise, ms, label){
+  let timeoutId;
+  const timeoutPromise = new Promise((_, reject) => {
+    timeoutId = setTimeout(() => reject(new Error(label+' - Timeout (network/rules problem)')), ms);
+  });
+
   return Promise.race([
     promise,
-    new Promise((_,reject)=> setTimeout(()=> reject(new Error(label+' - Timeout (network/rules problem)')), ms))
-  ]);
+    timeoutPromise
+  ]).finally(() => {
+    clearTimeout(timeoutId);
+  });
 }

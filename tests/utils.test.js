@@ -36,4 +36,17 @@ describe('withTimeout', () => {
 
     await expect(timeoutPromise).rejects.toThrow('Network - Timeout (network/rules problem)');
   });
+
+  it('should clear the timeout if promise resolves', async () => {
+    const promise = Promise.resolve('success');
+    await withTimeout(promise, 1000, 'Test');
+    expect(jest.getTimerCount()).toBe(0);
+  });
+
+  it('should clear the timeout if promise rejects', async () => {
+    const error = new Error('original error');
+    const promise = Promise.reject(error);
+    await expect(withTimeout(promise, 1000, 'Test')).rejects.toThrow('original error');
+    expect(jest.getTimerCount()).toBe(0);
+  });
 });

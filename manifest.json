@@ -1,7 +1,6 @@
 {
   "name": "HolyVerse Bible Studio",
   "short_name": "HolyVerse",
-  "description": "HolyVerse Bible Studio Application",
   "start_url": "/index.html",
   "display": "standalone",
   "background_color": "#060402",

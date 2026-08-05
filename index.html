@@ -198,7 +198,7 @@ function goTo(id){
 
 window.goToLogin = ()=> goTo('loginScreen');
 
-setTimeout(()=>{ goTo('loginScreen'); }, 2200);
+setTimeout(()=>{ if(!auth.currentUser) goTo('loginScreen'); }, 2200);
 
 window.previewChurchPhoto = function(input){
   if(input.files && input.files[0]){

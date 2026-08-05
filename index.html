@@ -188,6 +188,9 @@ function setLoading(on){
 let _activeScreen = null;
 function goTo(id){
   if(!_activeScreen) _activeScreen = document.querySelector('.screen.active');
+  // ⚡ Bolt: Early return if screen is already active to prevent DOM repaints
+  // Impact: Reduces transition time overhead significantly
+  if(_activeScreen && _activeScreen.id === id) return;
   if(_activeScreen) _activeScreen.classList.remove('active');
   _activeScreen = document.getElementById(id);
   if(_activeScreen) _activeScreen.classList.add('active');

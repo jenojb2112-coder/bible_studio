@@ -14,6 +14,7 @@ describe('withTimeout', () => {
     const promise = Promise.resolve('success');
     const result = await withTimeout(promise, 1000, 'Test');
     expect(result).toBe('success');
+    expect(jest.getTimerCount()).toBe(0);
   });
 
   it('should reject with the original error if promise rejects before timeout', async () => {

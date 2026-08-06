@@ -92,8 +92,8 @@ input.hit:-webkit-autofill:focus{
 </head>
 <body>
 
-<div class="loader" id="loader">⏳ Please wait...</div>
-<div class="msg-box" id="msgBox"></div>
+<div class="loader" id="loader" role="status" aria-live="polite">⏳ Please wait...</div>
+<div class="msg-box" id="msgBox" role="alert" aria-live="assertive"></div>
 
 <div class="screen active" id="splashScreen">
   <div class="splash-inner">

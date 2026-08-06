@@ -7,3 +7,7 @@
 **Vulnerability:** Client-side `FileReader` loading arbitrary large files completely into memory as Data URLs.
 **Learning:** Processing user-uploaded files on the client side without size limits can cause memory exhaustion and crash the browser (Client-side DoS).
 **Prevention:** Always validate `file.size` against a sensible maximum limit (e.g. 2MB) before attempting to read the file into memory using `FileReader`.
+## 2024-05-20 - [Add Content Security Policy]
+**Vulnerability:** Missing Content Security Policy (CSP) headers.
+**Learning:** Firebase requires specific external domains for auth and websockets, which must be explicitly whitelisted in the CSP `connect-src` and `frame-src` to avoid blocking its functionality.
+**Prevention:** Always include `https://*.googleapis.com`, `https://*.firebaseio.com`, `wss://*.firebaseio.com`, and `https://*.firebaseapp.com` in `connect-src`, and `https://*.firebaseapp.com` in `frame-src` when configuring CSP for Firebase projects.

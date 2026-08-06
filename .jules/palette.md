@@ -9,3 +9,6 @@
 ## 2024-05-18 - Enter-to-Submit Accessibility
 **Learning:** Custom transparent input overlays often lack form wrapping, meaning users cannot hit 'Enter' to submit, breaking standard keyboard UX.
 **Action:** Always add onkeydown listeners to inputs or wrap them in semantic form tags when building custom transparent hitzones.
+## 2026-08-06 - Improve text contrast for input overlays
+**Learning:** When input fields are overlaid on background images, using a distinct, high-contrast text color (like gold #e8c876) and hiding placeholder helps user-typed text stand out clearly against both dark backgrounds and baked-in placeholder text.
+**Action:** Ensure custom text color is used for inputs positioned over background images.

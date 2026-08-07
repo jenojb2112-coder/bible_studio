@@ -103,6 +103,8 @@ describe('saveChurchInfo', () => {
     document.getElementById('churchYT').value = 'testYT';
     document.getElementById('churchWeb').value = 'test.com';
 
+    window._churchPhotoDataUrl = 'data:image/png;base64,test';
+
     await window.saveChurchInfo();
 
     expect(docMock).toHaveBeenCalledWith(expect.anything(), 'users', '123');
@@ -114,7 +116,8 @@ describe('saveChurchInfo', () => {
         instagram: '@test',
         youtube: 'testYT',
         website: 'test.com',
-        email: 'test@test.com'
+        email: 'test@test.com',
+        photoDataUrl: 'data:image/png;base64,test'
       }),
       { merge: true }
     );

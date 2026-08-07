@@ -291,6 +291,7 @@ window.saveChurchInfo = async function(){
     await withTimeout(setDoc(doc(db, 'users', user.uid), {
       churchName, location: loc, instagram: insta, youtube: yt, website: web,
       email: user.email || null,
+      photoDataUrl: window._churchPhotoDataUrl || null,
       updatedAt: new Date().toISOString()
     }, { merge: true }), 10000, 'Save');
     setLoading(false);

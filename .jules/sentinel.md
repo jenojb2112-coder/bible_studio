@@ -11,3 +11,8 @@
 **Vulnerability:** Missing Content Security Policy (CSP) headers.
 **Learning:** Firebase requires specific external domains for auth and websockets, which must be explicitly whitelisted in the CSP `connect-src` and `frame-src` to avoid blocking its functionality.
 **Prevention:** Always include `https://*.googleapis.com`, `https://*.firebaseio.com`, `wss://*.firebaseio.com`, and `https://*.firebaseapp.com` in `connect-src`, and `https://*.firebaseapp.com` in `frame-src` when configuring CSP for Firebase projects.
+
+## 2024-05-24 - [Input Length Missing - Application DoS Risk]
+**Vulnerability:** Input fields (`email`, `password`, `church details`) did not enforce a `maxlength` attribute on the client-side.
+**Learning:** Accepting unbounded input text in forms without length limits can lead to memory exhaustion on the client-side and overly large payloads sent to backend APIs, risking Application-level DoS or inefficient database storage.
+**Prevention:** Always define explicit and sensible `maxlength` attributes for HTML `<input>` elements (e.g., 100 for emails/names, 128 for passwords) as the first layer of defense against oversized inputs.

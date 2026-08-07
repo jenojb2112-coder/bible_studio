@@ -105,7 +105,8 @@ function handleContinue(){
 
   const data = {
     churchName, location: loc, instagram: insta, youtube: yt, website: web,
-    hasPhoto: !!window._churchPhotoDataUrl
+    hasPhoto: !!window._churchPhotoDataUrl,
+    photoDataUrl: window._churchPhotoDataUrl || null
   };
   console.log('Church Info collected:', data);
   showMsg('✅ Collected: ' + churchName + (loc ? ' | ' + loc : ''));

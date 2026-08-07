@@ -12,3 +12,6 @@
 ## 2026-08-06 - Improve text contrast for input overlays
 **Learning:** When input fields are overlaid on background images, using a distinct, high-contrast text color (like gold #e8c876) and hiding placeholder helps user-typed text stand out clearly against both dark backgrounds and baked-in placeholder text.
 **Action:** Ensure custom text color is used for inputs positioned over background images.
+## 2024-05-24 - Add ARIA live regions to dynamic overlays
+**Learning:** JS-driven UI overlays like toast messages and loaders are invisible to screen readers without ARIA roles. Using `role="alert" aria-live="assertive"` for messages and `role="status" aria-live="polite"` for loaders ensures they are announced appropriately.
+**Action:** Always add ARIA roles to dynamic overlays and loaders in applications to ensure screen reader accessibility.

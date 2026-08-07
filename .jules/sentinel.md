@@ -11,3 +11,8 @@
 **Vulnerability:** Missing Content Security Policy (CSP) headers.
 **Learning:** Firebase requires specific external domains for auth and websockets, which must be explicitly whitelisted in the CSP `connect-src` and `frame-src` to avoid blocking its functionality.
 **Prevention:** Always include `https://*.googleapis.com`, `https://*.firebaseio.com`, `wss://*.firebaseio.com`, and `https://*.firebaseapp.com` in `connect-src`, and `https://*.firebaseapp.com` in `frame-src` when configuring CSP for Firebase projects.
+
+## 2024-05-24 - [User Enumeration via Password Reset]
+**Vulnerability:** The password reset endpoint explicitly leaked whether an email address was registered or not, allowing attackers to enumerate the user base.
+**Learning:** Conditional error responses for auth flows (like password resets) can leak PII and expose users to targeted phishing or credential stuffing.
+**Prevention:** Fail securely by displaying a uniform success message regardless of whether the email exists in the system or not.

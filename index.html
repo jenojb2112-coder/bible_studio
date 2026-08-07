@@ -274,7 +274,13 @@ window.forgotPassword = async function(){
     await sendPasswordResetEmail(auth, email);
     showMsg('📧 Password reset link email-க்கு அனுப்பப்பட்டது');
   }catch(e){
-    console.error('Password reset error', e); showMsg('❌ Password reset failed. Please try again.');
+    console.error('Password reset error', e);
+    if ((e.code || '').includes('user-not-found')) {
+      // 🛡️ Sentinel: Fail securely - don't expose if user exists
+      showMsg('📧 Password reset link email-க்கு அனுப்பப்பட்டது');
+    } else {
+      showMsg('❌ Password reset failed. Please try again.');
+    }
   }
 };
 

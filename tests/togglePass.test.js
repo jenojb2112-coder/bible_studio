@@ -21,6 +21,7 @@ describe('window.togglePass', () => {
   beforeEach(() => {
     document.body.innerHTML = `
       <input id="loginPass" type="password" />
+      <button id="eyeBtn" aria-label="Show password" title="Show password"></button>
       <div id="eyeIcon"></div>
     `;
   });
@@ -28,6 +29,7 @@ describe('window.togglePass', () => {
   it('should toggle from password to text and change icon to closedEye', () => {
     const p = document.getElementById('loginPass');
     const icon = document.getElementById('eyeIcon');
+    const btn = document.getElementById('eyeBtn');
 
     expect(p.type).toBe('password');
 
@@ -35,17 +37,25 @@ describe('window.togglePass', () => {
 
     expect(p.type).toBe('text');
     expect(icon.innerHTML).toContain('M2 2l20 20'); // closedEye path
+    expect(btn.getAttribute('aria-label')).toBe('Hide password');
+    expect(btn.getAttribute('title')).toBe('Hide password');
   });
 
   it('should toggle from text to password and change icon to openEye', () => {
     const p = document.getElementById('loginPass');
     const icon = document.getElementById('eyeIcon');
+    const btn = document.getElementById('eyeBtn');
 
     p.type = 'text';
+    // We simulate an initial 'text' state before clicking, so btn would be 'Hide password'
+    btn.setAttribute('aria-label', 'Hide password');
+    btn.setAttribute('title', 'Hide password');
 
     window.togglePass();
 
     expect(p.type).toBe('password');
     expect(icon.innerHTML).toContain('M1 12s4-7'); // openEye path
+    expect(btn.getAttribute('aria-label')).toBe('Show password');
+    expect(btn.getAttribute('title')).toBe('Show password');
   });
 });

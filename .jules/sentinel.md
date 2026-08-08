@@ -16,3 +16,8 @@
 **Vulnerability:** The password reset endpoint explicitly leaked whether an email address was registered or not, allowing attackers to enumerate the user base.
 **Learning:** Conditional error responses for auth flows (like password resets) can leak PII and expose users to targeted phishing or credential stuffing.
 **Prevention:** Fail securely by displaying a uniform success message regardless of whether the email exists in the system or not.
+
+## 2024-08-08 - [Input Field Memory Exhaustion DoS]
+**Vulnerability:** Input fields lacked `maxlength` attributes, allowing potential client-side memory exhaustion DoS when excessively long strings are processed.
+**Learning:** To prevent client-side memory exhaustion DoS when strings are processed or sent to backend APIs, always define explicit and sensible `maxlength` attributes for HTML `<input>` elements.
+**Prevention:** Always define explicit and sensible `maxlength` attributes for HTML `<input>` elements (e.g., 100 for emails/names, 128 for passwords).

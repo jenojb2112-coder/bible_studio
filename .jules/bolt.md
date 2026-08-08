@@ -7,3 +7,7 @@
 ## 2024-05-24 - Prevent DOM repaints on duplicate route navigation
 **Learning:** In a single-page application that uses DOM class toggling (e.g., removing and adding 'active' classes) for routing, calling the navigation function with the already active route ID causes unnecessary DOM manipulations and repaints.
 **Action:** Add an early return condition (`if(_activeScreen && _activeScreen.id === id) return;`) at the beginning of the navigation function to bail out early if the target route is already active, preventing inefficient DOM traversal and repaints.
+
+## 2024-05-24 - DOM Query Optimization in Form Submission
+**Learning:** Repeatedly calling `document.getElementById` within form submission or event handler functions (like `saveChurchInfo`) adds unnecessary DOM traversal overhead. Since the elements are statically defined in the HTML and parsed before the module script runs, they can safely be queried once.
+**Action:** Extract repeated `document.getElementById` calls from frequently executed functions (like form handlers) and cache them as module-level constants to improve execution speed and reduce main thread blocking.

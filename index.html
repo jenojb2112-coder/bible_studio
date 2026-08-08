@@ -285,14 +285,19 @@ window.forgotPassword = async function(){
 };
 
 
+const _churchNameEl = document.getElementById('churchName');
+const _churchLocEl = document.getElementById('churchLoc');
+const _churchInstaEl = document.getElementById('churchInsta');
+const _churchYTEl = document.getElementById('churchYT');
+const _churchWebEl = document.getElementById('churchWeb');
 window.saveChurchInfo = async function(){
   const user = auth.currentUser;
   if(!user){ showMsg('⚠️ முதல்ல login பண்ணுங்க'); goTo('loginScreen'); return; }
-  const churchName = document.getElementById('churchName').value.trim();
-  const loc = document.getElementById('churchLoc').value.trim();
-  const insta = document.getElementById('churchInsta').value.trim();
-  const yt = document.getElementById('churchYT').value.trim();
-  const web = document.getElementById('churchWeb').value.trim();
+  const churchName = _churchNameEl.value.trim();
+  const loc = _churchLocEl.value.trim();
+  const insta = _churchInstaEl.value.trim();
+  const yt = _churchYTEl.value.trim();
+  const web = _churchWebEl.value.trim();
   if(!churchName){ showMsg('⚠️ Church Name தேவை'); return; }
   setLoading(true);
   try{

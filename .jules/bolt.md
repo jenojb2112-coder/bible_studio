@@ -7,3 +7,6 @@
 ## 2024-05-24 - Prevent DOM repaints on duplicate route navigation
 **Learning:** In a single-page application that uses DOM class toggling (e.g., removing and adding 'active' classes) for routing, calling the navigation function with the already active route ID causes unnecessary DOM manipulations and repaints.
 **Action:** Add an early return condition (`if(_activeScreen && _activeScreen.id === id) return;`) at the beginning of the navigation function to bail out early if the target route is already active, preventing inefficient DOM traversal and repaints.
+## 2024-05-18 - Preloading Critical Background Images
+**Learning:** In applications heavily relying on large background images (like 1.7MB+ PNGs) for the initial view (e.g., login screens, splash screens), the browser only begins downloading the image after it parses the `<img>` tag or CSS rule in the body. This causes a significant delay in the Largest Contentful Paint (LCP).
+**Action:** Always add `<link rel="preload" as="image" href="...">` for critical hero/background images in the `<head>`. This instructs the browser to fetch the large asset immediately, dramatically speeding up the perceived load time and LCP.

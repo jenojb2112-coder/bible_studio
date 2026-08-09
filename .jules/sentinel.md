@@ -16,3 +16,8 @@
 **Vulnerability:** The password reset endpoint explicitly leaked whether an email address was registered or not, allowing attackers to enumerate the user base.
 **Learning:** Conditional error responses for auth flows (like password resets) can leak PII and expose users to targeted phishing or credential stuffing.
 **Prevention:** Fail securely by displaying a uniform success message regardless of whether the email exists in the system or not.
+
+## 2024-08-09 - [Input Length Limits]
+**Vulnerability:** Missing explicit length limits on user input fields (like email, password, and profile data).
+**Learning:** Without length limits, overly large input strings can be submitted or processed by the application, leading to memory exhaustion and potential Denial of Service (DoS).
+**Prevention:** Always define explicit and sensible `maxlength` attributes for HTML `<input>` elements (e.g., 100 for emails/names, 128 for passwords).

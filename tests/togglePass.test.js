@@ -21,7 +21,9 @@ describe('window.togglePass', () => {
   beforeEach(() => {
     document.body.innerHTML = `
       <input id="loginPass" type="password" />
-      <div id="eyeIcon"></div>
+      <button id="eyeBtn" aria-label="Show password" title="Show password">
+        <svg id="eyeIcon" aria-hidden="true"></svg>
+      </button>
     `;
   });
 

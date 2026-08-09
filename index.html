@@ -91,6 +91,9 @@ input.hit:-webkit-autofill:focus{
 .photo-preview{position:absolute;left:9.5%;top:43.8%;width:8.5%;height:6.8%;border-radius:8px;
   object-fit:cover;display:none;z-index:5;}
 </style>
+<!-- ⚡ Bolt: Preload critical LCP assets (splash logo and background) for faster perceived load times -->
+<link rel="preload" href="images/splash-logo.png" as="image">
+<link rel="preload" href="images/login-bg.png" as="image">
 </head>
 <body>
 
@@ -124,7 +127,7 @@ input.hit:-webkit-autofill:focus{
 
 <div class="screen" id="churchScreen">
   <div class="stage" id="churchScreen2">
-    <img class="bg" id="churchImg" src="images/church-bg.png" alt="Church Information Step">
+    <img class="bg" id="churchImg" src="images/church-bg.png" alt="Church Information Step" loading="lazy">
     <button class="hit b-back2" onclick="goToLogin()" aria-label="Back to login"></button>
 
     <div class="mask m-cname"></div>

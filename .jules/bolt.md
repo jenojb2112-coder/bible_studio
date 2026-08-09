@@ -7,3 +7,12 @@
 ## 2024-05-24 - Prevent DOM repaints on duplicate route navigation
 **Learning:** In a single-page application that uses DOM class toggling (e.g., removing and adding 'active' classes) for routing, calling the navigation function with the already active route ID causes unnecessary DOM manipulations and repaints.
 **Action:** Add an early return condition (`if(_activeScreen && _activeScreen.id === id) return;`) at the beginning of the navigation function to bail out early if the target route is already active, preventing inefficient DOM traversal and repaints.
+## 2024-05-24 - DOM Query Optimization for Loader
+**Learning:** In script blocks executing after the DOM is fully parsed, `getElementById` for frequently toggled UI elements (like a loader) can be executed and cached immediately at the module level rather than using a lazy-loading conditional branch upon first access. This avoids the cost of branching and deferred DOM querying in hot paths.
+**Action:** When a UI element's visibility is frequently toggled (e.g., `setLoading(on)`), fetch it from the DOM immediately and cache it, removing the `if(!el) el = document.getElementById(...)` check.
+## 2024-05-24 - Preload Critical Assets and Lazy Load Off-Screen Assets
+**Learning:** For a fast initial paint, critical assets like splash screens or above-the-fold images should be preloaded to avoid layout shifts and improve LCP. Conversely, off-screen images (e.g., images for routes not initially visible) should be lazy-loaded to save bandwidth and prioritize critical resources.
+**Action:** Always add `<link rel="preload" as="image">` for critical images visible on initial load and `loading="lazy"` for off-screen/below-the-fold images to optimize frontend performance.
+## 2024-05-24 - Preload Critical Assets and Lazy Load Off-Screen Assets
+**Learning:** For a fast initial paint, critical assets like splash screens or above-the-fold images should be preloaded to avoid layout shifts and improve LCP. Conversely, off-screen images (e.g., images for routes not initially visible) should be lazy-loaded to save bandwidth and prioritize critical resources.
+**Action:** Always add `<link rel="preload" as="image">` for critical images visible on initial load and `loading="lazy"` for off-screen/below-the-fold images to optimize frontend performance.

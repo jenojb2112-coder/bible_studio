@@ -115,7 +115,6 @@ function handleContinue(){
     hasPhoto: !!window._churchPhotoDataUrl,
     photoDataUrl: window._churchPhotoDataUrl || null
   };
-  console.log('Church Info collected:', data);
   showMsg('✅ Collected: ' + churchName + (loc ? ' | ' + loc : ''));
   // TODO: connect this to your backend / next screen navigation here
 }

@@ -26,3 +26,7 @@
 **Vulnerability:** Client-side file uploads (`FileReader`) only validated file size but not MIME type, allowing users to potentially upload non-image files (e.g., executable scripts or malicious documents) if they bypassed the HTML `accept` attribute.
 **Learning:** Relying solely on the HTML `accept` attribute is insufficient for security as it can be easily bypassed by the client. Files read into Data URLs without type validation could be mishandled by the application or stored as invalid payloads.
 **Prevention:** Always validate the `type` property of `File` objects (e.g., `file.type.startsWith('image/')`) in JavaScript before reading them with `FileReader` or sending them to a backend.
+## 2024-05-18 - Remove sensitive data exposure in console log
+**Vulnerability:** Sensitive Data Exposure in Console Log via `console.log` in `church-info.html` (`handleContinue` function).
+**Learning:** Hardcoded `console.log` statements logging user input objects can expose sensitive information (like location details or image data) to the browser's developer tools console, which can be viewed by anyone with physical access or via malicious browser extensions.
+**Prevention:** Avoid logging complete user data objects to the client-side console in production environments. Remove debug logging before deploying.

@@ -235,7 +235,7 @@ window.emailSignIn = async function(){
   if(!email || !pass){ showMsg('⚠️ Email மற்றும் Password போடுங்க'); return; }
   setLoading(true);
   try{
-    await signInWithEmailAndPassword(auth, email, pass);
+    await withTimeout(signInWithEmailAndPassword(auth, email, pass), 10000, 'Login');
   }catch(e){
     setLoading(false);
     let msg = e.message || e.code;
@@ -252,7 +252,7 @@ window.emailSignUp = async function(){
   if(!email || !pass){ showMsg('⚠️ Account create பண்ண Email + Password (6+ chars) போடுங்க'); return; }
   setLoading(true);
   try{
-    await createUserWithEmailAndPassword(auth, email, pass);
+    await withTimeout(createUserWithEmailAndPassword(auth, email, pass), 10000, 'Sign Up');
     showMsg('✅ Account created!');
   }catch(e){
     setLoading(false);
@@ -264,7 +264,7 @@ window.googleSignIn = async function(){
   setLoading(true);
   try{
     const provider = new GoogleAuthProvider();
-    await signInWithPopup(auth, provider);
+    await withTimeout(signInWithPopup(auth, provider), 10000, 'Google Login');
   }catch(e){
     setLoading(false);
     console.error('Google Login error', e); showMsg('❌ Google Login தோல்வி. Please try again.');
@@ -275,7 +275,7 @@ window.forgotPassword = async function(){
   const email = document.getElementById('loginEmail').value.trim();
   if(!email){ showMsg('⚠️ முதல்ல Email போடுங்க'); return; }
   try{
-    await sendPasswordResetEmail(auth, email);
+    await withTimeout(sendPasswordResetEmail(auth, email), 10000, 'Password Reset');
     showMsg('📧 Password reset link email-க்கு அனுப்பப்பட்டது');
   }catch(e){
     console.error('Password reset error', e);
@@ -324,7 +324,7 @@ onAuthStateChanged(auth, async (user)=>{
   if(user){
     showMsg('✅ Login வெற்றி: ' + (user.email || user.phoneNumber || 'User'));
     try{
-      const snap = await getDoc(doc(db, 'users', user.uid));
+      const snap = await withTimeout(getDoc(doc(db, 'users', user.uid)), 10000, 'Fetch Data');
       if(snap.exists()){
         const d = snap.data();
         if(d.churchName) document.getElementById('churchName').value = d.churchName;

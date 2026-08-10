@@ -93,7 +93,7 @@ input.hit:-webkit-autofill:focus{
 .m-cweb    { left:19%; top:82.6%; width:65%; height:2.9%; background:#101111; }
 .f-cweb    { left:22%; top:82.8%; width:60%; height:2.6%; }
 .b-continue2{ left:8%; top:92.1%; width:84%; height:5.3%; }
-.photo-preview{position:absolute;left:9.5%;top:43.8%;width:8.5%;height:6.8%;border-radius:8px;
+.photo-preview{position:absolute;left:9.5%;top:43.8%;width:8.5%;height:6.8%;border-radius:8px;pointer-events:none;
   object-fit:cover;display:none;z-index:5;}
 </style>
 </head>
@@ -120,21 +120,21 @@ input.hit:-webkit-autofill:focus{
     <button class="eye-toggle" id="eyeBtn" onclick="togglePass()" aria-label="Show password" title="Show password">
       <svg id="eyeIcon" viewBox="0 0 24 24" aria-hidden="true"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>
     </button>
-    <button class="hit b-forgot" onclick="forgotPassword()" aria-label="Forgot password"></button>
-    <button class="hit b-signin" onclick="emailSignIn()" aria-label="Sign in"></button>
-    <button class="hit b-create" onclick="emailSignUp()" aria-label="Create account"></button>
+    <button class="hit b-forgot" onclick="forgotPassword()" aria-label="Forgot password" title="Forgot password"></button>
+    <button class="hit b-signin" onclick="emailSignIn()" aria-label="Sign in" title="Sign in"></button>
+    <button class="hit b-create" onclick="emailSignUp()" aria-label="Create account" title="Create account"></button>
   </div>
 </div>
 
 <div class="screen" id="churchScreen">
   <div class="stage" id="churchScreen2">
     <img class="bg" id="churchImg" src="images/church-bg.png" alt="Church Information Step" loading="lazy">
-    <button class="hit b-back2" onclick="goToLogin()" aria-label="Back to login"></button>
+    <button class="hit b-back2" onclick="goToLogin()" aria-label="Back to login" title="Back to login"></button>
 
     <div class="mask m-cname"></div>
     <input class="hit f-cname" id="churchName" type="text" maxlength="100" placeholder="Enter your church name" aria-label="Church Name" onkeydown="if(event.key === 'Enter') saveChurchInfo()">
 
-    <button class="hit b-cphoto" onclick="document.getElementById('churchPhotoFile').click()" aria-label="Upload church photo"></button>
+    <button class="hit b-cphoto" onclick="document.getElementById('churchPhotoFile').click()" aria-label="Upload church photo" title="Upload church photo"></button>
     <input type="file" id="churchPhotoFile" accept="image/*" style="display:none" onchange="previewChurchPhoto(this)">
     <img class="photo-preview" id="churchPhotoPreview" src="" alt="Church Photo Preview">
 
@@ -150,7 +150,7 @@ input.hit:-webkit-autofill:focus{
     <div class="mask m-cweb"></div>
     <input class="hit f-cweb" id="churchWeb" type="text" maxlength="100" placeholder="e.g. www.yourchurch.org" aria-label="Website" onkeydown="if(event.key === 'Enter') saveChurchInfo()">
 
-    <button class="hit b-continue2" onclick="saveChurchInfo()" aria-label="Save church information"></button>
+    <button class="hit b-continue2" onclick="saveChurchInfo()" aria-label="Save church information" title="Save church information"></button>
   </div>
 </div>
 

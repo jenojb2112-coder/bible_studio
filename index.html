@@ -235,9 +235,12 @@ window.togglePass = function(){
   }
 };
 
+const _loginEmailEl = document.getElementById('loginEmail');
+const _loginPassEl = document.getElementById('loginPass');
+
 window.emailSignIn = async function(){
-  const email = document.getElementById('loginEmail').value.trim();
-  const pass  = document.getElementById('loginPass').value;
+  const email = _loginEmailEl.value.trim();
+  const pass  = _loginPassEl.value;
   if(!email || !pass){ showMsg('⚠️ Email மற்றும் Password போடுங்க'); return; }
   setLoading(true);
   try{
@@ -253,8 +256,8 @@ window.emailSignIn = async function(){
 };
 
 window.emailSignUp = async function(){
-  const email = document.getElementById('loginEmail').value.trim();
-  const pass  = document.getElementById('loginPass').value;
+  const email = _loginEmailEl.value.trim();
+  const pass  = _loginPassEl.value;
   if(!email || !pass){ showMsg('⚠️ Account create பண்ண Email + Password (6+ chars) போடுங்க'); return; }
   setLoading(true);
   try{
@@ -267,7 +270,7 @@ window.emailSignUp = async function(){
 };
 
 window.forgotPassword = async function(){
-  const email = document.getElementById('loginEmail').value.trim();
+  const email = _loginEmailEl.value.trim();
   if(!email){ showMsg('⚠️ முதல்ல Email போடுங்க'); return; }
   try{
     await sendPasswordResetEmail(auth, email);

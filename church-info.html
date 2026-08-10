@@ -101,12 +101,18 @@ function previewChurchPhoto(input){
   }
 }
 
+const elChurchName = document.getElementById('churchName');
+const elLoc = document.getElementById('churchLoc');
+const elInsta = document.getElementById('churchInsta');
+const elYT = document.getElementById('churchYT');
+const elWeb = document.getElementById('churchWeb');
+
 function handleContinue(){
-  const churchName = document.getElementById('churchName').value.trim();
-  const loc = document.getElementById('churchLoc').value.trim();
-  const insta = document.getElementById('churchInsta').value.trim();
-  const yt = document.getElementById('churchYT').value.trim();
-  const web = document.getElementById('churchWeb').value.trim();
+  const churchName = elChurchName.value.trim();
+  const loc = elLoc.value.trim();
+  const insta = elInsta.value.trim();
+  const yt = elYT.value.trim();
+  const web = elWeb.value.trim();
 
   if(!churchName){ showMsg('⚠️ Church Name தேவை'); return; }
 

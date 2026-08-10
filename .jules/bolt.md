@@ -14,3 +14,7 @@
 ## 2024-05-24 - LCP and Off-screen Image Optimization
 **Learning:** Missing resource preloading for critical above-the-fold assets (like splash logos and initial backgrounds) delays the Largest Contentful Paint (LCP). Conversely, loading off-screen images (like backgrounds for hidden screens) eagerly consumes unnecessary bandwidth and delays critical resources.
 **Action:** Always add `<link rel="preload" as="image">` for critical above-the-fold images to improve perceived load time, and add `loading="lazy"` to `<img ...>` tags for off-screen or below-the-fold images to defer their loading.
+
+## 2025-02-23 - DOM Query Caching
+**Learning:** Querying the DOM dynamically (e.g. `document.getElementById`) on frequent toggle interactions causes redundant overhead.
+**Action:** Use a memoization technique holding DOM element references globally outside the function, with a `document.contains` guard for tests.

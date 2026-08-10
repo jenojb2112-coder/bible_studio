@@ -78,12 +78,12 @@ input.hit:focus::placeholder{color:transparent;}
 </div>
 
 <script>
+const _cachedMsgBox = document.getElementById('msgBox');
 function showMsg(text, ms=3000){
-  const box = document.getElementById('msgBox');
-  box.textContent = text;
-  box.style.display = 'block';
+  _cachedMsgBox.textContent = text;
+  _cachedMsgBox.style.display = 'block';
   clearTimeout(window._msgTimer);
-  window._msgTimer = setTimeout(()=>{ box.style.display='none'; }, ms);
+  window._msgTimer = setTimeout(()=>{ _cachedMsgBox.style.display='none'; }, ms);
 }
 
 function previewChurchPhoto(input){

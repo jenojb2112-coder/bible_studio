@@ -21,3 +21,8 @@
 **Vulnerability:** Input fields lacked `maxlength` attributes, allowing potential client-side memory exhaustion DoS when excessively long strings are processed.
 **Learning:** To prevent client-side memory exhaustion DoS when strings are processed or sent to backend APIs, always define explicit and sensible `maxlength` attributes for HTML `<input>` elements.
 **Prevention:** Always define explicit and sensible `maxlength` attributes for HTML `<input>` elements (e.g., 100 for emails/names, 128 for passwords).
+
+## 2024-08-10 - [Missing API Timeouts]
+**Vulnerability:** External API calls to Firebase did not have explicit timeouts, relying entirely on the client's default connection behaviors.
+**Learning:** Firebase's offline behaviors can result in promises hanging indefinitely. This can lead to the application getting stuck in a loading state, essentially causing a client-side DoS and a degraded user experience.
+**Prevention:** Always wrap external network requests (like Auth and Firestore queries) with a `withTimeout` race condition (e.g. 10000ms) to ensure the application fails securely and promptly when network connectivity drops or the service hangs.

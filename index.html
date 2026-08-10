@@ -5,6 +5,8 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.gstatic.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' https://*.googleapis.com https://*.firebaseio.com wss://*.firebaseio.com https://*.firebaseapp.com; frame-src 'self' https://*.firebaseapp.com;">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <title>HolyVerse Bible Studio - Login</title>
+<link rel="preload" href="images/splash-logo.png" as="image">
+<link rel="preload" href="images/login-bg.png" as="image">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#060402">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -128,7 +130,7 @@ input.hit:-webkit-autofill:focus{
 
 <div class="screen" id="churchScreen">
   <div class="stage" id="churchScreen2">
-    <img class="bg" id="churchImg" src="images/church-bg.png" alt="Church Information Step">
+    <img class="bg" id="churchImg" src="images/church-bg.png" alt="Church Information Step" loading="lazy">
     <button class="hit b-back2" onclick="goToLogin()" aria-label="Back to login"></button>
 
     <div class="mask m-cname"></div>

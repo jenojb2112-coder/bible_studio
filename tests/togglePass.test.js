@@ -12,13 +12,14 @@ describe('window.togglePass', () => {
     // Extract the window.togglePass function definition.
     const togglePassMatch = scriptContent.match(/window\.togglePass\s*=\s*function\(\)\{[\s\S]*?\n\};/);
     if (togglePassMatch) {
-      eval(togglePassMatch[0]);
+      eval('window._loginPassEl = null;\n' + togglePassMatch[0].replace(/_loginPassEl/g, 'window._loginPassEl'));
     } else {
       throw new Error("Could not find window.togglePass in index.html");
     }
   });
 
   beforeEach(() => {
+    window._loginPassEl = null;
     document.body.innerHTML = `
       <input id="loginPass" type="password" />
       <button id="eyeBtn" aria-label="Show password" title="Show password">

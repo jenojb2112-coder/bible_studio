@@ -21,3 +21,8 @@
 **Vulnerability:** Input fields lacked `maxlength` attributes, allowing potential client-side memory exhaustion DoS when excessively long strings are processed.
 **Learning:** To prevent client-side memory exhaustion DoS when strings are processed or sent to backend APIs, always define explicit and sensible `maxlength` attributes for HTML `<input>` elements.
 **Prevention:** Always define explicit and sensible `maxlength` attributes for HTML `<input>` elements (e.g., 100 for emails/names, 128 for passwords).
+
+## 2024-08-08 - [Missing File Upload MIME Type Validation]
+**Vulnerability:** Client-side file uploads (`FileReader`) only validated file size but not MIME type, allowing users to potentially upload non-image files (e.g., executable scripts or malicious documents) if they bypassed the HTML `accept` attribute.
+**Learning:** Relying solely on the HTML `accept` attribute is insufficient for security as it can be easily bypassed by the client. Files read into Data URLs without type validation could be mishandled by the application or stored as invalid payloads.
+**Prevention:** Always validate the `type` property of `File` objects (e.g., `file.type.startsWith('image/')`) in JavaScript before reading them with `FileReader` or sending them to a backend.

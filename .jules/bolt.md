@@ -11,3 +11,6 @@
 ## 2024-05-24 - DOM Query Optimization in Form Submission
 **Learning:** Repeatedly calling `document.getElementById` within form submission or event handler functions (like `saveChurchInfo`) adds unnecessary DOM traversal overhead. Since the elements are statically defined in the HTML and parsed before the module script runs, they can safely be queried once.
 **Action:** Extract repeated `document.getElementById` calls from frequently executed functions (like form handlers) and cache them as module-level constants to improve execution speed and reduce main thread blocking.
+## 2024-05-24 - LCP and Off-screen Image Optimization
+**Learning:** Missing resource preloading for critical above-the-fold assets (like splash logos and initial backgrounds) delays the Largest Contentful Paint (LCP). Conversely, loading off-screen images (like backgrounds for hidden screens) eagerly consumes unnecessary bandwidth and delays critical resources.
+**Action:** Always add `<link rel="preload" as="image">` for critical above-the-fold images to improve perceived load time, and add `loading="lazy"` to `<img ...>` tags for off-screen or below-the-fold images to defer their loading.

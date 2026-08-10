@@ -15,3 +15,6 @@
 ## 2024-05-24 - Add ARIA live regions to dynamic overlays
 **Learning:** JS-driven UI overlays like toast messages and loaders are invisible to screen readers without ARIA roles. Using `role="alert" aria-live="assertive"` for messages and `role="status" aria-live="polite"` for loaders ensures they are announced appropriately.
 **Action:** Always add ARIA roles to dynamic overlays and loaders in applications to ensure screen reader accessibility.
+## 2024-08-10 - Dynamic aria-label and title for stateful toggle buttons
+**Learning:** Stateful toggle buttons (like password visibility) with static labels (e.g. "Toggle password visibility") provide insufficient context for screen reader and mouse users.
+**Action:** Always dynamically update `aria-label` and `title` attributes within the JavaScript event handler that alters the visual state to ensure accurate context (e.g., "Show password" vs "Hide password"). Additionally, apply `aria-hidden="true"` to internal decorative SVGs to prevent redundant announcements.

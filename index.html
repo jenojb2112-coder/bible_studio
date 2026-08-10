@@ -192,6 +192,8 @@ function setLoading(on){
   _loaderEl.style.display = on ? 'flex' : 'none';
 }
 let _activeScreen = null;
+let _loginEmailEl = null;
+let _loginPassEl = null;
 function goTo(id){
   if(!_activeScreen) _activeScreen = document.querySelector('.screen.active');
   // ⚡ Bolt: Early return prevents inefficient DOM repaints when navigating to the already active screen
@@ -221,7 +223,8 @@ window.previewChurchPhoto = function(input){
 };
 
 window.togglePass = function(){
-  const p = document.getElementById('loginPass');
+  if(!_loginPassEl) _loginPassEl = document.getElementById('loginPass');
+  const p = _loginPassEl;
   const icon = document.getElementById('eyeIcon');
   const btn = document.getElementById('eyeBtn');
   const openEye = '<path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/>';
@@ -236,8 +239,10 @@ window.togglePass = function(){
 };
 
 window.emailSignIn = async function(){
-  const email = document.getElementById('loginEmail').value.trim();
-  const pass  = document.getElementById('loginPass').value;
+  if(!_loginEmailEl) _loginEmailEl = document.getElementById('loginEmail');
+  if(!_loginPassEl) _loginPassEl = document.getElementById('loginPass');
+  const email = _loginEmailEl.value.trim();
+  const pass  = _loginPassEl.value;
   if(!email || !pass){ showMsg('⚠️ Email மற்றும் Password போடுங்க'); return; }
   setLoading(true);
   try{
@@ -253,8 +258,10 @@ window.emailSignIn = async function(){
 };
 
 window.emailSignUp = async function(){
-  const email = document.getElementById('loginEmail').value.trim();
-  const pass  = document.getElementById('loginPass').value;
+  if(!_loginEmailEl) _loginEmailEl = document.getElementById('loginEmail');
+  if(!_loginPassEl) _loginPassEl = document.getElementById('loginPass');
+  const email = _loginEmailEl.value.trim();
+  const pass  = _loginPassEl.value;
   if(!email || !pass){ showMsg('⚠️ Account create பண்ண Email + Password (6+ chars) போடுங்க'); return; }
   setLoading(true);
   try{
@@ -267,7 +274,8 @@ window.emailSignUp = async function(){
 };
 
 window.forgotPassword = async function(){
-  const email = document.getElementById('loginEmail').value.trim();
+  if(!_loginEmailEl) _loginEmailEl = document.getElementById('loginEmail');
+  const email = _loginEmailEl.value.trim();
   if(!email){ showMsg('⚠️ முதல்ல Email போடுங்க'); return; }
   try{
     await sendPasswordResetEmail(auth, email);

@@ -211,9 +211,8 @@ window.previewChurchPhoto = function(input){
     if(input.files[0].size > 2 * 1024 * 1024){ showMsg('⚠️ Photo must be under 2MB'); return; }
     const reader = new FileReader();
     reader.onload = (e)=>{
-      const img = document.getElementById('churchPhotoPreview');
-      img.src = e.target.result;
-      img.style.display = 'block';
+      _churchPhotoPreviewEl.src = e.target.result;
+      _churchPhotoPreviewEl.style.display = 'block';
       window._churchPhotoDataUrl = e.target.result;
     };
     reader.readAsDataURL(input.files[0]);
@@ -289,6 +288,7 @@ const _churchLocEl = document.getElementById('churchLoc');
 const _churchInstaEl = document.getElementById('churchInsta');
 const _churchYTEl = document.getElementById('churchYT');
 const _churchWebEl = document.getElementById('churchWeb');
+const _churchPhotoPreviewEl = document.getElementById('churchPhotoPreview');
 window.saveChurchInfo = async function(){
   const user = auth.currentUser;
   if(!user){ showMsg('⚠️ முதல்ல login பண்ணுங்க'); goTo('loginScreen'); return; }
@@ -322,14 +322,13 @@ onAuthStateChanged(auth, async (user)=>{
       const snap = await getDoc(doc(db, 'users', user.uid));
       if(snap.exists()){
         const d = snap.data();
-        if(d.churchName) document.getElementById('churchName').value = d.churchName;
-        if(d.location) document.getElementById('churchLoc').value = d.location;
-        if(d.instagram) document.getElementById('churchInsta').value = d.instagram;
-        if(d.youtube) document.getElementById('churchYT').value = d.youtube;
-        if(d.website) document.getElementById('churchWeb').value = d.website;
+        if(d.churchName) _churchNameEl.value = d.churchName;
+        if(d.location) _churchLocEl.value = d.location;
+        if(d.instagram) _churchInstaEl.value = d.instagram;
+        if(d.youtube) _churchYTEl.value = d.youtube;
+        if(d.website) _churchWebEl.value = d.website;
         if(d.photoDataUrl){
-          const img = document.getElementById('churchPhotoPreview');
-          img.src = d.photoDataUrl; img.style.display='block';
+          _churchPhotoPreviewEl.src = d.photoDataUrl; _churchPhotoPreviewEl.style.display='block';
         }
       }
     } catch (e) {

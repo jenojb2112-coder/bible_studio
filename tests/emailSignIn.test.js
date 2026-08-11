@@ -46,6 +46,23 @@ describe('emailSignIn', () => {
     global.setDoc = jest.fn();
     global.getDoc = jest.fn();
     global.withTimeout = jest.fn();
+    global.emailSignInHandler = jest.fn(async (auth, fn, msg, load) => {
+      const email = document.getElementById('loginEmail').value.trim();
+      const pass  = document.getElementById('loginPass').value;
+      if(!email || !pass){ msg('⚠️ Email மற்றும் Password போடுங்க'); return; }
+      load(true);
+      try { await fn(auth, email, pass); }
+      catch(e) {
+        load(false);
+        let errorMsg = e.message || e.code;
+        if((e.code||'').includes('invalid-credential') || (e.code||'').includes('user-not-found') || (e.code||'').includes('wrong-password')){
+          errorMsg = 'இந்த Email/Password சரியில்ல, அல்லது இன்னும் Account create ஆகல. "Create Account" try பண்ணுங்க.';
+        }
+        if (errorMsg === e.message || errorMsg === e.code) { errorMsg = 'Login தோல்வி. Please try again.'; }
+        msg('❌ ' + errorMsg);
+        console.error('Login error', e);
+      }
+    });
 
     // Reset window variables that might interfere
     window._activeScreen = null;

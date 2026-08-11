@@ -22,30 +22,40 @@ describe('window.togglePass', () => {
     document.body.innerHTML = `
       <input id="loginPass" type="password" />
       <div id="eyeIcon"></div>
+      <button id="eyeBtn" aria-label="Show password" title="Show password"></button>
     `;
   });
 
-  it('should toggle from password to text and change icon to closedEye', () => {
+  it('should toggle from password to text and change icon to openEye', () => {
     const p = document.getElementById('loginPass');
     const icon = document.getElementById('eyeIcon');
+    const btn = document.getElementById('eyeBtn');
 
     expect(p.type).toBe('password');
 
     window.togglePass();
 
     expect(p.type).toBe('text');
-    expect(icon.innerHTML).toContain('M2 2l20 20'); // closedEye path
+    expect(icon.innerHTML).toContain('M1 12s4-7'); // openEye path
+    expect(btn.getAttribute('aria-label')).toBe('Hide password');
+    expect(btn.getAttribute('title')).toBe('Hide password');
   });
 
-  it('should toggle from text to password and change icon to openEye', () => {
+  it('should toggle from text to password and change icon to closedEye', () => {
     const p = document.getElementById('loginPass');
     const icon = document.getElementById('eyeIcon');
+    const btn = document.getElementById('eyeBtn');
 
     p.type = 'text';
+    icon.innerHTML = 'M1 12s4-7';
+    btn.setAttribute('aria-label', 'Hide password');
+    btn.setAttribute('title', 'Hide password');
 
     window.togglePass();
 
     expect(p.type).toBe('password');
-    expect(icon.innerHTML).toContain('M1 12s4-7'); // openEye path
+    expect(icon.innerHTML).toContain('M2 2l20 20'); // closedEye path
+    expect(btn.getAttribute('aria-label')).toBe('Show password');
+    expect(btn.getAttribute('title')).toBe('Show password');
   });
 });

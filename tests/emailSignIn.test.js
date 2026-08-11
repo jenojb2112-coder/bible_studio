@@ -119,7 +119,7 @@ describe('emailSignIn', () => {
 
     await window.emailSignIn();
 
-    expect(document.getElementById('msgBox').textContent).toContain('இந்த Email/Password சரியில்ல, அல்லது இன்னும் Account create ஆகல');
+    expect(document.getElementById('msgBox').textContent).toContain('இந்த Email/Password சரியில்ல, அல்லது Account இன்னும் Create ஆகல');
   });
 
   it('should show specific error message for user-not-found error code', async () => {
@@ -132,7 +132,7 @@ describe('emailSignIn', () => {
 
     await window.emailSignIn();
 
-    expect(document.getElementById('msgBox').textContent).toContain('இந்த Email/Password சரியில்ல, அல்லது இன்னும் Account create ஆகல');
+    expect(document.getElementById('msgBox').textContent).toContain('இந்த Email/Password சரியில்ல, அல்லது Account இன்னும் Create ஆகல');
   });
 
   it('should show specific error message for wrong-password error code', async () => {
@@ -145,6 +145,6 @@ describe('emailSignIn', () => {
 
     await window.emailSignIn();
 
-    expect(document.getElementById('msgBox').textContent).toContain('இந்த Email/Password சரியில்ல, அல்லது இன்னும் Account create ஆகல');
+    expect(document.getElementById('msgBox').textContent).toContain('இந்த Email/Password சரியில்ல, அல்லது Account இன்னும் Create ஆகல');
   });
 });

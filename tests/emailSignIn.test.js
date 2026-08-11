@@ -46,6 +46,10 @@ describe('emailSignIn', () => {
     global.setDoc = jest.fn();
     global.getDoc = jest.fn();
     global.withTimeout = jest.fn();
+    global.showMsg = jest.fn((text, ms=3000) => {
+      const box = document.getElementById('msgBox');
+      if(box) { box.textContent = text; box.style.display = 'block'; }
+    });
 
     // Reset window variables that might interfere
     window._activeScreen = null;

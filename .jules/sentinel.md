@@ -26,3 +26,8 @@
 **Vulnerability:** Client-side file uploads (`FileReader`) only validated file size but not MIME type, allowing users to potentially upload non-image files (e.g., executable scripts or malicious documents) if they bypassed the HTML `accept` attribute.
 **Learning:** Relying solely on the HTML `accept` attribute is insufficient for security as it can be easily bypassed by the client. Files read into Data URLs without type validation could be mishandled by the application or stored as invalid payloads.
 **Prevention:** Always validate the `type` property of `File` objects (e.g., `file.type.startsWith('image/')`) in JavaScript before reading them with `FileReader` or sending them to a backend.
+
+## 2026-08-11 - [False Positive API Key]
+**Vulnerability:** A hardcoded Firebase API key was identified in client-side configuration.
+**Learning:** Unlike server-side secret keys, Firebase web client API keys are public by design to identify the Firebase project. This is a false positive vulnerability.
+**Prevention:** Add explicit clarifying comments (e.g., `// NOTE: This key is intentionally public`) near such keys in the code to prevent future developers or automated tools from misidentifying them.

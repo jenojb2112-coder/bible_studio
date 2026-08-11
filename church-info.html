@@ -77,19 +77,38 @@ input.hit:focus::placeholder{color:transparent;}
   <button class="hit b-continue2" onclick="handleContinue()" aria-label="Continue"></button>
 </div>
 
-<script>
-function showMsg(text, ms=3000){
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
+import { getAuth } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
+import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
+import { withTimeout } from "./utils.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyB7IPJN4DIxSTtrclOXftvdAZ6AKgFkKRQ",
+  authDomain: "bible-studio-pk.firebaseapp.com",
+  projectId: "bible-studio-pk",
+  storageBucket: "bible-studio-pk.firebasestorage.app",
+  messagingSenderId: "620234131776",
+  appId: "1:620234131776:web:64300139740961dcf852a5",
+  measurementId: "G-N06JW2YQR4"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+window.showMsg = function(text, ms=3000){
   const box = document.getElementById('msgBox');
   box.textContent = text;
   box.style.display = 'block';
   clearTimeout(window._msgTimer);
   window._msgTimer = setTimeout(()=>{ box.style.display='none'; }, ms);
-}
+};
 
-function previewChurchPhoto(input){
+window.previewChurchPhoto = function(input){
   if(input.files && input.files[0]){
-    if(!input.files[0].type.startsWith('image/')){ showMsg('⚠️ Image file மட்டும் upload பண்ணுங்க'); return; }
-    if(input.files[0].size > 2 * 1024 * 1024){ showMsg('⚠️ Photo must be under 2MB'); return; }
+    if(!input.files[0].type.startsWith('image/')){ window.showMsg('⚠️ Image file மட்டும் upload பண்ணுங்க'); return; }
+    if(input.files[0].size > 2 * 1024 * 1024){ window.showMsg('⚠️ Photo must be under 2MB'); return; }
     const reader = new FileReader();
     reader.onload = (e)=>{
       const img = document.getElementById('churchPhotoPreview');
@@ -99,26 +118,45 @@ function previewChurchPhoto(input){
     };
     reader.readAsDataURL(input.files[0]);
   }
-}
+};
 
-function handleContinue(){
+window.handleContinue = async function(){
   const churchName = document.getElementById('churchName').value.trim();
   const loc = document.getElementById('churchLoc').value.trim();
   const insta = document.getElementById('churchInsta').value.trim();
   const yt = document.getElementById('churchYT').value.trim();
   const web = document.getElementById('churchWeb').value.trim();
 
-  if(!churchName){ showMsg('⚠️ Church Name தேவை'); return; }
+  if(!churchName){ window.showMsg('⚠️ Church Name தேவை'); return; }
+
+  const user = auth.currentUser;
+  if (!user) {
+    window.showMsg('⚠️ முதல்ல login பண்ணுங்க');
+    setTimeout(() => { window.location.href = 'index.html'; }, 2000);
+    return;
+  }
 
   const data = {
     churchName, location: loc, instagram: insta, youtube: yt, website: web,
+    email: user.email || null,
     hasPhoto: !!window._churchPhotoDataUrl,
-    photoDataUrl: window._churchPhotoDataUrl || null
+    photoDataUrl: window._churchPhotoDataUrl || null,
+    updatedAt: new Date().toISOString()
   };
+
   console.log('Church Info collected:', data);
-  showMsg('✅ Collected: ' + churchName + (loc ? ' | ' + loc : ''));
-  // TODO: connect this to your backend / next screen navigation here
-}
+
+  try {
+    await withTimeout(setDoc(doc(db, 'users', user.uid), data, { merge: true }), 10000, 'Save');
+    window.showMsg('✅ Collected: ' + churchName + (loc ? ' | ' + loc : ''));
+    setTimeout(() => {
+        window.location.href = 'index.html';
+    }, 1500);
+  } catch (e) {
+    console.error('Save error', e);
+    window.showMsg('❌ Save தோல்வி. Please try again.', 6000);
+  }
+};
 </script>
 </body>
 </html>

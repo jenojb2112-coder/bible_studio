@@ -19,3 +19,7 @@
 ## 2026-08-10 - Dynamic ARIA attributes for stateful transparent toggles
 **Learning:** Stateful transparent toggle buttons (like password visibility) require their `aria-label` and `title` to update dynamically based on state to ensure accurate context for screen reader and mouse users. Also, decorative inner SVGs must use `aria-hidden="true"` to prevent redundant announcements.
 **Action:** Always dynamically update `aria-label` and `title` within the JS event handler that alters a toggle button's state, and hide internal decorative SVGs using `aria-hidden="true"`.
+
+## 2026-08-11 - Add Native Tooltips for Transparent Hitzone UI Elements
+**Learning:** Transparent hitzone elements (such as buttons with `aria-label`) lack visual cues for mouse users since they don't contain visible text or icons, making it difficult for them to understand the button's function before clicking.
+**Action:** Always include a `title` attribute that matches the `aria-label` attribute on transparent hitzone buttons to provide native hover tooltips for mouse users.

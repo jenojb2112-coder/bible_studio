@@ -163,7 +163,7 @@ import {
 import {
   getFirestore, doc, setDoc, getDoc
 } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
-import { withTimeout } from "./utils.js";
+import { withTimeout, showMsg } from "./utils.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyB7IPJN4DIxSTtrclOXftvdAZ6AKgFkKRQ",
@@ -179,13 +179,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-const _cachedMsgBox = document.getElementById('msgBox');
-function showMsg(text, ms=3000){
-  _cachedMsgBox.textContent = text;
-  _cachedMsgBox.style.display = 'block';
-  clearTimeout(window._msgTimer);
-  window._msgTimer = setTimeout(()=>{ _cachedMsgBox.style.display='none'; }, ms);
-}
+window.showMsg = showMsg;
 let _loaderEl = null;
 function setLoading(on){
   if(!_loaderEl) _loaderEl = document.getElementById('loader');

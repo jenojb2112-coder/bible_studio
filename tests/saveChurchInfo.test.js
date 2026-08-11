@@ -53,6 +53,10 @@ describe('saveChurchInfo', () => {
 
     withTimeoutMock = jest.fn((promise) => promise);
     global.withTimeout = withTimeoutMock;
+    global.showMsg = jest.fn((text, ms=3000) => {
+      const box = document.getElementById('msgBox');
+      if(box) { box.textContent = text; box.style.display = 'block'; }
+    });
 
     global.signInWithEmailAndPassword = jest.fn();
     global.createUserWithEmailAndPassword = jest.fn();

@@ -23,3 +23,6 @@
 ## 2026-08-11 - Hover Tooltips for Transparent Hitzones
 **Learning:** For UI implementations using transparent hitzones over background images, mouse users lack visual indicators of the hitzone boundaries or their specific functions before clicking.
 **Action:** Always add `title` attributes (matching the `aria-label`) to `<button>` elements to provide native hover tooltips for mouse users who lack visual indicators.
+## 2024-08-12 - Fix photo preview blocking click
+**Learning:** When dynamic visual overlays (such as image previews like `.photo-preview`) are positioned on top of interactive transparent hitzone elements, they can block clicks from reaching the underlying button.
+**Action:** Always apply `pointer-events: none;` to the overlay to allow clicks to pass through to the underlying button.

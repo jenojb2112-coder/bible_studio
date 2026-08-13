@@ -31,3 +31,8 @@
 **Vulnerability:** A hardcoded Firebase API key was identified in client-side configuration.
 **Learning:** Unlike server-side secret keys, Firebase web client API keys are public by design to identify the Firebase project. This is a false positive vulnerability.
 **Prevention:** Add explicit clarifying comments (e.g., `// NOTE: This key is intentionally public`) near such keys in the code to prevent future developers or automated tools from misidentifying them.
+
+## 2026-08-13 - [Missing API Timeouts]
+**Vulnerability:** External API calls (Firebase Auth/Firestore) were not wrapped with a timeout, leading to potential client-side Denial of Service (indefinite hanging) if the network connection fails silently.
+**Learning:** Network requests, especially to third-party services, can hang indefinitely without explicit timeout mechanisms, degrading user experience and consuming client resources.
+**Prevention:** Always wrap external network-dependent API calls (such as Firebase Auth functions and Firestore queries) with a timeout mechanism (e.g., `withTimeout(call, 10000)`) to ensure failing connections reject quickly and securely.

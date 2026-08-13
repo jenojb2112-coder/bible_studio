@@ -242,7 +242,7 @@ window.emailSignIn = async function(){
   if(!email || !pass){ showMsg('⚠️ Email மற்றும் Password போடுங்க'); return; }
   setLoading(true);
   try{
-    await signInWithEmailAndPassword(auth, email, pass);
+    await withTimeout(signInWithEmailAndPassword(auth, email, pass), 10000, 'Login');
   }catch(e){
     setLoading(false);
     let msg = e.message || e.code;
@@ -259,7 +259,7 @@ window.emailSignUp = async function(){
   if(!email || !pass){ showMsg('⚠️ Account create பண்ண Email + Password (6+ chars) போடுங்க'); return; }
   setLoading(true);
   try{
-    await createUserWithEmailAndPassword(auth, email, pass);
+    await withTimeout(createUserWithEmailAndPassword(auth, email, pass), 10000, 'Signup');
     showMsg('✅ Account created!');
   }catch(e){
     setLoading(false);
@@ -271,7 +271,7 @@ window.forgotPassword = async function(){
   const email = document.getElementById('loginEmail').value.trim();
   if(!email){ showMsg('⚠️ முதல்ல Email போடுங்க'); return; }
   try{
-    await sendPasswordResetEmail(auth, email);
+    await withTimeout(sendPasswordResetEmail(auth, email), 10000, 'Reset Password');
     showMsg('📧 Password reset link email-க்கு அனுப்பப்பட்டது');
   }catch(e){
     console.error('Password reset error', e);

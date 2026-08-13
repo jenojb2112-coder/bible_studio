@@ -31,3 +31,8 @@
 **Vulnerability:** A hardcoded Firebase API key was identified in client-side configuration.
 **Learning:** Unlike server-side secret keys, Firebase web client API keys are public by design to identify the Firebase project. This is a false positive vulnerability.
 **Prevention:** Add explicit clarifying comments (e.g., `// NOTE: This key is intentionally public`) near such keys in the code to prevent future developers or automated tools from misidentifying them.
+
+## 2026-08-11 - [Missing API Timeouts]
+**Vulnerability:** Client-side DoS via indefinite network hanging on Firebase Auth calls.
+**Learning:** External network calls without timeouts can hang indefinitely in offline scenarios.
+**Prevention:** Wrap all network-dependent API calls with a timeout mechanism like withTimeout(call, 10000).

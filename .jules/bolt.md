@@ -19,3 +19,7 @@
 **Learning:** Repeatedly querying the DOM using `document.getElementById` for elements that don't change (like static input fields) is inefficient, especially when those inputs are accessed across multiple user interactions (signup, signin, toggle pass, etc.).
 
 **Action:** Cache these DOM elements in global variables (e.g., `let _loginEmailEl = null;`) upon their first access, and reuse the cached reference for subsequent actions. This reduces unnecessary DOM traversals.
+
+## 2026-08-14 - Preconnecting to Critical External Domains
+**Learning:** Loading critical external resources (like Firebase JS SDKs and API endpoints) incurs significant connection overhead (DNS resolution, TCP handshake, TLS negotiation), which delays script execution and API calls.
+**Action:** Always use `<link rel="preconnect" href="..." crossorigin>` for critical external domains (e.g., `https://www.gstatic.com`) to establish early connections and measurably reduce network latency.

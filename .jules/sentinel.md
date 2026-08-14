@@ -36,3 +36,8 @@
 **Vulnerability:** Client-side DoS via indefinite network hanging on Firebase Auth calls.
 **Learning:** External network calls without timeouts can hang indefinitely in offline scenarios.
 **Prevention:** Wrap all network-dependent API calls with a timeout mechanism like withTimeout(call, 10000).
+
+## 2026-08-14 - [Mocking Promise Wrappers in Tests]
+**Vulnerability:** N/A (Testing best practice)
+**Learning:** When adding promise wrapper functions like `withTimeout` to external API calls (e.g., `getDoc`), poorly configured test mocks (like `jest.fn()` resolving to undefined) will break the test suite by swallowing the promise chain.
+**Prevention:** Ensure wrapper functions are mocked to pass through the promise (e.g., `global.withTimeout = jest.fn((promise) => promise);)` to maintain the expected asynchronous behavior in tests.

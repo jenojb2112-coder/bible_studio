@@ -45,7 +45,7 @@ describe('emailSignUp', () => {
     global.doc = jest.fn();
     global.setDoc = jest.fn();
     global.getDoc = jest.fn();
-    global.withTimeout = jest.fn();
+    global.withTimeout = jest.fn((promise) => promise);
 
     // Reset window variables that might interfere
     window._activeScreen = null;

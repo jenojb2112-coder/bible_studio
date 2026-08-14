@@ -19,3 +19,9 @@
 **Learning:** Repeatedly querying the DOM using `document.getElementById` for elements that don't change (like static input fields) is inefficient, especially when those inputs are accessed across multiple user interactions (signup, signin, toggle pass, etc.).
 
 **Action:** Cache these DOM elements in global variables (e.g., `let _loginEmailEl = null;`) upon their first access, and reuse the cached reference for subsequent actions. This reduces unnecessary DOM traversals.
+## 2025-02-18 - Reuse module-cached DOM elements in callbacks
+**Learning:** Relying on document.getElementById() inside a frequently invoked callback (e.g. onAuthStateChanged) performs unnecessary DOM lookups, especially when the target elements are already cached in module-level variables.
+**Action:** Reuse existing module-scoped DOM variables whenever available in asynchronous or event-driven callbacks to minimize DOM traversals.
+## 2025-02-18 - Preconnect external domains
+**Learning:** The application heavily relies on external Firebase services (Firestore, Auth, static assets), and the connection overhead (DNS, TCP, TLS) delays API requests.
+**Action:** Add <link rel="preconnect"> for critical external domains to establish connections early and reduce API latency.

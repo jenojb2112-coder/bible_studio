@@ -36,3 +36,8 @@
 **Vulnerability:** Client-side DoS via indefinite network hanging on Firebase Auth calls.
 **Learning:** External network calls without timeouts can hang indefinitely in offline scenarios.
 **Prevention:** Wrap all network-dependent API calls with a timeout mechanism like withTimeout(call, 10000).
+
+## 2026-08-15 - [Missing Input Validation on Auth Forms]
+**Vulnerability:** User forms (login, signup, forgot password) lacked explicit client-side email format validation, allowing malformed strings to be passed to the backend authentication service.
+**Learning:** While the backend may eventually reject malformed data, failing to validate inputs on the client side wastes network requests, degrades user experience, and violates the defense-in-depth principle.
+**Prevention:** Always validate user input on the client side (e.g., using `isValidEmail`) before transmitting it to external APIs or services.

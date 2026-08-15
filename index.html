@@ -228,12 +228,17 @@ window.togglePass = function(){
   }
 };
 
+function isValidEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
 window.emailSignIn = async function(){
   if(!_loginEmailEl) _loginEmailEl = document.getElementById('loginEmail');
   if(!_loginPassEl) _loginPassEl = document.getElementById('loginPass');
   const email = _loginEmailEl.value.trim();
   const pass  = _loginPassEl.value;
   if(!email || !pass){ showMsg('⚠️ Email மற்றும் Password போடுங்க'); return; }
+  if(!isValidEmail(email)){ showMsg('⚠️ சரியான Email போடுங்க'); return; }
   setLoading(true);
   try{
     await withTimeout(signInWithEmailAndPassword(auth, email, pass), 10000, 'Login');
@@ -253,6 +258,7 @@ window.emailSignUp = async function(){
   const email = _loginEmailEl.value.trim();
   const pass  = _loginPassEl.value;
   if(!email || !pass){ showMsg('⚠️ Account create பண்ண Email + Password (6+ chars) போடுங்க'); return; }
+  if(!isValidEmail(email)){ showMsg('⚠️ சரியான Email போடுங்க'); return; }
   setLoading(true);
   try{
     await withTimeout(createUserWithEmailAndPassword(auth, email, pass), 10000, 'Signup');
@@ -267,6 +273,7 @@ window.forgotPassword = async function(){
   if(!_loginEmailEl) _loginEmailEl = document.getElementById('loginEmail');
   const email = _loginEmailEl.value.trim();
   if(!email){ showMsg('⚠️ முதல்ல Email போடுங்க'); return; }
+  if(!isValidEmail(email)){ showMsg('⚠️ சரியான Email போடுங்க'); return; }
   try{
     await withTimeout(sendPasswordResetEmail(auth, email), 10000, 'Reset Password');
     showMsg('📧 Password reset link email-க்கு அனுப்பப்பட்டது');

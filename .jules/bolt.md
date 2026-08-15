@@ -19,3 +19,7 @@
 **Learning:** Repeatedly querying the DOM using `document.getElementById` for elements that don't change (like static input fields) is inefficient, especially when those inputs are accessed across multiple user interactions (signup, signin, toggle pass, etc.).
 
 **Action:** Cache these DOM elements in global variables (e.g., `let _loginEmailEl = null;`) upon their first access, and reuse the cached reference for subsequent actions. This reduces unnecessary DOM traversals.
+
+## 2026-08-15 - Resource Preconnection for External Modules
+**Learning:** Relying on ES module imports in the body to initiate connections to external domains (like gstatic.com) delays module fetching due to DNS, TCP, and TLS overhead.
+**Action:** Always include <link rel="preconnect"> in the document head for critical external domains (especially those hosting essential scripts like Firebase) to parallelize connection setup with initial HTML parsing.

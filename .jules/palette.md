@@ -27,3 +27,6 @@
 ## 2024-05-25 - Pointer Events for Visual Overlays
 **Learning:** When dynamic visual overlays (such as image previews like `.photo-preview`) are positioned on top of interactive transparent hitzone elements, they can block click events, preventing users from interacting with the underlying button (e.g., to upload a new photo).
 **Action:** Apply `pointer-events: none;` to the visual overlay to allow clicks to pass through to the underlying interactive element.
+## 2024-05-23 - Form Inputs on Transparent Hitzones
+**Learning:** When inputs are styled as transparent hitzones over a background image, mouse users lack hover context and screen readers may not announce them correctly without explicit attributes.
+**Action:** Always add `title` attributes matching the `aria-label` to provide native hover tooltips, and explicitly include the `required` attribute for mandatory fields so screen readers announce their state.

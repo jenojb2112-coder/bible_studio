@@ -317,7 +317,7 @@ onAuthStateChanged(auth, async (user)=>{
   if(user){
     showMsg('✅ Login வெற்றி: ' + (user.email || user.phoneNumber || 'User'));
     try{
-      const snap = await getDoc(doc(db, 'users', user.uid));
+      const snap = await withTimeout(getDoc(doc(db, 'users', user.uid)), 10000, 'Load User Data');
       if(snap.exists()){
         const d = snap.data();
         if(d.churchName) document.getElementById('churchName').value = d.churchName;

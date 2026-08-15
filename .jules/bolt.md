@@ -19,3 +19,6 @@
 **Learning:** Repeatedly querying the DOM using `document.getElementById` for elements that don't change (like static input fields) is inefficient, especially when those inputs are accessed across multiple user interactions (signup, signin, toggle pass, etc.).
 
 **Action:** Cache these DOM elements in global variables (e.g., `let _loginEmailEl = null;`) upon their first access, and reuse the cached reference for subsequent actions. This reduces unnecessary DOM traversals.
+## 2025-01-01 - Early Connection Establishment for Critical External Scripts
+**Learning:** In applications relying on external third-party scripts (like Firebase loaded from `www.gstatic.com`), browsers normally wait until they encounter the `<script>` or `import` tags at the bottom of the HTML to begin DNS resolution, TCP handshakes, and TLS negotiation.
+**Action:** Prioritize high-impact changes with measurable results, such as using `<link rel="preconnect">` inside the `<head>` to reduce connection overhead (DNS, TCP, TLS) for critical external domains (e.g., Firebase). This proactively establishes the connection early during HTML parsing, significantly accelerating the subsequent loading of the scripts.

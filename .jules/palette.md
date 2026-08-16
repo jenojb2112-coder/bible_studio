@@ -27,3 +27,7 @@
 ## 2024-05-25 - Pointer Events for Visual Overlays
 **Learning:** When dynamic visual overlays (such as image previews like `.photo-preview`) are positioned on top of interactive transparent hitzone elements, they can block click events, preventing users from interacting with the underlying button (e.g., to upload a new photo).
 **Action:** Apply `pointer-events: none;` to the visual overlay to allow clicks to pass through to the underlying interactive element.
+
+## 2026-08-16 - Explicit Required and Title attributes for Form Overlays
+**Learning:** When using transparent overlays for form inputs, mouse users lack visual indicators of functionality and screen readers do not announce fields as mandatory because standard `required` and `title` attributes are missing on custom overlays.
+**Action:** Always include `title` attributes matching the `aria-label` for tooltips and explicitly add `required` attributes to required form input fields designed as transparent overlays over background images.

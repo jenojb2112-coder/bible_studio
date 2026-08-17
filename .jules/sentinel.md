@@ -36,3 +36,8 @@
 **Vulnerability:** Client-side DoS via indefinite network hanging on Firebase Auth calls.
 **Learning:** External network calls without timeouts can hang indefinitely in offline scenarios.
 **Prevention:** Wrap all network-dependent API calls with a timeout mechanism like withTimeout(call, 10000).
+
+## 2024-08-17 - [Missing API Timeouts on getDoc]
+**Vulnerability:** Client-side DoS via indefinite network hanging on Firebase getDoc calls.
+**Learning:** External network calls like getDoc without timeouts can hang indefinitely in offline scenarios.
+**Prevention:** Wrap all network-dependent API calls with a timeout mechanism like withTimeout(call, 10000).

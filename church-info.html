@@ -56,23 +56,23 @@ input.hit:focus::placeholder{color:transparent;}
   <button class="hit b-back2" onclick="history.back()" aria-label="Back"></button>
 
   <div class="mask m-cname"></div>
-  <input class="hit f-cname" id="churchName" type="text" maxlength="100" placeholder="Enter your church name" aria-label="Church Name" onkeydown="if(event.key === 'Enter') handleContinue()">
+  <input class="hit f-cname" id="churchName" type="text" maxlength="100" placeholder="Enter your church name" aria-label="Church Name" title="Church Name" required onkeydown="if(event.key === 'Enter') handleContinue()">
 
   <button class="hit b-cphoto" onclick="document.getElementById('churchPhotoFile').click()" aria-label="Upload church photo"></button>
-  <input type="file" id="churchPhotoFile" accept="image/*" style="display:none" onchange="previewChurchPhoto(this)">
+  <input type="file" id="churchPhotoFile" accept="image/*" style="display:none" aria-label="Upload church photo" title="Upload church photo" onchange="previewChurchPhoto(this)">
   <img class="photo-preview" id="churchPhotoPreview" src="" alt="Church Photo Preview">
 
   <div class="mask m-cloc"></div>
-  <input class="hit f-cloc" id="churchLoc" type="text" maxlength="100" placeholder="Search your church location" aria-label="Church Location" onkeydown="if(event.key === 'Enter') handleContinue()">
+  <input class="hit f-cloc" id="churchLoc" type="text" maxlength="100" placeholder="Search your church location" aria-label="Church Location" title="Church Location" onkeydown="if(event.key === 'Enter') handleContinue()">
 
   <div class="mask m-cinsta"></div>
-  <input class="hit f-cinsta" id="churchInsta" type="text" maxlength="100" placeholder="e.g. @yourchurch" aria-label="Instagram Handle" onkeydown="if(event.key === 'Enter') handleContinue()">
+  <input class="hit f-cinsta" id="churchInsta" type="text" maxlength="100" placeholder="e.g. @yourchurch" aria-label="Instagram Handle" title="Instagram Handle" onkeydown="if(event.key === 'Enter') handleContinue()">
 
   <div class="mask m-cyt"></div>
-  <input class="hit f-cyt" id="churchYT" type="text" maxlength="100" placeholder="e.g. Your Church Channel" aria-label="YouTube Channel" onkeydown="if(event.key === 'Enter') handleContinue()">
+  <input class="hit f-cyt" id="churchYT" type="text" maxlength="100" placeholder="e.g. Your Church Channel" aria-label="YouTube Channel" title="YouTube Channel" onkeydown="if(event.key === 'Enter') handleContinue()">
 
   <div class="mask m-cweb"></div>
-  <input class="hit f-cweb" id="churchWeb" type="text" maxlength="100" placeholder="e.g. www.yourchurch.org" aria-label="Website" onkeydown="if(event.key === 'Enter') handleContinue()">
+  <input class="hit f-cweb" id="churchWeb" type="text" maxlength="100" placeholder="e.g. www.yourchurch.org" aria-label="Website" title="Website" onkeydown="if(event.key === 'Enter') handleContinue()">
 
   <button class="hit b-continue2" onclick="handleContinue()" aria-label="Continue"></button>
 </div>

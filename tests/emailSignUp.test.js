@@ -45,7 +45,7 @@ describe('emailSignUp', () => {
     global.doc = jest.fn();
     global.setDoc = jest.fn();
     global.getDoc = jest.fn();
-    global.withTimeout = jest.fn();
+    global.withTimeout = jest.fn((promise) => promise);
 
     // Reset window variables that might interfere
     window._activeScreen = null;
@@ -87,7 +87,7 @@ describe('emailSignUp', () => {
     document.getElementById('loginPass').value = 'password123';
 
     const error = new Error('Sign up failed');
-    global.createUserWithEmailAndPassword.mockRejectedValueOnce(error);
+    global.withTimeout.mockRejectedValueOnce(error);
 
     await window.emailSignUp();
 

@@ -19,3 +19,6 @@
 **Learning:** Repeatedly querying the DOM using `document.getElementById` for elements that don't change (like static input fields) is inefficient, especially when those inputs are accessed across multiple user interactions (signup, signin, toggle pass, etc.).
 
 **Action:** Cache these DOM elements in global variables (e.g., `let _loginEmailEl = null;`) upon their first access, and reuse the cached reference for subsequent actions. This reduces unnecessary DOM traversals.
+## 2026-08-18 - Preconnect to External CDNs
+**Learning:** Preemptively establishing connections (DNS, TCP, TLS) to external domains used for critical ES module imports (like Firebase via www.gstatic.com) significantly reduces network handshake overhead and improves Time to Interactive.
+**Action:** Always identify explicit external domains used in imports and add `<link rel="preconnect">` tags for them in the document head.

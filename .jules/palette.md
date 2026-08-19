@@ -27,3 +27,7 @@
 ## 2024-05-25 - Pointer Events for Visual Overlays
 **Learning:** When dynamic visual overlays (such as image previews like `.photo-preview`) are positioned on top of interactive transparent hitzone elements, they can block click events, preventing users from interacting with the underlying button (e.g., to upload a new photo).
 **Action:** Apply `pointer-events: none;` to the visual overlay to allow clicks to pass through to the underlying interactive element.
+
+## 2026-08-12 - Input Required Attributes for Screen Readers
+**Learning:** Adding the `required` attribute to truly mandatory input fields allows screen readers to announce them as required, while omitting it for optional fields prevents false requirements.
+**Action:** Always add the `required` attribute to mandatory fields (e.g., Email, Password) but not to optional ones.

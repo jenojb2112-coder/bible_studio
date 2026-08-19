@@ -19,3 +19,6 @@
 **Learning:** Repeatedly querying the DOM using `document.getElementById` for elements that don't change (like static input fields) is inefficient, especially when those inputs are accessed across multiple user interactions (signup, signin, toggle pass, etc.).
 
 **Action:** Cache these DOM elements in global variables (e.g., `let _loginEmailEl = null;`) upon their first access, and reuse the cached reference for subsequent actions. This reduces unnecessary DOM traversals.
+## 2024-08-19 - Removed Base64 Image Bloat
+**Learning:** Inlining massive images as base64 inside HTML heavily bloats the file size and negatively affects parsing times.
+**Action:** Always prefer external references for large assets.

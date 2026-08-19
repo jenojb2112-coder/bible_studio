@@ -27,3 +27,7 @@
 ## 2024-05-25 - Pointer Events for Visual Overlays
 **Learning:** When dynamic visual overlays (such as image previews like `.photo-preview`) are positioned on top of interactive transparent hitzone elements, they can block click events, preventing users from interacting with the underlying button (e.g., to upload a new photo).
 **Action:** Apply `pointer-events: none;` to the visual overlay to allow clicks to pass through to the underlying interactive element.
+
+## 2026-08-19 - Add Tooltips for Transparent Hitzone Inputs
+**Learning:** Transparent input hitzones over images miss native tooltips, hurting mouse UX. Applying 'required' broadly breaks semantics for optional fields.
+**Action:** Add 'title' matching 'aria-label' to all hitzones, but restrict 'required' strictly to mandatory fields (e.g., Email, Password, Church Name).

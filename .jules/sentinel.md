@@ -36,3 +36,8 @@
 **Vulnerability:** Client-side DoS via indefinite network hanging on Firebase Auth calls.
 **Learning:** External network calls without timeouts can hang indefinitely in offline scenarios.
 **Prevention:** Wrap all network-dependent API calls with a timeout mechanism like withTimeout(call, 10000).
+
+## 2024-05-27 - Removed console.error logging from sign-up catch block
+**Vulnerability:** Unsanitized error object printing to console during sign-up
+**Learning:** Console logging of error objects can expose sensitive application logic or data structure
+**Prevention:** Avoid console logging sensitive application errors, instead display sanitized errors using UI elements

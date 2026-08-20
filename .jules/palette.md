@@ -27,3 +27,9 @@
 ## 2024-05-25 - Pointer Events for Visual Overlays
 **Learning:** When dynamic visual overlays (such as image previews like `.photo-preview`) are positioned on top of interactive transparent hitzone elements, they can block click events, preventing users from interacting with the underlying button (e.g., to upload a new photo).
 **Action:** Apply `pointer-events: none;` to the visual overlay to allow clicks to pass through to the underlying interactive element.
+## 2026-08-20 - Update input placeholder colors
+**Learning:** Input fields and their placeholder pseudo-elements were hard to read against the application background.
+**Action:** Always check the contrast of text and placeholders over dark themes, and set the text color and placeholder color properly (). Also fixed an existing test mock for `withTimeout` to properly return the passed promise.
+## 2026-08-20 - Update input placeholder colors
+**Learning:** Input fields and their placeholder pseudo-elements were hard to read against the application background.
+**Action:** Always check the contrast of text and placeholders over dark themes, and set the text color and placeholder color properly (`::placeholder { color: #7a6a55; }`). Also fixed an existing test mock for `withTimeout` to properly return the passed promise.

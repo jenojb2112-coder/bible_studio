@@ -36,3 +36,7 @@
 **Vulnerability:** Client-side DoS via indefinite network hanging on Firebase Auth calls.
 **Learning:** External network calls without timeouts can hang indefinitely in offline scenarios.
 **Prevention:** Wrap all network-dependent API calls with a timeout mechanism like withTimeout(call, 10000).
+## 2026-08-20 - Fix XSS via innerHTML in togglePass
+**Vulnerability:** Use of innerHTML for static SVG injection in togglePass function.
+**Learning:** Even for static strings, innerHTML is considered insecure by SAST tools and sets a bad precedent for future dynamic inputs.
+**Prevention:** Always use secure DOM manipulation methods (createElementNS, setAttribute, appendChild) to dynamically generate and insert SVG or HTML elements.

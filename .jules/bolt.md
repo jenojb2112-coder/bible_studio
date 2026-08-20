@@ -19,3 +19,6 @@
 **Learning:** Repeatedly querying the DOM using `document.getElementById` for elements that don't change (like static input fields) is inefficient, especially when those inputs are accessed across multiple user interactions (signup, signin, toggle pass, etc.).
 
 **Action:** Cache these DOM elements in global variables (e.g., `let _loginEmailEl = null;`) upon their first access, and reuse the cached reference for subsequent actions. This reduces unnecessary DOM traversals.
+## 2024-05-24 - Preconnect for critical external domains
+**Learning:** External resources, such as Firebase SDKs loaded from `https://www.gstatic.com`, require DNS resolution, TCP handshake, and TLS negotiation before the browser can begin downloading the file.
+**Action:** Always add `<link rel="preconnect" href="https://..." crossorigin>` for critical external domains referenced in the codebase (e.g., in ES module imports or Content-Security-Policy headers) to eliminate connection overhead and speed up resource fetching.

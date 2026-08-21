@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.gstatic.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' https://*.googleapis.com https://*.firebaseio.com wss://*.firebaseio.com https://*.firebaseapp.com; frame-src 'self' https://*.firebaseapp.com;">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>HolyVerse Bible Studio - Login</title>
+<link rel="preload" as="image" href="images/splash-logo.png">
+<link rel="preload" as="image" href="images/login-bg.png">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#060402">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{height:100%;background:#060402;overflow-y:auto;overflow-x:hidden;font-family:Georgia,serif;}
+
+.screen{position:fixed;inset:0;display:none;align-items:center;justify-content:center;
+  background:radial-gradient(ellipse at 50% 0%, #1a1108 0%, #060402 70%);}
+.screen.active{display:flex;}
+.stage{position:relative;width:100%;max-width:480px;aspect-ratio:1024/1536;margin:auto;}
+.stage img.bg{width:100%;height:100%;display:block;object-fit:fill;}
+
+.hit{position:absolute;background:transparent;border:none;padding:0;margin:0;cursor:pointer;-webkit-tap-highlight-color:transparent;}
+.hit:focus-visible, .eye-toggle:focus-visible { outline: 2px solid #c9a15a !important; border-radius: 4px; z-index: 10; }
+input.hit{color:#e8c876;font-size:clamp(11px,2.5vw,15px);outline:none;font-family:Georgia,serif;
+  line-height:1;display:flex;align-items:center;background:transparent;z-index:3;}
+input.hit::placeholder{color:transparent;}
+input.hit:focus::placeholder{color:transparent;}
+input.hit:-webkit-autofill,
+input.hit:-webkit-autofill:hover,
+input.hit:-webkit-autofill:focus{
+  -webkit-text-fill-color:#fff !important;
+  -webkit-box-shadow:0 0 0px 1000px #0b0c0d inset !important;
+  box-shadow:0 0 0px 1000px #0b0c0d inset !important;
+  transition:background-color 9999s ease-in-out 0s;
+  caret-color:#fff;
+}
+#churchScreen input.hit:-webkit-autofill{
+  -webkit-box-shadow:0 0 0px 1000px #151109 inset !important;
+  box-shadow:0 0 0px 1000px #151109 inset !important;
+}
+.mask{position:absolute;border-radius:6px;z-index:2;}
+.eye-toggle{position:absolute;z-index:4;background:transparent;border:none;cursor:pointer;padding:0;
+  display:flex;align-items:center;justify-content:center;}
+.eye-toggle svg{width:60%;height:60%;stroke:#c9a15a;fill:none;stroke-width:1.8;}
+
+#loginScreen .m-email{ left:21%; top:52.5%; width:64%; height:4.3%; background:#0b0c0d; }
+#loginScreen .m-pass { left:21%; top:62.5%; width:60%; height:4.3%; background:#0b0c0d; }
+#loginScreen .f-email{ left:24%; top:53.0%; width:60%; height:3.3%; }
+#loginScreen .f-pass { left:24%; top:63.0%; width:44%; height:3.3%; }
+#loginScreen .eye-toggle{ left:80%; top:62.8%; width:6%; height:3.6%; color:#c9a15a; }
+#loginScreen .b-forgot{ left:58%; top:67.8%; width:33%; height:2.3%; }
+#loginScreen .b-signin{ left:12.5%; top:73.0%; width:75%; height:4.7%; }
+#loginScreen .b-create{ left:54%; top:88.2%; width:38%; height:2.8%; }
+
+
+.msg-box{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);
+  background:rgba(20,12,4,0.95);border:1px solid #a5772a;color:#f0ddb0;
+  padding:10px 18px;border-radius:20px;font-size:0.85rem;display:none;z-index:999;max-width:90%;text-align:center;}
+.loader{position:fixed;inset:0;background:rgba(0,0,0,0.55);display:none;align-items:center;justify-content:center;z-index:998;color:#e8c876;font-size:1rem;}
+
+/* ===== SPLASH SCREEN ===== */
+#splashScreen{background:radial-gradient(circle at 50% 45%,#1c1408 0%,#060402 75%);}
+.splash-logo{width:38vw;max-width:180px;border-radius:24px;
+  animation:splashGlow 2s ease-in-out infinite alternate, splashFade 2.2s ease forwards;
+  box-shadow:0 0 40px rgba(255,215,0,0.35);}
+.splash-title{margin-top:22px;color:#e8c876;font-family:Georgia,serif;font-size:1.5rem;letter-spacing:0.12em;
+  opacity:0;animation:splashFade 1.6s ease 0.3s forwards;}
+.splash-sub{margin-top:6px;color:#8a7a5c;font-size:0.75rem;letter-spacing:0.3em;text-transform:uppercase;
+  opacity:0;animation:splashFade 1.6s ease 0.6s forwards;}
+@keyframes splashGlow{
+  from{ box-shadow:0 0 25px rgba(255,215,0,0.25); }
+  to{ box-shadow:0 0 55px rgba(255,215,0,0.55); }
+}
+@keyframes splashFade{
+  from{ opacity:0; transform:translateY(8px); }
+  to{ opacity:1; transform:translateY(0); }
+}
+.splash-inner{display:flex;flex-direction:column;align-items:center;justify-content:center;}
+
+/* ===== CHURCH INFO v2 hitzones (new richer design) ===== */
+.b-back2   { left:3.5%; top:2.4%;  width:6.5%; height:2.6%; }
+.m-cname   { left:19%; top:38.1%; width:65%; height:2.9%; background:#101111; }
+.f-cname   { left:22%; top:38.3%; width:60%; height:2.6%; }
+.b-cphoto  { left:6%;  top:42.3%; width:88%; height:8.3%; }
+.m-cloc    { left:19%; top:56.2%; width:65%; height:2.9%; background:#111212; }
+.f-cloc    { left:22%; top:56.4%; width:60%; height:2.6%; }
+.m-cinsta  { left:19%; top:65.0%; width:65%; height:2.9%; background:#111212; }
+.f-cinsta  { left:22%; top:65.2%; width:60%; height:2.6%; }
+.m-cyt     { left:19%; top:73.8%; width:65%; height:2.9%; background:#101212; }
+.f-cyt     { left:22%; top:74.0%; width:60%; height:2.6%; }
+.m-cweb    { left:19%; top:82.6%; width:65%; height:2.9%; background:#101111; }
+.f-cweb    { left:22%; top:82.8%; width:60%; height:2.6%; }
+.b-continue2{ left:8%; top:92.1%; width:84%; height:5.3%; }
+.photo-preview{position:absolute;left:9.5%;top:43.8%;width:8.5%;height:6.8%;border-radius:8px;
+  object-fit:cover;display:none;z-index:5;pointer-events:none;}
+</style>
+</head>
+<body>
+
+<div class="loader" id="loader" role="status" aria-live="polite">⏳ Please wait...</div>
+<div class="msg-box" id="msgBox" role="alert" aria-live="assertive"></div>
+
+<div class="screen active" id="splashScreen">
+  <div class="splash-inner">
+    <img class="splash-logo" id="splashLogo" src="images/splash-logo.png" alt="HolyVerse Logo">
+    <div class="splash-title">HOLYVERSE</div>
+    <div class="splash-sub">Bible Studio</div>
+  </div>
+</div>
+
+<div class="screen" id="loginScreen">
+  <div class="stage">
+    <img class="bg" id="loginImg" src="images/login-bg.png" alt="HolyVerse Bible Studio Login">
+    <div class="mask m-email"></div>
+    <div class="mask m-pass"></div>
+    <input class="hit f-email" id="loginEmail" type="email" maxlength="100" placeholder="Enter your email" aria-label="Email address" autocomplete="email" onkeydown="if(event.key === 'Enter') emailSignIn()">
+    <input class="hit f-pass"  id="loginPass"  type="password" maxlength="128" placeholder="Enter your password" aria-label="Password" autocomplete="current-password" onkeydown="if(event.key === 'Enter') emailSignIn()">
+    <button class="eye-toggle" id="eyeBtn" onclick="togglePass()" aria-label="Show password" title="Show password">
+      <svg id="eyeIcon" viewBox="0 0 24 24" aria-hidden="true"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>
+    </button>
+    <button class="hit b-forgot" onclick="forgotPassword()" aria-label="Forgot password" title="Forgot password"></button>
+    <button class="hit b-signin" onclick="emailSignIn()" aria-label="Sign in" title="Sign in"></button>
+    <button class="hit b-create" onclick="emailSignUp()" aria-label="Create account" title="Create account"></button>
+  </div>
+</div>
+
+<div class="screen" id="churchScreen">
+  <div class="stage" id="churchScreen2">
+    <img class="bg" id="churchImg" src="images/church-bg.png" alt="Church Information Step" loading="lazy">
+    <button class="hit b-back2" onclick="goToLogin()" aria-label="Back to login" title="Back to login"></button>
+
+    <div class="mask m-cname"></div>
+    <input class="hit f-cname" id="churchName" type="text" maxlength="100" placeholder="Enter your church name" aria-label="Church Name" onkeydown="if(event.key === 'Enter') saveChurchInfo()">
+
+    <button class="hit b-cphoto" onclick="document.getElementById('churchPhotoFile').click()" aria-label="Upload church photo" title="Upload church photo"></button>
+    <input type="file" id="churchPhotoFile" accept="image/*" style="display:none" onchange="previewChurchPhoto(this)">
+    <img class="photo-preview" id="churchPhotoPreview" src="" alt="Church Photo Preview">
+
+    <div class="mask m-cloc"></div>
+    <input class="hit f-cloc" id="churchLoc" type="text" maxlength="100" placeholder="Search your church location" aria-label="Church Location" onkeydown="if(event.key === 'Enter') saveChurchInfo()">
+
+    <div class="mask m-cinsta"></div>
+    <input class="hit f-cinsta" id="churchInsta" type="text" maxlength="100" placeholder="e.g. @yourchurch" aria-label="Instagram Handle" onkeydown="if(event.key === 'Enter') saveChurchInfo()">
+
+    <div class="mask m-cyt"></div>
+    <input class="hit f-cyt" id="churchYT" type="text" maxlength="100" placeholder="e.g. Your Church Channel" aria-label="YouTube Channel" onkeydown="if(event.key === 'Enter') saveChurchInfo()">
+
+    <div class="mask m-cweb"></div>
+    <input class="hit f-cweb" id="churchWeb" type="text" maxlength="100" placeholder="e.g. www.yourchurch.org" aria-label="Website" onkeydown="if(event.key === 'Enter') saveChurchInfo()">
+
+    <button class="hit b-continue2" onclick="saveChurchInfo()" aria-label="Save church information" title="Save church information"></button>
+  </div>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
+import {
+  getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword,
+  sendPasswordResetEmail, onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
+import {
+  getFirestore, doc, setDoc, getDoc
+} from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
+import { withTimeout, previewChurchPhotoHandler } from "./utils.js";
+
+const firebaseConfig = {
+  // NOTE: This key is intentionally public
+  apiKey: "AIzaSyB7IPJN4DIxSTtrclOXftvdAZ6AKgFkKRQ",
+  authDomain: "bible-studio-8d5df.firebaseapp.com",
+  projectId: "bible-studio-8d5df",
+  storageBucket: "bible-studio-8d5df.firebasestorage.app",
+  messagingSenderId: "620234131776",
+  appId: "1:620234131776:web:64300139740961dcf852a5",
+  measurementId: "G-N06JW2YQR4"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+const _cachedMsgBox = document.getElementById('msgBox');
+function showMsg(text, ms=3000){
+  _cachedMsgBox.textContent = text;
+  _cachedMsgBox.style.display = 'block';
+  clearTimeout(window._msgTimer);
+  window._msgTimer = setTimeout(()=>{ _cachedMsgBox.style.display='none'; }, ms);
+}
+let _loaderEl = null;
+function setLoading(on){
+  if(!_loaderEl) _loaderEl = document.getElementById('loader');
+  _loaderEl.style.display = on ? 'flex' : 'none';
+}
+let _activeScreen = null;
+let _loginEmailEl = null;
+let _loginPassEl = null;
+function goTo(id){
+  if(!_activeScreen) _activeScreen = document.querySelector('.screen.active');
+  // ⚡ Bolt: Early return prevents inefficient DOM repaints when navigating to the already active screen
+  if(_activeScreen && _activeScreen.id === id) return;
+  if(_activeScreen) _activeScreen.classList.remove('active');
+  _activeScreen = document.getElementById(id);
+  if(_activeScreen) _activeScreen.classList.add('active');
+}
+
+window.goToLogin = ()=> goTo('loginScreen');
+
+setTimeout(()=>{ if(!auth.currentUser) goTo('loginScreen'); }, 2200);
+
+window.previewChurchPhoto = function(input) {
+  previewChurchPhotoHandler(input, showMsg);
+};
+
+window.togglePass = function(){
+  if(!_loginPassEl) _loginPassEl = document.getElementById('loginPass');
+  const p = _loginPassEl;
+  const icon = document.getElementById('eyeIcon');
+  const btn = document.getElementById('eyeBtn');
+  const openEye = '<path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/>';
+  const closedEye = '<path d="M2 2l20 20"/><path d="M9.9 5.2A10.9 10.9 0 0 1 12 5c7 0 11 7 11 7a17.6 17.6 0 0 1-3.2 4.1M6.5 6.6C3.4 8.5 1 12 1 12s4 7 11 7a10.6 10.6 0 0 0 4.2-.9"/><path d="M14.1 14.1a3 3 0 1 1-4.2-4.2"/>';
+  if(p.type === 'password'){
+    p.type = 'text'; icon.innerHTML = closedEye;
+    if(btn) { btn.setAttribute('aria-label', 'Hide password'); btn.setAttribute('title', 'Hide password'); }
+  } else {
+    p.type = 'password'; icon.innerHTML = openEye;
+    if(btn) { btn.setAttribute('aria-label', 'Show password'); btn.setAttribute('title', 'Show password'); }
+  }
+};
+
+window.emailSignIn = async function(){
+  if(!_loginEmailEl) _loginEmailEl = document.getElementById('loginEmail');
+  if(!_loginPassEl) _loginPassEl = document.getElementById('loginPass');
+  const email = _loginEmailEl.value.trim();
+  const pass  = _loginPassEl.value;
+  if(!email || !pass){ showMsg('⚠️ Email மற்றும் Password போடுங்க'); return; }
+  setLoading(true);
+  try{
+    await withTimeout(signInWithEmailAndPassword(auth, email, pass), 10000, 'Login');
+  }catch(e){
+    setLoading(false);
+    let msg = e.message || e.code;
+    if((e.code||'').includes('invalid-credential') || (e.code||'').includes('user-not-found') || (e.code||'').includes('wrong-password')){
+      msg = 'இந்த Email/Password சரியில்ல, அல்லது இன்னும் Account create ஆகல. "Create Account" try பண்ணுங்க.';
+    }
+    console.error('Login error', e); if (msg === e.message || msg === e.code) { msg = 'Login தோல்வி. Please try again.'; } showMsg('❌ ' + msg, 5000);
+  }
+};
+
+window.emailSignUp = async function(){
+  if(!_loginEmailEl) _loginEmailEl = document.getElementById('loginEmail');
+  if(!_loginPassEl) _loginPassEl = document.getElementById('loginPass');
+  const email = _loginEmailEl.value.trim();
+  const pass  = _loginPassEl.value;
+  if(!email || !pass){ showMsg('⚠️ Account create பண்ண Email + Password (6+ chars) போடுங்க'); return; }
+  setLoading(true);
+  try{
+    await withTimeout(createUserWithEmailAndPassword(auth, email, pass), 10000, 'Signup');
+    showMsg('✅ Account created!');
+  }catch(e){
+    setLoading(false);
+    console.error('Sign up error', e); showMsg('❌ Sign up தோல்வி. Please try again.');
+  }
+};
+
+window.forgotPassword = async function(){
+  if(!_loginEmailEl) _loginEmailEl = document.getElementById('loginEmail');
+  const email = _loginEmailEl.value.trim();
+  if(!email){ showMsg('⚠️ முதல்ல Email போடுங்க'); return; }
+  try{
+    await withTimeout(sendPasswordResetEmail(auth, email), 10000, 'Reset Password');
+    showMsg('📧 Password reset link email-க்கு அனுப்பப்பட்டது');
+  }catch(e){
+    console.error('Password reset error', e);
+    if ((e.code || '').includes('user-not-found')) {
+      // 🛡️ Sentinel: Fail securely - don't expose if user exists
+      showMsg('📧 Password reset link email-க்கு அனுப்பப்பட்டது');
+    } else {
+      showMsg('❌ Password reset failed. Please try again.');
+    }
+  }
+};
+
+
+const _churchNameEl = document.getElementById('churchName');
+const _churchLocEl = document.getElementById('churchLoc');
+const _churchInstaEl = document.getElementById('churchInsta');
+const _churchYTEl = document.getElementById('churchYT');
+const _churchWebEl = document.getElementById('churchWeb');
+window.saveChurchInfo = async function(){
+  const user = auth.currentUser;
+  if(!user){ showMsg('⚠️ முதல்ல login பண்ணுங்க'); goTo('loginScreen'); return; }
+  const churchName = _churchNameEl.value.trim();
+  const loc = _churchLocEl.value.trim();
+  const insta = _churchInstaEl.value.trim();
+  const yt = _churchYTEl.value.trim();
+  const web = _churchWebEl.value.trim();
+  if(!churchName){ showMsg('⚠️ Church Name தேவை'); return; }
+  setLoading(true);
+  try{
+    await withTimeout(setDoc(doc(db, 'users', user.uid), {
+      churchName, location: loc, instagram: insta, youtube: yt, website: web,
+      email: user.email || null,
+      photoDataUrl: window._churchPhotoDataUrl || null,
+      updatedAt: new Date().toISOString()
+    }, { merge: true }), 10000, 'Save');
+    setLoading(false);
+    showMsg('✅ Church details save ஆனது! Welcome ' + churchName);
+  }catch(e){
+    setLoading(false);
+    console.error('Save error', e); showMsg('❌ Save தோல்வி. Please try again.', 6000);
+  }
+};
+
+onAuthStateChanged(auth, async (user)=>{
+  setLoading(false);
+  if(user){
+    showMsg('✅ Login வெற்றி: ' + (user.email || user.phoneNumber || 'User'));
+    try{
+      const snap = await getDoc(doc(db, 'users', user.uid));
+      if(snap.exists()){
+        const d = snap.data();
+        if(d.churchName) document.getElementById('churchName').value = d.churchName;
+        if(d.location) document.getElementById('churchLoc').value = d.location;
+        if(d.instagram) document.getElementById('churchInsta').value = d.instagram;
+        if(d.youtube) document.getElementById('churchYT').value = d.youtube;
+        if(d.website) document.getElementById('churchWeb').value = d.website;
+        if(d.photoDataUrl){
+          const img = document.getElementById('churchPhotoPreview');
+          img.src = d.photoDataUrl; img.style.display='block';
+        }
+      }
+    } catch (e) {
+      console.error('Error fetching user data:', e);
+    }
+    goTo('churchScreen');
+  }
+});
+</script>
+</body>
+</html>

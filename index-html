@@ -677,7 +677,7 @@ input[type=range].date-slider{-webkit-appearance:auto;appearance:auto;height:20p
 </div>
 
 <div class="header">
-  <button class="menu-hamburger" onclick="openChurchDrawer()">☰</button>
+  <button aria-label="Open Menu" class="menu-hamburger" onclick="openChurchDrawer()">☰</button>
   <h1 id="churchName">✝ இன்றைய வசனம்</h1>
   <p id="churchSub">St. Stephen's Church · Pulavankudiyiruppu</p>
   <button id="pwaInstallBtn" onclick="pwaInstall()" style="display:none;margin-top:8px;background:linear-gradient(135deg,#7c3aed,#a855f7);color:#fff;border:none;border-radius:20px;padding:7px 16px;font-size:0.7rem;font-weight:700;cursor:pointer;">📲 App-ஆ Install பண்ணு</button>
@@ -687,7 +687,7 @@ input[type=range].date-slider{-webkit-appearance:auto;appearance:auto;height:20p
 <div class="church-drawer" id="churchDrawer">
   <div class="drawer-head">
     <span>⛪ Church Info</span>
-    <button onclick="closeChurchDrawer()">✕</button>
+    <button aria-label="Close" onclick="closeChurchDrawer()">✕</button>
   </div>
   <div class="drawer-body">
     <!-- ACCOUNT -->
@@ -826,7 +826,7 @@ input[type=range].date-slider{-webkit-appearance:auto;appearance:auto;height:20p
           <option value="">— Template தேர்வு செய்யுங்க —</option>
         </select>
         <button onclick="capSaveTemplate()">💾 Save</button>
-        <button onclick="capDeleteTemplate()">🗑</button>
+        <button aria-label="Delete" onclick="capDeleteTemplate()">🗑</button>
       </div>
       <p style="color:#666;font-size:0.6rem;margin-top:-4px;margin-bottom:8px;">இப்போ இருக்குற Details + Tone-ஐ ஒரு பேருடன் Template-ஆ Save பண்ணி, அடுத்த தடவை ஒரே click-ல் Load பண்ணலாம் (எ.கா. "Sunday Service", "Special Occasion").</p>
     </div>
@@ -1029,13 +1029,13 @@ input[type=range].date-slider{-webkit-appearance:auto;appearance:auto;height:20p
               <button class="vb-btn" id="ptRef" style="flex:1;" onclick="setPosTarget('ref')">🔖 Ref</button>
             </div>
             <div class="pos-pad">
-              <div><button class="arr-btn" onclick="moveText('y',-1)">▲</button></div>
+              <div><button aria-label="Move Up" class="arr-btn" onclick="moveText('y',-1)">▲</button></div>
               <div style="display:flex;justify-content:center;align-items:center;gap:6px;margin:3px 0;">
-                <button class="arr-btn" onclick="moveText('x',-1)">◄</button>
-                <button class="reset-pos" onclick="resetTextPos()">↺</button>
-                <button class="arr-btn" onclick="moveText('x',1)">►</button>
+                <button aria-label="Move Left" class="arr-btn" onclick="moveText('x',-1)">◄</button>
+                <button aria-label="Reset" class="reset-pos" onclick="resetTextPos()">↺</button>
+                <button aria-label="Move Right" class="arr-btn" onclick="moveText('x',1)">►</button>
               </div>
-              <div><button class="arr-btn" onclick="moveText('y',1)">▼</button></div>
+              <div><button aria-label="Move Down" class="arr-btn" onclick="moveText('y',1)">▼</button></div>
             </div>
             <p style="color:#666;font-size:0.6rem;text-align:center;margin-top:6px;">Verse-ஐ நகர்த்தினா Ref அப்படியே இருக்கும், Ref-ஐ நகர்த்தினா Verse அப்படியே இருக்கும்.</p>
           </div>
@@ -1056,13 +1056,13 @@ input[type=range].date-slider{-webkit-appearance:auto;appearance:auto;height:20p
           <div style="flex:2;">
             <label style="font-size:0.68rem;color:#C8960C;margin-bottom:3px;display:block;">📍 Date Position</label>
             <div class="pos-pad">
-              <div><button class="arr-btn" onclick="move('y',-1)">▲</button></div>
+              <div><button aria-label="Move Up" class="arr-btn" onclick="move('y',-1)">▲</button></div>
               <div style="display:flex;justify-content:center;align-items:center;gap:6px;margin:3px 0;">
-                <button class="arr-btn" onclick="move('x',-1)">◄</button>
-                <button class="reset-pos" onclick="dx=0.843;dy=0.148;redraw();saveAllSettings()">↺</button>
-                <button class="arr-btn" onclick="move('x',1)">►</button>
+                <button aria-label="Move Left" class="arr-btn" onclick="move('x',-1)">◄</button>
+                <button aria-label="Reset" class="reset-pos" onclick="dx=0.843;dy=0.148;redraw();saveAllSettings()">↺</button>
+                <button aria-label="Move Right" class="arr-btn" onclick="move('x',1)">►</button>
               </div>
-              <div><button class="arr-btn" onclick="move('y',1)">▼</button></div>
+              <div><button aria-label="Move Down" class="arr-btn" onclick="move('y',1)">▼</button></div>
             </div>
           </div>
         </div>
@@ -2581,7 +2581,7 @@ function renderBgGallery(){
   bgList.forEach(bg=>{
     const div=document.createElement("div");
     div.className="bg-thumb"+(bg.id===activeBgId?" active":"");
-    div.innerHTML=`<img src="${bg.src}" loading="lazy"><div class="label">${bg.label}</div>${(bg.id!=="default"&&!bg.id.startsWith("preset"))?'<button class="del" onclick="delBg(event,\''+bg.id+'\')">✕</button>':""}`;
+    div.innerHTML=`<img src="${bg.src}" loading="lazy"><div class="label">${bg.label}</div>${(bg.id!=="default"&&!bg.id.startsWith("preset"))?'<button aria-label="Close" class="del" onclick="delBg(event,\''+bg.id+'\')">✕</button>':""}`;
     div.onclick=()=>selectBg(bg.id);
     scroll.insertBefore(div,addBtn);
   });
@@ -3463,7 +3463,7 @@ function buildMonthList(){
     const verseText=v?(monthLang==="ta"?v.ta:v.en)||'':'வசனம் இல்லை';
     const refText=v?(monthLang==="ta"?v.ref_ta:v.ref_en)||'':'';
     const thumbId='miThumb_'+d;
-    div.innerHTML=`<canvas class="mi-thumb" id="${thumbId}" width="34" height="43"></canvas><div class="mi-day"><div class="dn" style="color:${d===day?"var(--gold)":"#fff"}">${d}</div><div class="dm">${MONTHS_SHORT[month]}</div></div><div class="mi-text" style="flex:1;"><p>${hasVerse?'':'⚠️ '}${verseText.substring(0,60)}${verseText.length>60?'...':''}</p><div class="mr">${refText}</div></div>${hasVerse?`<button class="mi-dl" onclick="event.stopPropagation();downloadDay(${d})" title="இந்த நாளுக்கு மட்டும் Download">📥</button>`:''}`;
+    div.innerHTML=`<canvas class="mi-thumb" id="${thumbId}" width="34" height="43"></canvas><div class="mi-day"><div class="dn" style="color:${d===day?"var(--gold)":"#fff"}">${d}</div><div class="dm">${MONTHS_SHORT[month]}</div></div><div class="mi-text" style="flex:1;"><p>${hasVerse?'':'⚠️ '}${verseText.substring(0,60)}${verseText.length>60?'...':''}</p><div class="mr">${refText}</div></div>${hasVerse?`<button aria-label="Download" class="mi-dl" onclick="event.stopPropagation();downloadDay(${d})" title="இந்த நாளுக்கு மட்டும் Download">📥</button>`:''}`;
     const dd=d;
     div.onclick=()=>{day=dd;switchTab("poster");document.querySelector(".tab").click();buildDayGrid();buildMonthList();redraw();};
     list.appendChild(div);
@@ -4115,12 +4115,12 @@ function capRenderTags(){
   list.innerHTML = details.map((d,i)=>`
     <div class="cap-tag-row ${d.on?'':'off'}">
       <div class="cap-reorder">
-        <button ${i===0?'disabled':''} onclick="capMoveDetail(${i},-1)">▲</button>
-        <button ${i===details.length-1?'disabled':''} onclick="capMoveDetail(${i},1)">▼</button>
+        <button aria-label="Move Up" ${i===0?'disabled':''} onclick="capMoveDetail(${i},-1)">▲</button>
+        <button aria-label="Move Down" ${i===details.length-1?'disabled':''} onclick="capMoveDetail(${i},1)">▼</button>
       </div>
       <span class="cap-row-txt" onclick="capToggleTagAt(${i})">${d.label?('<b>'+d.label+':</b> '):''}${d.value}</span>
       <div class="cap-tag-toggle ${d.on?'on':''}" onclick="capToggleTagAt(${i})"></div>
-      <button class="cap-tag-del" onclick="capDeleteTagAt(${i})">✕</button>
+      <button aria-label="Close" class="cap-tag-del" onclick="capDeleteTagAt(${i})">✕</button>
     </div>
   `).join('');
 }
@@ -4217,7 +4217,7 @@ function capRenderHistory(){
         <span class="cap-hist-time">${capHistTimeAgo(h.ts)}</span>
         <div class="cap-hist-actions">
           <button class="use" onclick="capUseHistory(${i})">🔁 Use</button>
-          <button class="del" onclick="capDeleteHistory(${i})">✕</button>
+          <button aria-label="Close" class="del" onclick="capDeleteHistory(${i})">✕</button>
         </div>
       </div>
     </div>
@@ -4508,8 +4508,8 @@ function occRenderVBPanel() {
           <div class="occ-vb-text">${v.ta||v.en||''}</div>
           <div class="occ-vb-ref">${v.ref_ta||v.ref_en||''}</div>
           <div class="occ-vb-btns">
-            <button class="vb-btn" style="font-size:0.6rem;padding:3px 8px;" onclick="occEditVerseAt(${i})">✏️</button>
-            <button class="vb-btn red" style="font-size:0.6rem;padding:3px 8px;" onclick="occDeleteVerseAt(${i})">🗑</button>
+            <button aria-label="Edit" class="vb-btn" style="font-size:0.6rem;padding:3px 8px;" onclick="occEditVerseAt(${i})">✏️</button>
+            <button aria-label="Delete" class="vb-btn red" style="font-size:0.6rem;padding:3px 8px;" onclick="occDeleteVerseAt(${i})">🗑</button>
           </div>
         </div>`;
       item.onclick = (e) => { if(!e.target.closest('button')){occSelectVerseAt(i);} };

@@ -677,7 +677,7 @@ input[type=range].date-slider{-webkit-appearance:auto;appearance:auto;height:20p
 </div>
 
 <div class="header">
-  <button class="menu-hamburger" onclick="openChurchDrawer()">☰</button>
+  <button class="menu-hamburger" aria-label="Open Church Drawer" onclick="openChurchDrawer()">☰</button>
   <h1 id="churchName">✝ இன்றைய வசனம்</h1>
   <p id="churchSub">St. Stephen's Church · Pulavankudiyiruppu</p>
   <button id="pwaInstallBtn" onclick="pwaInstall()" style="display:none;margin-top:8px;background:linear-gradient(135deg,#7c3aed,#a855f7);color:#fff;border:none;border-radius:20px;padding:7px 16px;font-size:0.7rem;font-weight:700;cursor:pointer;">📲 App-ஆ Install பண்ணு</button>
@@ -687,7 +687,7 @@ input[type=range].date-slider{-webkit-appearance:auto;appearance:auto;height:20p
 <div class="church-drawer" id="churchDrawer">
   <div class="drawer-head">
     <span>⛪ Church Info</span>
-    <button onclick="closeChurchDrawer()">✕</button>
+    <button aria-label="Close Church Drawer" onclick="closeChurchDrawer()">✕</button>
   </div>
   <div class="drawer-body">
     <!-- ACCOUNT -->
@@ -826,7 +826,7 @@ input[type=range].date-slider{-webkit-appearance:auto;appearance:auto;height:20p
           <option value="">— Template தேர்வு செய்யுங்க —</option>
         </select>
         <button onclick="capSaveTemplate()">💾 Save</button>
-        <button onclick="capDeleteTemplate()">🗑</button>
+        <button aria-label="Delete Template" onclick="capDeleteTemplate()">🗑</button>
       </div>
       <p style="color:#666;font-size:0.6rem;margin-top:-4px;margin-bottom:8px;">இப்போ இருக்குற Details + Tone-ஐ ஒரு பேருடன் Template-ஆ Save பண்ணி, அடுத்த தடவை ஒரே click-ல் Load பண்ணலாம் (எ.கா. "Sunday Service", "Special Occasion").</p>
     </div>

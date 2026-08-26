@@ -3338,7 +3338,9 @@ function bulkRenderRows(){
     const row=document.createElement('div');
     row.className='bulk-row'+(verseVal?' filled':'');
     row.id='bulkRow_'+d;
-    row.innerHTML=`<div class="br-day">${d}</div><div class="br-fields"><textarea placeholder="${bulkLang==='ta'?'தமிழ் வசனம்...':'English verse...'}" oninput="bulkUpdateProgress()" id="bulkTa_${d}">${verseVal}</textarea><input placeholder="${bulkLang==='ta'?'Reference (எ.கா. யோவான் 3:16)':'Reference (e.g. John 3:16)'}" id="bulkRef_${d}" value="${refVal}"></div>`;
+    row.innerHTML=`<div class="br-day">${d}</div><div class="br-fields"><textarea placeholder="${bulkLang==='ta'?'தமிழ் வசனம்...':'English verse...'}" oninput="bulkUpdateProgress()" id="bulkTa_${d}"></textarea><input placeholder="${bulkLang==='ta'?'Reference (எ.கா. யோவான் 3:16)':'Reference (e.g. John 3:16)'}" id="bulkRef_${d}"></div>`;
+    row.querySelector('textarea').value=verseVal;
+    row.querySelector('input').value=refVal;
     wrap.appendChild(row);
   }
   bulkUpdateProgress();

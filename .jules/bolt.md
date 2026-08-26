@@ -19,3 +19,6 @@
 **Learning:** Repeatedly querying the DOM using `document.getElementById` for elements that don't change (like static input fields) is inefficient, especially when those inputs are accessed across multiple user interactions (signup, signin, toggle pass, etc.).
 
 **Action:** Cache these DOM elements in global variables (e.g., `let _loginEmailEl = null;`) upon their first access, and reuse the cached reference for subsequent actions. This reduces unnecessary DOM traversals.
+## 2024-08-26 - Cache DOM Elements in Input Event Handlers
+**Learning:** Repeated `document.getElementById` calls inside frequent event handlers (like `oninput`) cause unnecessary DOM lookup overhead. Caching the elements once globally improves performance.
+**Action:** Use global variables to cache DOM elements when they are queried frequently inside event handlers to avoid repeated lookups.

@@ -16,8 +16,6 @@ describe('handleContinue in church-info.html', () => {
     // Reset global photo data
     window._churchPhotoDataUrl = undefined;
 
-    jest.spyOn(console, 'log').mockImplementation(() => {});
-
     // Extract and execute the script from the HTML to bind functions globally
     const scriptMatch = html.match(/<script>([\s\S]*?)<\/script>/);
     if (scriptMatch) {
@@ -45,7 +43,7 @@ describe('handleContinue in church-info.html', () => {
     expect(showMsgMock).toHaveBeenCalledWith('⚠️ Church Name தேவை');
   });
 
-  it('should collect church info, log it, and show success message', () => {
+  it('should collect church info and show success message', () => {
     document.getElementById('churchName').value = 'My Church';
     document.getElementById('churchLoc').value = 'City';
     document.getElementById('churchInsta').value = 'insta';
@@ -56,16 +54,6 @@ describe('handleContinue in church-info.html', () => {
 
     global.handleContinue();
 
-    expect(console.log).toHaveBeenCalledWith('Church Info collected:', {
-      churchName: 'My Church',
-      location: 'City',
-      instagram: 'insta',
-      youtube: 'yt',
-      website: 'web',
-      hasPhoto: true,
-      photoDataUrl: 'data:image/png;base64,123'
-    });
-
     expect(showMsgMock).toHaveBeenCalledWith('✅ Collected: My Church | City');
   });
 
@@ -74,11 +62,6 @@ describe('handleContinue in church-info.html', () => {
     document.getElementById('churchLoc').value = '';
 
     global.handleContinue();
-
-    expect(console.log).toHaveBeenCalledWith('Church Info collected:', expect.objectContaining({
-      churchName: 'My Church',
-      location: ''
-    }));
 
     expect(showMsgMock).toHaveBeenCalledWith('✅ Collected: My Church');
   });

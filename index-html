@@ -2928,8 +2928,11 @@ function renderToCanvas(canvas,dayNum,monthIdx,verseObj,isEn){
   ctx.restore();
 }
 
+let _cvCache = null;
 function redraw(){
-  const cv=document.getElementById("cv");
+  // ⚡ Bolt: Cache canvas element to prevent repeated DOM lookups during high-frequency redraws
+  if(!_cvCache) _cvCache=document.getElementById("cv");
+  const cv=_cvCache;
   const v=verses[day-1]||verses.find(x=>x&&(x.ta||x.en))||{ta:'',en:'',ref_ta:'',ref_en:'',tags:[]};
   renderToCanvas(cv,day,month,v,lang==="en");
   renderPreview();

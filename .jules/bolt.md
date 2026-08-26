@@ -19,3 +19,6 @@
 **Learning:** Repeatedly querying the DOM using `document.getElementById` for elements that don't change (like static input fields) is inefficient, especially when those inputs are accessed across multiple user interactions (signup, signin, toggle pass, etc.).
 
 **Action:** Cache these DOM elements in global variables (e.g., `let _loginEmailEl = null;`) upon their first access, and reuse the cached reference for subsequent actions. This reduces unnecessary DOM traversals.
+## 2024-05-15 - Cache canvas DOM lookup in high-frequency redraw function
+**Learning:** Calling `document.getElementById` repeatedly within a function that is executed frequently (e.g., during slider input changes mapping to ~60fps) introduces unnecessary overhead and layout thrashing.
+**Action:** Cache the retrieved DOM element in a higher-level scope and reuse it to reduce function call overhead and improve redraw performance.

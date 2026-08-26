@@ -3199,13 +3199,21 @@ function filterFonts(){
 }
 
 // ─── CHURCH ──────────────────────────────────────
+// ⚡ Bolt: Cache DOM elements globally to prevent repeated lookups on input events
+let cnInput, csInput, cnText, csText;
 function updateChurch(){
-  const cn=document.getElementById('cChurch')?.value;
-  const cs=document.getElementById('cSub')?.value;
+  if (!cnInput) {
+    cnInput = document.getElementById('cChurch');
+    csInput = document.getElementById('cSub');
+    cnText = document.getElementById("churchName");
+    csText = document.getElementById("churchSub");
+  }
+  const cn=cnInput?.value;
+  const cs=csInput?.value;
   if(cn)saveSettingsToDB('churchName',cn);
   if(cs)saveSettingsToDB('churchSub',cs);
-  document.getElementById("churchName").textContent=document.getElementById("cChurch").value;
-  document.getElementById("churchSub").textContent=document.getElementById("cSub").value;
+  if(cnText && cnInput) cnText.textContent=cnInput.value;
+  if(csText && csInput) csText.textContent=csInput.value;
 }
 
 // ─── HEADER DRAWER (Account + Church Info + Logout) ────

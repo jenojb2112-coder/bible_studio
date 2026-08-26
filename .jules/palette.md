@@ -27,3 +27,7 @@
 ## 2024-05-25 - Pointer Events for Visual Overlays
 **Learning:** When dynamic visual overlays (such as image previews like `.photo-preview`) are positioned on top of interactive transparent hitzone elements, they can block click events, preventing users from interacting with the underlying button (e.g., to upload a new photo).
 **Action:** Apply `pointer-events: none;` to the visual overlay to allow clicks to pass through to the underlying interactive element.
+
+## 2026-08-26 - Icon-only buttons accessibility
+**Learning:** Icon-only buttons (like hamburger menus or close buttons) without text are completely invisible to screen readers, causing a severe accessibility issue where users don't know what the buttons do.
+**Action:** Always ensure icon-only buttons have explicit `aria-label` attributes and `title` attributes assigned to describe their function (e.g., `aria-label="Open Menu"` and `title="Open Menu"`).

@@ -14,7 +14,12 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="இன்றைய வசனம்">
+<!-- ⚡ Bolt: preconnect to critical external domains to reduce connection overhead (DNS, TCP, TLS) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://api.versequick.com" crossorigin>
+<link rel="preconnect" href="https://bible.helloao.org" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Dancing+Script:wght@700&family=Pacifico&family=Playfair+Display:wght@700&family=Montserrat:wght@700&family=Poppins:wght@700&family=Lora:wght@700&family=Oswald:wght@700&family=Raleway:wght@700&family=Great+Vibes&family=Lobster&family=Satisfy&family=Nunito:wght@700&family=Righteous&family=Fredoka+One&family=Comfortaa:wght@700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <style>

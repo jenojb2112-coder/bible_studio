@@ -2472,7 +2472,8 @@ function fullBackupExport(){
     URL.revokeObjectURL(url);
     showMsg('✅ Backup Export ஆனது! File-ஐ பத்திரமா வையுங்க.');
   }catch(e){
-    showMsg('❌ Backup Export தோல்வி: ' + e.message);
+    console.error('Backup export failed:', e);
+    showMsg('❌ Backup Export தோல்வி (மீண்டும் முயற்சிக்கவும்)');
   }
 }
 
@@ -2544,7 +2545,8 @@ function fullBackupImport(event){
       redraw();
       showMsg('✅ Backup Restore ஆனது! எல்லா data-வும் திரும்ப வந்துடுச்சு.');
     }catch(e){
-      showMsg('❌ Import தோல்வி: ' + e.message);
+      console.error('Backup import failed:', e);
+      showMsg('❌ Import தோல்வி (சரியான Backup file-ஐ தேர்வு செய்யவும்)');
     }
     event.target.value = '';
   };
@@ -5203,7 +5205,8 @@ function fontInitLoad() {
       // onAuthStateChanged below takes it from here
     } catch (e) {
       setAuthLoading(false);
-      showAuthError('❌ Google Login தோல்வி: ' + (e.message || e.code || ''));
+      console.error('Google login failed:', e);
+      showAuthError('❌ Google Login தோல்வி (மீண்டும் முயற்சிக்கவும்)');
     }
   };
 
@@ -5228,7 +5231,8 @@ function fontInitLoad() {
       document.getElementById('authPhoneStep').style.display = 'none';
       showAuthError('✅ OTP அனுப்பப்பட்டது!');
     } catch (e) {
-      showAuthError('❌ OTP அனுப்ப முடியல: ' + (e.message || e.code || ''));
+      console.error('OTP send failed:', e);
+      showAuthError('❌ OTP அனுப்ப முடியல (சரியான எண்ணை உள்ளிடவும்)');
       try { recaptchaVerifier?.render().then(id => grecaptcha?.reset(id)); } catch (_) {}
     } finally {
       btn.disabled = false; btn.textContent = '📲 OTP அனுப்பு';
@@ -5245,7 +5249,8 @@ function fontInitLoad() {
       await confirmationResult.confirm(code);
       // onAuthStateChanged below takes it from here
     } catch (e) {
-      showAuthError('❌ தவறான OTP: ' + (e.message || e.code || ''));
+      console.error('OTP verification failed:', e);
+      showAuthError('❌ தவறான OTP (சரியான OTP-ஐ உள்ளிடவும்)');
     } finally {
       btn.disabled = false; btn.textContent = '✓ சரிபார்';
     }

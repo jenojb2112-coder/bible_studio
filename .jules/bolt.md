@@ -19,3 +19,6 @@
 **Learning:** Repeatedly querying the DOM using `document.getElementById` for elements that don't change (like static input fields) is inefficient, especially when those inputs are accessed across multiple user interactions (signup, signin, toggle pass, etc.).
 
 **Action:** Cache these DOM elements in global variables (e.g., `let _loginEmailEl = null;`) upon their first access, and reuse the cached reference for subsequent actions. This reduces unnecessary DOM traversals.
+## 2024-11-20 - Preconnect for External APIs and Scripts
+**Learning:** The application fetches scripts and API data from external domains (like www.gstatic.com, api.versequick.com) which adds DNS, TCP, and TLS negotiation overhead at runtime.
+**Action:** Add `<link rel="preconnect">` for these domains in the document `<head>` so that connections are established early, thereby reducing latency when the actual requests are made.

@@ -4112,13 +4112,14 @@ function capRenderTags(){
     list.innerHTML = '<div class="cap-tag-empty">இன்னும் detail எதுவும் add பண்ணல. மேலே ⛪/📍/📞 preset-ஐ tap பண்ணி value type பண்ணி Add பண்ணுங்க.</div>';
     return;
   }
+  const esc = s => String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');
   list.innerHTML = details.map((d,i)=>`
     <div class="cap-tag-row ${d.on?'':'off'}">
       <div class="cap-reorder">
         <button ${i===0?'disabled':''} onclick="capMoveDetail(${i},-1)">▲</button>
         <button ${i===details.length-1?'disabled':''} onclick="capMoveDetail(${i},1)">▼</button>
       </div>
-      <span class="cap-row-txt" onclick="capToggleTagAt(${i})">${d.label?('<b>'+d.label+':</b> '):''}${d.value}</span>
+      <span class="cap-row-txt" onclick="capToggleTagAt(${i})">${d.label?('<b>'+esc(d.label)+':</b> '):''}${esc(d.value)}</span>
       <div class="cap-tag-toggle ${d.on?'on':''}" onclick="capToggleTagAt(${i})"></div>
       <button class="cap-tag-del" onclick="capDeleteTagAt(${i})">✕</button>
     </div>

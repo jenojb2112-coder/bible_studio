@@ -677,7 +677,7 @@ input[type=range].date-slider{-webkit-appearance:auto;appearance:auto;height:20p
 </div>
 
 <div class="header">
-  <button class="menu-hamburger" onclick="openChurchDrawer()">☰</button>
+  <button class="menu-hamburger" aria-label="Open menu" title="Open menu" onclick="openChurchDrawer()">☰</button>
   <h1 id="churchName">✝ இன்றைய வசனம்</h1>
   <p id="churchSub">St. Stephen's Church · Pulavankudiyiruppu</p>
   <button id="pwaInstallBtn" onclick="pwaInstall()" style="display:none;margin-top:8px;background:linear-gradient(135deg,#7c3aed,#a855f7);color:#fff;border:none;border-radius:20px;padding:7px 16px;font-size:0.7rem;font-weight:700;cursor:pointer;">📲 App-ஆ Install பண்ணு</button>
@@ -687,7 +687,7 @@ input[type=range].date-slider{-webkit-appearance:auto;appearance:auto;height:20p
 <div class="church-drawer" id="churchDrawer">
   <div class="drawer-head">
     <span>⛪ Church Info</span>
-    <button onclick="closeChurchDrawer()">✕</button>
+    <button aria-label="Close menu" title="Close menu" onclick="closeChurchDrawer()">✕</button>
   </div>
   <div class="drawer-body">
     <!-- ACCOUNT -->
@@ -826,7 +826,7 @@ input[type=range].date-slider{-webkit-appearance:auto;appearance:auto;height:20p
           <option value="">— Template தேர்வு செய்யுங்க —</option>
         </select>
         <button onclick="capSaveTemplate()">💾 Save</button>
-        <button onclick="capDeleteTemplate()">🗑</button>
+        <button aria-label="Delete template" title="Delete template" onclick="capDeleteTemplate()">🗑</button>
       </div>
       <p style="color:#666;font-size:0.6rem;margin-top:-4px;margin-bottom:8px;">இப்போ இருக்குற Details + Tone-ஐ ஒரு பேருடன் Template-ஆ Save பண்ணி, அடுத்த தடவை ஒரே click-ல் Load பண்ணலாம் (எ.கா. "Sunday Service", "Special Occasion").</p>
     </div>
@@ -1029,13 +1029,13 @@ input[type=range].date-slider{-webkit-appearance:auto;appearance:auto;height:20p
               <button class="vb-btn" id="ptRef" style="flex:1;" onclick="setPosTarget('ref')">🔖 Ref</button>
             </div>
             <div class="pos-pad">
-              <div><button class="arr-btn" onclick="moveText('y',-1)">▲</button></div>
+              <div><button class="arr-btn" aria-label="Move text up" title="Move text up" onclick="moveText('y',-1)">▲</button></div>
               <div style="display:flex;justify-content:center;align-items:center;gap:6px;margin:3px 0;">
-                <button class="arr-btn" onclick="moveText('x',-1)">◄</button>
-                <button class="reset-pos" onclick="resetTextPos()">↺</button>
-                <button class="arr-btn" onclick="moveText('x',1)">►</button>
+                <button class="arr-btn" aria-label="Move text left" title="Move text left" onclick="moveText('x',-1)">◄</button>
+                <button class="reset-pos" aria-label="Reset text position" title="Reset text position" onclick="resetTextPos()">↺</button>
+                <button class="arr-btn" aria-label="Move text right" title="Move text right" onclick="moveText('x',1)">►</button>
               </div>
-              <div><button class="arr-btn" onclick="moveText('y',1)">▼</button></div>
+              <div><button class="arr-btn" aria-label="Move text down" title="Move text down" onclick="moveText('y',1)">▼</button></div>
             </div>
             <p style="color:#666;font-size:0.6rem;text-align:center;margin-top:6px;">Verse-ஐ நகர்த்தினா Ref அப்படியே இருக்கும், Ref-ஐ நகர்த்தினா Verse அப்படியே இருக்கும்.</p>
           </div>
@@ -1056,13 +1056,13 @@ input[type=range].date-slider{-webkit-appearance:auto;appearance:auto;height:20p
           <div style="flex:2;">
             <label style="font-size:0.68rem;color:#C8960C;margin-bottom:3px;display:block;">📍 Date Position</label>
             <div class="pos-pad">
-              <div><button class="arr-btn" onclick="move('y',-1)">▲</button></div>
+              <div><button class="arr-btn" aria-label="Move date up" title="Move date up" onclick="move('y',-1)">▲</button></div>
               <div style="display:flex;justify-content:center;align-items:center;gap:6px;margin:3px 0;">
-                <button class="arr-btn" onclick="move('x',-1)">◄</button>
-                <button class="reset-pos" onclick="dx=0.843;dy=0.148;redraw();saveAllSettings()">↺</button>
-                <button class="arr-btn" onclick="move('x',1)">►</button>
+                <button class="arr-btn" aria-label="Move date left" title="Move date left" onclick="move('x',-1)">◄</button>
+                <button class="reset-pos" aria-label="Reset date position" title="Reset date position" onclick="dx=0.843;dy=0.148;redraw();saveAllSettings()">↺</button>
+                <button class="arr-btn" aria-label="Move date right" title="Move date right" onclick="move('x',1)">►</button>
               </div>
-              <div><button class="arr-btn" onclick="move('y',1)">▼</button></div>
+              <div><button class="arr-btn" aria-label="Move date down" title="Move date down" onclick="move('y',1)">▼</button></div>
             </div>
           </div>
         </div>
@@ -4115,12 +4115,12 @@ function capRenderTags(){
   list.innerHTML = details.map((d,i)=>`
     <div class="cap-tag-row ${d.on?'':'off'}">
       <div class="cap-reorder">
-        <button ${i===0?'disabled':''} onclick="capMoveDetail(${i},-1)">▲</button>
-        <button ${i===details.length-1?'disabled':''} onclick="capMoveDetail(${i},1)">▼</button>
+        <button aria-label="Move up" title="Move up" ${i===0?'disabled':''} onclick="capMoveDetail(${i},-1)">▲</button>
+        <button aria-label="Move down" title="Move down" ${i===details.length-1?'disabled':''} onclick="capMoveDetail(${i},1)">▼</button>
       </div>
       <span class="cap-row-txt" onclick="capToggleTagAt(${i})">${d.label?('<b>'+d.label+':</b> '):''}${d.value}</span>
       <div class="cap-tag-toggle ${d.on?'on':''}" onclick="capToggleTagAt(${i})"></div>
-      <button class="cap-tag-del" onclick="capDeleteTagAt(${i})">✕</button>
+      <button class="cap-tag-del" aria-label="Delete detail" title="Delete detail" onclick="capDeleteTagAt(${i})">✕</button>
     </div>
   `).join('');
 }

@@ -14,7 +14,7 @@ describe('saveChurchInfo', () => {
     jest.resetModules();
     jest.clearAllMocks();
 
-    const html = fs.readFileSync('index.html', 'utf-8');
+    const html = fs.readFileSync('index-html', 'utf-8');
 
     // Set up DOM
     document.body.innerHTML = html.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');

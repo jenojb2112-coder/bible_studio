@@ -5,7 +5,7 @@ import path from 'path';
 
 describe('window.togglePass', () => {
   beforeAll(() => {
-    const html = fs.readFileSync(path.resolve(process.cwd(), 'index.html'), 'utf8');
+    const html = fs.readFileSync(path.resolve(process.cwd(), 'index-html'), 'utf8');
     const scriptMatch = html.match(/<script type="module">([\s\S]*?)<\/script>/);
     let scriptContent = scriptMatch[1];
 

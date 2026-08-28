@@ -11,7 +11,7 @@ describe('emailSignUp', () => {
   let consoleErrorMock;
 
   beforeAll(() => {
-    const htmlPath = path.resolve(process.cwd(), 'index.html');
+    const htmlPath = path.resolve(process.cwd(), 'index-html');
     const content = fs.readFileSync(htmlPath, 'utf8');
     const scriptMatch = content.match(/<script type="module">([\s\S]*?)<\/script>/);
     let script = scriptMatch[1];

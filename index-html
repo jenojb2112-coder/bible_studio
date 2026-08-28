@@ -2935,8 +2935,10 @@ function renderToCanvas(canvas,dayNum,monthIdx,verseObj,isEn){
   ctx.restore();
 }
 
+let _cvEl = null;
 function redraw(){
-  const cv=document.getElementById("cv");
+  if (!_cvEl) _cvEl = document.getElementById("cv"); // ⚡ Bolt: Cache DOM element to avoid redundant lookups in 60fps oninput event loops
+  const cv = _cvEl;
   const v=verses[day-1]||verses.find(x=>x&&(x.ta||x.en))||{ta:'',en:'',ref_ta:'',ref_en:'',tags:[]};
   renderToCanvas(cv,day,month,v,lang==="en");
   renderPreview();
@@ -3617,8 +3619,10 @@ async function shareMore(){
 
 // Grabs whatever is currently in the Caption Generator box (church details, tone,
 // hashtags — whatever the user has set up) so all share buttons stay in sync with it.
+let _captionBoxShareEl = null;
 function capGetShareText(){
-  const box = document.getElementById('captionBox');
+  if (!_captionBoxShareEl) _captionBoxShareEl = document.getElementById('captionBox'); // ⚡ Bolt: Cache DOM element
+  const box = _captionBoxShareEl;
   const t = box ? box.textContent.trim() : '';
   if (t && !t.startsWith('📌')) return t; // ignore the "no verse saved yet" placeholder
   const v=verses[day-1]||verses.find(x=>x&&(x.ta||x.en))||{ta:'',en:'',ref_ta:'',ref_en:'',tags:[]};
@@ -3627,8 +3631,10 @@ function capGetShareText(){
 }
 
 
+let _cvPreviewEl = null;
 function renderPreview(){
-  const cv=document.getElementById("cvPreview");
+  if (!_cvPreviewEl) _cvPreviewEl = document.getElementById("cvPreview"); // ⚡ Bolt: Cache DOM element to avoid redundant lookups
+  const cv = _cvPreviewEl;
   if(!cv)return;
   if(!bgImg.complete||!bgImg.width)return;
   const BW=bgImg.width,BH=bgImg.height;
@@ -3981,10 +3987,14 @@ function capResetToGenerated(){
   capBuildSimple();
   showMsg('✅ Caption திரும்ப உருவாக்கப்பட்டது');
 }
+let _capCharCountEl = null;
+let _captionBoxCountEl = null;
 function capUpdateCharCount(){
-  const el = document.getElementById('capCharCount');
+  if (!_capCharCountEl) _capCharCountEl = document.getElementById('capCharCount'); // ⚡ Bolt: Cache DOM elements
+  if (!_captionBoxCountEl) _captionBoxCountEl = document.getElementById('captionBox');
+  const el = _capCharCountEl;
   if(!el) return;
-  const len = (document.getElementById('captionBox').textContent||'').length;
+  const len = (_captionBoxCountEl.textContent||'').length;
   const limit = 2200; // Instagram caption limit
   el.textContent = len + ' / ' + limit + ' characters';
   el.style.color = len > limit ? '#f87171' : (len > 1900 ? '#facc15' : '#888');

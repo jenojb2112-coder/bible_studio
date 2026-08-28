@@ -22,3 +22,7 @@
 ## 2024-11-20 - Preconnect Requires Crossorigin for API/Fonts
 **Learning:** Preconnecting to external domains (like Firebase APIs, Google Fonts, etc.) without the `crossorigin` attribute for resources fetched via CORS means the browser won't use the pre-established connection, negating the performance benefit.
 **Action:** Always add the `crossorigin` attribute to `<link rel="preconnect">` tags for domains where resources (like ES modules or JSON APIs) will be fetched via CORS to ensure the connection overhead (DNS, TCP, TLS) is actually reduced.
+
+## 2024-11-20 - Cache DOM elements in high-frequency event handlers
+**Learning:** `redraw()` and related UI update functions are bound to input `oninput` events (e.g. range sliders). Firing `document.getElementById` continuously at 60fps causes micro-stutters and unnecessary main thread overhead in this specific vanilla JS architecture.
+**Action:** Always extract and cache elements outside of rendering loops or continuously firing event handlers.

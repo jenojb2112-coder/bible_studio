@@ -4330,9 +4330,14 @@ async function capAIGenerate() {
 
 // Auto-build caption when verse changes
 const _origRedraw = redraw;
+// ⚡ Bolt: Debounce redraw using requestAnimationFrame to prevent main thread blocking during rapid slider input
+let _redrawRafId = null;
 redraw = function() {
-  _origRedraw();
-  capBuildSimple();
+  if (_redrawRafId) cancelAnimationFrame(_redrawRafId);
+  _redrawRafId = requestAnimationFrame(() => {
+    _origRedraw();
+    capBuildSimple();
+  });
 };
 
 // ═══════════════════════════════════════════

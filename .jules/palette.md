@@ -27,3 +27,7 @@
 ## 2024-05-25 - Pointer Events for Visual Overlays
 **Learning:** When dynamic visual overlays (such as image previews like `.photo-preview`) are positioned on top of interactive transparent hitzone elements, they can block click events, preventing users from interacting with the underlying button (e.g., to upload a new photo).
 **Action:** Apply `pointer-events: none;` to the visual overlay to allow clicks to pass through to the underlying interactive element.
+
+## 2026-08-28 - Adding accessibility labels to icon-only buttons
+**Learning:** Found multiple instances of icon-only buttons (like 🗑, ✏️, ↺, ◄, ►, ▲, ▼) that lacked `aria-label` and `title` attributes, making them inaccessible to screen readers and difficult to understand without hover tooltips. This is a common pattern in the app's control interfaces (like text positioning and caption templates).
+**Action:** Next time creating or reviewing interactive elements, I will ensure all buttons that use symbols or emojis as their primary content include both `aria-label` (for screen readers) and `title` (for visual hover tooltips) to ensure accessibility for all users.

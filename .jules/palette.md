@@ -27,3 +27,6 @@
 ## 2024-05-25 - Pointer Events for Visual Overlays
 **Learning:** When dynamic visual overlays (such as image previews like `.photo-preview`) are positioned on top of interactive transparent hitzone elements, they can block click events, preventing users from interacting with the underlying button (e.g., to upload a new photo).
 **Action:** Apply `pointer-events: none;` to the visual overlay to allow clicks to pass through to the underlying interactive element.
+## 2026-08-28 - Template Deletion Confirmation
+**Learning:** Destructive actions without a confirmation prompt can easily lead to accidental data loss, which degrades the UX significantly. Icon-only buttons also require `aria-label` and `title` to be accessible and intuitive for all users.
+**Action:** Always add a confirmation dialog (e.g., using `confirm()`) for destructive actions like deleting templates, and ensure all icon-only buttons include descriptive `aria-label` and `title` attributes.

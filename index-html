@@ -831,7 +831,7 @@ input[type=range].date-slider{-webkit-appearance:auto;appearance:auto;height:20p
           <option value="">— Template தேர்வு செய்யுங்க —</option>
         </select>
         <button onclick="capSaveTemplate()">💾 Save</button>
-        <button onclick="capDeleteTemplate()">🗑</button>
+        <button onclick="capDeleteTemplate()" aria-label="Delete template" title="Delete template">🗑</button>
       </div>
       <p style="color:#666;font-size:0.6rem;margin-top:-4px;margin-bottom:8px;">இப்போ இருக்குற Details + Tone-ஐ ஒரு பேருடன் Template-ஆ Save பண்ணி, அடுத்த தடவை ஒரே click-ல் Load பண்ணலாம் (எ.கா. "Sunday Service", "Special Occasion").</p>
     </div>
@@ -1061,13 +1061,13 @@ input[type=range].date-slider{-webkit-appearance:auto;appearance:auto;height:20p
           <div style="flex:2;">
             <label style="font-size:0.68rem;color:#C8960C;margin-bottom:3px;display:block;">📍 Date Position</label>
             <div class="pos-pad">
-              <div><button class="arr-btn" onclick="move('y',-1)">▲</button></div>
+              <div><button class="arr-btn" onclick="move('y',-1)" aria-label="Move date up" title="Move date up">▲</button></div>
               <div style="display:flex;justify-content:center;align-items:center;gap:6px;margin:3px 0;">
-                <button class="arr-btn" onclick="move('x',-1)">◄</button>
-                <button class="reset-pos" onclick="dx=0.843;dy=0.148;redraw();saveAllSettings()">↺</button>
-                <button class="arr-btn" onclick="move('x',1)">►</button>
+                <button class="arr-btn" onclick="move('x',-1)" aria-label="Move date left" title="Move date left">◄</button>
+                <button class="reset-pos" onclick="dx=0.843;dy=0.148;redraw();saveAllSettings()" aria-label="Reset date position" title="Reset date position">↺</button>
+                <button class="arr-btn" onclick="move('x',1)" aria-label="Move date right" title="Move date right">►</button>
               </div>
-              <div><button class="arr-btn" onclick="move('y',1)">▼</button></div>
+              <div><button class="arr-btn" onclick="move('y',1)" aria-label="Move date down" title="Move date down">▼</button></div>
             </div>
           </div>
         </div>
@@ -4178,6 +4178,7 @@ function capDeleteTemplate(){
   const sel = document.getElementById('capTplSelect');
   const id = sel.value;
   if(!id){ showMsg('⚠️ முதலில் ஒரு Template தேர்வு செய்யுங்க'); return; }
+  if(!confirm('நிச்சயமாக இந்த Template-ஐ நீக்க வேண்டுமா? (Are you sure you want to delete this template?)')) return;
   fx.capTemplates = (fx.capTemplates||[]).filter(t=>t.id!==id);
   capRenderTemplates();
   saveAllSettings();

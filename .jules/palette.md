@@ -27,3 +27,7 @@
 ## 2024-05-25 - Pointer Events for Visual Overlays
 **Learning:** When dynamic visual overlays (such as image previews like `.photo-preview`) are positioned on top of interactive transparent hitzone elements, they can block click events, preventing users from interacting with the underlying button (e.g., to upload a new photo).
 **Action:** Apply `pointer-events: none;` to the visual overlay to allow clicks to pass through to the underlying interactive element.
+
+## 2026-08-28 - ARIA labels for positional controls
+**Learning:** Text and Date positional controls in the sidebar lack aria-labels, making them completely inaccessible to screen reader users as they are just arrow symbols.
+**Action:** Always add `aria-label` and `title` to custom symbol buttons for positional controls.

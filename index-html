@@ -2597,6 +2597,9 @@ function renderBgGallery(){
 function addBgFiles(input){
   const files=Array.from(input.files);
   files.forEach(file=>{
+    // Security: Prevent processing non-image files and limit file size to 2MB to avoid memory exhaustion
+    if(!file.type.startsWith('image/')){ showMsg('⚠️ Image file மட்டும் select பண்ணுங்க'); return; }
+    if(file.size > 2 * 1024 * 1024){ showMsg('⚠️ Image size 2MB-க்கு உள்ள இருக்கணும்'); return; }
     const reader=new FileReader();
     reader.onload=e=>{
       const id="bg_"+Date.now()+"_"+Math.random().toString(36).substr(2,5);

@@ -41,3 +41,8 @@
 **Vulnerability:** User-provided inputs (`d.label` and `d.value`) for user details/history were directly interpolated into an HTML string and injected via `innerHTML` without sanitization.
 **Learning:** Any user-controlled string must be escaped for HTML entities before being injected into the DOM via `.innerHTML` or `.insertAdjacentHTML`, otherwise it leads to Cross-Site Scripting (XSS).
 **Prevention:** Use standard text escaping for sensitive characters (like `<`, `>`, `&`, `"`, `'`) or rely on safer DOM APIs like `textContent`.
+
+## 2024-08-29 - [Stored XSS in Avatar URL]
+**Vulnerability:** User-provided `photoURL` was directly interpolated into an HTML string and injected via `innerHTML` without sanitization.
+**Learning:** External user profile data such as profile picture URLs can contain malicious payloads. Injecting them directly into `innerHTML` leads to Stored XSS.
+**Prevention:** Use safe DOM manipulation APIs like `document.createElement('img')` and assign properties directly (`img.src = url`) rather than constructing raw HTML strings.

@@ -831,7 +831,7 @@ input[type=range].date-slider{-webkit-appearance:auto;appearance:auto;height:20p
           <option value="">— Template தேர்வு செய்யுங்க —</option>
         </select>
         <button onclick="capSaveTemplate()">💾 Save</button>
-        <button onclick="capDeleteTemplate()">🗑</button>
+        <button onclick="capDeleteTemplate()" aria-label="Delete template" title="Delete template">🗑</button>
       </div>
       <p style="color:#666;font-size:0.6rem;margin-top:-4px;margin-bottom:8px;">இப்போ இருக்குற Details + Tone-ஐ ஒரு பேருடன் Template-ஆ Save பண்ணி, அடுத்த தடவை ஒரே click-ல் Load பண்ணலாம் (எ.கா. "Sunday Service", "Special Occasion").</p>
     </div>
@@ -4125,12 +4125,12 @@ function capRenderTags(){
   list.innerHTML = details.map((d,i)=>`
     <div class="cap-tag-row ${d.on?'':'off'}">
       <div class="cap-reorder">
-        <button ${i===0?'disabled':''} onclick="capMoveDetail(${i},-1)">▲</button>
-        <button ${i===details.length-1?'disabled':''} onclick="capMoveDetail(${i},1)">▼</button>
+        <button ${i===0?'disabled':''} onclick="capMoveDetail(${i},-1)" aria-label="Move up" title="Move up">▲</button>
+        <button ${i===details.length-1?'disabled':''} onclick="capMoveDetail(${i},1)" aria-label="Move down" title="Move down">▼</button>
       </div>
       <span class="cap-row-txt" onclick="capToggleTagAt(${i})">${d.label?('<b>'+esc(d.label)+':</b> '):''}${esc(d.value)}</span>
       <div class="cap-tag-toggle ${d.on?'on':''}" onclick="capToggleTagAt(${i})"></div>
-      <button class="cap-tag-del" onclick="capDeleteTagAt(${i})">✕</button>
+      <button class="cap-tag-del" onclick="capDeleteTagAt(${i})" aria-label="Delete tag" title="Delete tag">✕</button>
     </div>
   `).join('');
 }

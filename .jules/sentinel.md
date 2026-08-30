@@ -41,3 +41,7 @@
 **Vulnerability:** User-provided inputs (`d.label` and `d.value`) for user details/history were directly interpolated into an HTML string and injected via `innerHTML` without sanitization.
 **Learning:** Any user-controlled string must be escaped for HTML entities before being injected into the DOM via `.innerHTML` or `.insertAdjacentHTML`, otherwise it leads to Cross-Site Scripting (XSS).
 **Prevention:** Use standard text escaping for sensitive characters (like `<`, `>`, `&`, `"`, `'`) or rely on safer DOM APIs like `textContent`.
+## 2024-05-25 - [Stored XSS in Verse Bank Tag Filters]
+**Vulnerability:** User-controlled tags used in the verse bank filter row were embedded in double quotes inside HTML attributes (like `onclick="vbFilterByTag('...')"`), but not safely escaped for HTML/attributes, leading to potential Cross-Site Scripting (XSS).
+**Learning:** XSS can happen not only within elements but also when untrusted inputs are used directly inside inline event handler attributes if they break out of the string boundary (e.g., using quotes).
+**Prevention:** Avoid injecting strings directly into inline JS event handlers within `innerHTML`. Prefer standard DOM properties and `addEventListener`, or ensure the input is aggressively escaped specifically for the attribute context.

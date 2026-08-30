@@ -27,3 +27,6 @@
 ## 2024-05-25 - Pointer Events for Visual Overlays
 **Learning:** When dynamic visual overlays (such as image previews like `.photo-preview`) are positioned on top of interactive transparent hitzone elements, they can block click events, preventing users from interacting with the underlying button (e.g., to upload a new photo).
 **Action:** Apply `pointer-events: none;` to the visual overlay to allow clicks to pass through to the underlying interactive element.
+## 2026-08-30 - Added accessibility labels to directional pad buttons
+**Learning:** The directional pad (`pos-pad`) pattern uses visually intuitive icon-only buttons (▲, ▼, ◄, ►, ↺) which lack context for screen readers and tooltips for hover users, creating accessibility issues in custom UI controls.
+**Action:** When creating custom directional controls with icon buttons, always include `aria-label` for screen readers and `title` attributes (matching the `aria-label`) to provide hover tooltips for mouse users.

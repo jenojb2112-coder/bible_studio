@@ -41,3 +41,8 @@
 **Vulnerability:** User-provided inputs (`d.label` and `d.value`) for user details/history were directly interpolated into an HTML string and injected via `innerHTML` without sanitization.
 **Learning:** Any user-controlled string must be escaped for HTML entities before being injected into the DOM via `.innerHTML` or `.insertAdjacentHTML`, otherwise it leads to Cross-Site Scripting (XSS).
 **Prevention:** Use standard text escaping for sensitive characters (like `<`, `>`, `&`, `"`, `'`) or rely on safer DOM APIs like `textContent`.
+
+## 2024-08-11 - [Missing File Upload Size and MIME Type Validation]
+**Vulnerability:** Client-side file uploads in `addBgFiles` (`FileReader`) lacked size and MIME type validation, allowing users to potentially upload excessively large files (memory exhaustion DoS) or non-image files if they bypassed the HTML `accept` attribute.
+**Learning:** Processing user-uploaded files on the client side without size limits can cause memory exhaustion and crash the browser (Client-side DoS). Furthermore, relying solely on the HTML `accept` attribute is insufficient for security as it can be bypassed.
+**Prevention:** Always validate both the `type` property (e.g., `file.type.startsWith('image/')`) and `size` property of `File` objects before reading them with `FileReader` or sending them to a backend.

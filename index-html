@@ -2597,6 +2597,8 @@ function renderBgGallery(){
 function addBgFiles(input){
   const files=Array.from(input.files);
   files.forEach(file=>{
+    if(!file.type.startsWith('image/')){showMsg?.('⚠️ Image file மட்டும் upload பண்ணுங்க');return;}
+    if(file.size>2*1024*1024){showMsg?.('⚠️ Photo must be under 2MB');return;}
     const reader=new FileReader();
     reader.onload=e=>{
       const id="bg_"+Date.now()+"_"+Math.random().toString(36).substr(2,5);

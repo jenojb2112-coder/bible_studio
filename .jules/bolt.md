@@ -22,3 +22,6 @@
 ## 2024-11-20 - Preconnect Requires Crossorigin for API/Fonts
 **Learning:** Preconnecting to external domains (like Firebase APIs, Google Fonts, etc.) without the `crossorigin` attribute for resources fetched via CORS means the browser won't use the pre-established connection, negating the performance benefit.
 **Action:** Always add the `crossorigin` attribute to `<link rel="preconnect">` tags for domains where resources (like ES modules or JSON APIs) will be fetched via CORS to ensure the connection overhead (DNS, TCP, TLS) is actually reduced.
+## 2024-11-21 - Cache active UI tab element selection to avoid N element lookup.
+**Learning:** Repeatedly invoking `document.querySelectorAll('.tab')` in frequently-called single-page app tab change handlers like `switchTab` initiates an unnecessary linear search pattern across the DOM tree.
+**Action:** When working on navigation or tab selection code, declare module-level variables (like `_activeTabBtn` and `_activePanel`) to store references to the current active elements, and simply update those pointers during transitions instead of querying `.querySelectorAll()` for every click.

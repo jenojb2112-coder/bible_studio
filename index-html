@@ -1061,13 +1061,13 @@ input[type=range].date-slider{-webkit-appearance:auto;appearance:auto;height:20p
           <div style="flex:2;">
             <label style="font-size:0.68rem;color:#C8960C;margin-bottom:3px;display:block;">📍 Date Position</label>
             <div class="pos-pad">
-              <div><button class="arr-btn" onclick="move('y',-1)">▲</button></div>
+              <div><button class="arr-btn" aria-label="Move date up" title="Move date up" onclick="move('y',-1)">▲</button></div>
               <div style="display:flex;justify-content:center;align-items:center;gap:6px;margin:3px 0;">
-                <button class="arr-btn" onclick="move('x',-1)">◄</button>
-                <button class="reset-pos" onclick="dx=0.843;dy=0.148;redraw();saveAllSettings()">↺</button>
-                <button class="arr-btn" onclick="move('x',1)">►</button>
+                <button class="arr-btn" aria-label="Move date left" title="Move date left" onclick="move('x',-1)">◄</button>
+                <button class="reset-pos" aria-label="Reset date position" title="Reset date position" onclick="dx=0.843;dy=0.148;redraw();saveAllSettings()">↺</button>
+                <button class="arr-btn" aria-label="Move date right" title="Move date right" onclick="move('x',1)">►</button>
               </div>
-              <div><button class="arr-btn" onclick="move('y',1)">▼</button></div>
+              <div><button class="arr-btn" aria-label="Move date down" title="Move date down" onclick="move('y',1)">▼</button></div>
             </div>
           </div>
         </div>

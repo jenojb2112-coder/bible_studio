@@ -1,0 +1,4 @@
+1. I will add `aria-label` and `title` to the `arr-btn` and `reset-pos` icon-only buttons in `index-html`. There are a total of 10 such buttons for text positioning and date positioning that are currently just arrows/reset icons without any screen reader or hover context.
+2. I will run `pnpm test` to ensure I didn't break anything.
+3. I will run `pre_commit_instructions` and follow the steps.
+4. I will create a pull request with the title `🎨 Palette: Add ARIA labels to positioning controls` and a description outlining what was changed.

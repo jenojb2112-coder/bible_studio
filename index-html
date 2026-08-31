@@ -5289,7 +5289,11 @@ function fontInitLoad() {
     if (!avatar) return;
     if (currentUser) {
       if (currentUser.photoURL) {
-        avatar.innerHTML = `<img src="${currentUser.photoURL}" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">`;
+        const img = document.createElement('img');
+        img.src = currentUser.photoURL;
+        img.style.cssText = 'width:100%;height:100%;border-radius:50%;object-fit:cover;';
+        avatar.innerHTML = '';
+        avatar.appendChild(img);
       } else {
         avatar.textContent = (currentUser.displayName || currentUser.phoneNumber || '?').charAt(0).toUpperCase();
       }

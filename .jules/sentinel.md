@@ -41,3 +41,7 @@
 **Vulnerability:** User-provided inputs (`d.label` and `d.value`) for user details/history were directly interpolated into an HTML string and injected via `innerHTML` without sanitization.
 **Learning:** Any user-controlled string must be escaped for HTML entities before being injected into the DOM via `.innerHTML` or `.insertAdjacentHTML`, otherwise it leads to Cross-Site Scripting (XSS).
 **Prevention:** Use standard text escaping for sensitive characters (like `<`, `>`, `&`, `"`, `'`) or rely on safer DOM APIs like `textContent`.
+## 2024-05-18 - Fix XSS Vulnerability in Avatar Rendering
+**Vulnerability:** DOM-based XSS where `currentUser.photoURL` was injected directly into `.innerHTML` as a string (`avatar.innerHTML = \`<img src="\${currentUser.photoURL}"...>\``).
+**Learning:** Even internal or third-party controlled data (like Firebase user profiles) can be vectors for XSS if they aren't properly sanitized or securely injected, especially when building DOM elements via string interpolation.
+**Prevention:** Avoid using `.innerHTML` when injecting dynamic data. Instead, build DOM elements dynamically using `document.createElement()` and assign values to properties like `.src`, `.textContent`, or use DOM APIs like `.appendChild()` which inherently treat input as strings rather than executable HTML.

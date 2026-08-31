@@ -3271,11 +3271,32 @@ function skipChurchOnboarding(){
 }
 
 // ─── TABS ─────────────────────────────────────────
+let _activeTabBtn = null;
+let _activePanel = null;
+
 function switchTab(tab){
-  document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
-  document.querySelectorAll(".panel").forEach(p=>p.classList.remove("active"));
-  document.getElementById("tab-"+tab).classList.add("active");
-  event.target.classList.add("active");
+  const newTabBtn = event.target;
+  const newPanel = document.getElementById("tab-"+tab);
+
+  if(_activePanel && _activePanel.id === "tab-" + tab) {
+    if(tab==="settings"){loadSettingsVerse();renderPreview();fontLiveSearch(document.getElementById('fontSearch')?.value||'');}
+    if(tab==="versebank"){bulkFillMonthSelect();bulkRenderRows();vbUpdateCount();}
+    if(tab==="occasions"){occInit();}
+    return;
+  }
+
+  if(!_activeTabBtn) _activeTabBtn = document.querySelector('.tab.active');
+  if(!_activePanel) _activePanel = document.querySelector('.panel.active');
+
+  if(_activeTabBtn) _activeTabBtn.classList.remove("active");
+  if(_activePanel) _activePanel.classList.remove("active");
+
+  if(newTabBtn) newTabBtn.classList.add("active");
+  if(newPanel) newPanel.classList.add("active");
+
+  _activeTabBtn = newTabBtn;
+  _activePanel = newPanel;
+
   if(tab==="settings"){loadSettingsVerse();renderPreview();fontLiveSearch(document.getElementById('fontSearch')?.value||'');}
   if(tab==="versebank"){bulkFillMonthSelect();bulkRenderRows();vbUpdateCount();}
   if(tab==="occasions"){occInit();}
@@ -3808,11 +3829,21 @@ function vbUse(idx) {
 }
 
 function switchTabDirect(tab) {
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-  document.getElementById('tab-' + tab).classList.add('active');
-  const tabEl = [...document.querySelectorAll('.tab')].find(t => t.onclick && t.onclick.toString().includes("'" + tab + "'"));
-  if (tabEl) tabEl.classList.add('active');
+  if(_activePanel && _activePanel.id === "tab-" + tab) return;
+  if(!_activeTabBtn) _activeTabBtn = document.querySelector('.tab.active');
+  if(!_activePanel) _activePanel = document.querySelector('.panel.active');
+
+  if(_activeTabBtn) _activeTabBtn.classList.remove('active');
+  if(_activePanel) _activePanel.classList.remove('active');
+
+  const newPanel = document.getElementById('tab-' + tab);
+  const newTabBtn = [...document.querySelectorAll('.tab')].find(t => t.onclick && t.onclick.toString().includes("'" + tab + "'"));
+
+  if(newPanel) newPanel.classList.add('active');
+  if(newTabBtn) newTabBtn.classList.add('active');
+
+  _activePanel = newPanel;
+  _activeTabBtn = newTabBtn;
 }
 
 function vbExport() {

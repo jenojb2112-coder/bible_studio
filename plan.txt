@@ -1,0 +1,9 @@
+1. Implement local tracking of active tab and panel for DOM query optimization.
+  - In `index-html`, add `_activeTabBtn` and `_activePanel` global variables.
+  - Modify `switchTab` and `switchTabDirect` to update and use these cached variables instead of calling `document.querySelectorAll('.tab')` and `document.querySelectorAll('.panel')` on every click, returning early if the target tab is already active, in accordance with the memory log from 2024-05-24. **Crucially, ensure we run the tab initialization logic if the tab is clicked, even if it is already active, to avoid breaking refresh behavior.**
+
+2. Run Tests
+  - `pnpm test` (or equivalent) to ensure no functionality is broken. Note: existing test failures are permissible if they pre-date changes.
+
+3. Complete pre-commit steps to ensure proper testing, verification, review, and reflection are done.
+4. Call `create_pull_request` (or `submit` based on instructions).

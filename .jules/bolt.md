@@ -22,3 +22,6 @@
 ## 2024-11-20 - Preconnect Requires Crossorigin for API/Fonts
 **Learning:** Preconnecting to external domains (like Firebase APIs, Google Fonts, etc.) without the `crossorigin` attribute for resources fetched via CORS means the browser won't use the pre-established connection, negating the performance benefit.
 **Action:** Always add the `crossorigin` attribute to `<link rel="preconnect">` tags for domains where resources (like ES modules or JSON APIs) will be fetched via CORS to ensure the connection overhead (DNS, TCP, TLS) is actually reduced.
+## 2024-12-07 - Debouncing DOM Heavy Filter Inputs
+**Learning:** Functions like `vbFilter` and `fontLiveSearch` manipulate the DOM directly (creating/updating UI elements). When attached directly to `oninput` events, rapid typing triggers these expensive functions continuously, blocking the main thread and causing noticeable lag.
+**Action:** Always wrap search filter functions that update the DOM in a `debounce` utility (e.g., with a 300ms delay) when attached to fast-firing events like `oninput` or `keyup` to ensure the DOM is only updated once the user pauses typing.

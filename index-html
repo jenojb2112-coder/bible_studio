@@ -4125,12 +4125,12 @@ function capRenderTags(){
   list.innerHTML = details.map((d,i)=>`
     <div class="cap-tag-row ${d.on?'':'off'}">
       <div class="cap-reorder">
-        <button ${i===0?'disabled':''} onclick="capMoveDetail(${i},-1)">▲</button>
-        <button ${i===details.length-1?'disabled':''} onclick="capMoveDetail(${i},1)">▼</button>
+        <button ${i===0?'disabled':''} onclick="capMoveDetail(${i},-1)" aria-label="Move tag up" title="Move tag up">▲</button>
+        <button ${i===details.length-1?'disabled':''} onclick="capMoveDetail(${i},1)" aria-label="Move tag down" title="Move tag down">▼</button>
       </div>
       <span class="cap-row-txt" onclick="capToggleTagAt(${i})">${d.label?('<b>'+esc(d.label)+':</b> '):''}${esc(d.value)}</span>
       <div class="cap-tag-toggle ${d.on?'on':''}" onclick="capToggleTagAt(${i})"></div>
-      <button class="cap-tag-del" onclick="capDeleteTagAt(${i})">✕</button>
+      <button class="cap-tag-del" onclick="capDeleteTagAt(${i})" aria-label="Delete tag" title="Delete tag">✕</button>
     </div>
   `).join('');
 }

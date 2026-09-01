@@ -27,3 +27,6 @@
 ## 2024-05-25 - Pointer Events for Visual Overlays
 **Learning:** When dynamic visual overlays (such as image previews like `.photo-preview`) are positioned on top of interactive transparent hitzone elements, they can block click events, preventing users from interacting with the underlying button (e.g., to upload a new photo).
 **Action:** Apply `pointer-events: none;` to the visual overlay to allow clicks to pass through to the underlying interactive element.
+## 2026-08-11 - ARIA Labels and Titles for Rendered HTML Template Icon Buttons
+**Learning:** Icon-only buttons rendered dynamically via template literals (like `list.innerHTML = ...`) often lack context for both screen reader users (who hear unhelpful generic terms or just the symbol) and mouse users (who don't know what the icon does before clicking).
+**Action:** Always ensure that icon-only buttons injected via template literals include explicit `aria-label` attributes for accessibility and matching `title` attributes to provide native hover tooltips.

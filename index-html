@@ -918,7 +918,7 @@ input[type=range].date-slider{-webkit-appearance:auto;appearance:auto;height:20p
     <!-- Font Search Picker (same box model as Date Format Picker) -->
     <div style="padding:0 12px;margin-bottom:10px;">
       <div id="fontSearchPanel" style="display:none;margin-top:4px;max-height:340px;overflow-y:auto;background:#160a00;border:1px solid #6a4400;border-radius:8px;padding:8px;">
-        <input id="fontSearch" class="cust-input" placeholder="🔍 font தேடு... (Cinzel, Poppins...)" oninput="fontLiveSearch(this.value)" autocomplete="off">
+        <input id="fontSearch" class="cust-input" placeholder="🔍 font தேடு... (Cinzel, Poppins...)" oninput="debouncedFontLiveSearch(this.value)" autocomplete="off">
         <div id="fontResultList" class="font-result-list"></div>
         <div class="srow" style="margin-top:6px;">
           <label style="color:#666;font-size:0.62rem;">தேர்வு செய்யப்பட்டது:</label>
@@ -1330,7 +1330,7 @@ input[type=range].date-slider{-webkit-appearance:auto;appearance:auto;height:20p
 
     <!-- Toolbar for urgent single verse edit -->
     <div class="vb-toolbar" style="margin-top:10px;border-top:1px solid #2a0040;padding-top:10px;">
-      <input class="vb-search" id="vbSearch" placeholder="🔍 வசனம் / reference தேடு..." oninput="vbFilter()">
+      <input class="vb-search" id="vbSearch" placeholder="🔍 வசனம் / reference தேடு..." oninput="debouncedVbFilter()">
       <button class="vb-btn green" onclick="vbOpenQuick()">+ புதிய வசனம்</button>
       <button class="vb-btn blue" onclick="vbExport()">📤 Export</button>
       <label class="vb-btn" style="background:#555;color:#fff;cursor:pointer;">📥 Import<input type="file" accept=".json" style="display:none" onchange="vbImport(event)"></label>
@@ -1408,6 +1408,15 @@ input[type=range].date-slider{-webkit-appearance:auto;appearance:auto;height:20p
 </div>
 
 <script>
+// ─── UTILS ──────────────────────────────────────
+function debounce(func, wait) {
+  let timeout;
+  return function(...args) {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func.apply(this, args), wait);
+  };
+}
+
 // ─── DATA ───────────────────────────────────────
 const MONTHS_SHORT=["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
 const MONTHS_FULL=["January","February","March","April","May","June","July","August","September","October","November","December"];
@@ -3706,6 +3715,8 @@ function vbRenderTagFilterRow(){
     [...allTags].sort().map(t=>`<span class="vb-filter-chip${vbActiveTag===t?' active':''}" onclick="vbFilterByTag('${t.replace(/'/g,"\\'")}')">#${t}</span>`).join('');
 }
 
+const debouncedVbFilter = debounce(() => vbFilter(), 300);
+
 function vbFilterByTag(tag){
   vbActiveTag = tag;
   vbFilter();
@@ -5046,6 +5057,8 @@ function loadGFont(gfont) {
   link.href = 'https://fonts.googleapis.com/css2?family=' + gfont + ':wght@400;700;900&display=swap';
   document.head.appendChild(link);
 }
+
+const debouncedFontLiveSearch = debounce((query) => fontLiveSearch(query), 300);
 
 function fontLiveSearch(query) {
   const list = document.getElementById('fontResultList');

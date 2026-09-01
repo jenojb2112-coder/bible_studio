@@ -2485,6 +2485,10 @@ function fullBackupExport(){
 function fullBackupImport(event){
   const file = event.target.files && event.target.files[0];
   if(!file) return;
+  if (file.size > 5 * 1024 * 1024) {
+    alert('⚠️ Backup file is too large (max 5MB)');
+    return;
+  }
   if(!confirm('⚠️ இப்போ இருக்குற எல்லா data-வும் இந்த backup file-ஓட data-வா மாறிடும். தொடரணுமா?')){
     event.target.value = '';
     return;
@@ -2597,6 +2601,14 @@ function renderBgGallery(){
 function addBgFiles(input){
   const files=Array.from(input.files);
   files.forEach(file=>{
+    if (!file.type.startsWith('image/')) {
+      alert('⚠️ Please upload an image file');
+      return;
+    }
+    if (file.size > 2 * 1024 * 1024) {
+      alert('⚠️ File is too large (max 2MB)');
+      return;
+    }
     const reader=new FileReader();
     reader.onload=e=>{
       const id="bg_"+Date.now()+"_"+Math.random().toString(36).substr(2,5);
@@ -3827,6 +3839,10 @@ function vbExport() {
 function vbImport(e) {
   const file = e.target.files[0];
   if (!file) return;
+  if (file.size > 2 * 1024 * 1024) {
+    alert('⚠️ File is too large (max 2MB)');
+    return;
+  }
   const reader = new FileReader();
   reader.onload = function(ev) {
     try {

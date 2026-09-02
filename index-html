@@ -4140,8 +4140,9 @@ function capRenderTemplates(){
   const sel = document.getElementById('capTplSelect');
   if(!sel) return;
   const tpls = fx.capTemplates||[];
+  const esc = s => String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');
   sel.innerHTML = '<option value="">— Template தேர்வு செய்யுங்க —</option>' +
-    tpls.map(t=>`<option value="${t.id}">${t.name}</option>`).join('');
+    tpls.map(t=>`<option value="${esc(t.id)}">${esc(t.name)}</option>`).join('');
 }
 function capSaveTemplate(){
   const name = prompt('Template பேர் என்ன? (எ.கா. Sunday Service)');
@@ -4220,9 +4221,10 @@ function capRenderHistory(){
     list.innerHTML = '<div class="cap-tag-empty">இன்னும் history இல்ல. 🤖 AI Caption அல்லது 📋 Copy பண்ணினா இங்கே சேமிக்கும்.</div>';
     return;
   }
+  const esc = s => String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');
   list.innerHTML = hist.map((h,i)=>`
     <div class="cap-hist-item">
-      <div class="cap-hist-txt">${h.text.replace(/</g,'&lt;')}</div>
+      <div class="cap-hist-txt">${esc(h.text)}</div>
       <div class="cap-hist-meta">
         <span class="cap-hist-time">${capHistTimeAgo(h.ts)}</span>
         <div class="cap-hist-actions">

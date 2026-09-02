@@ -1408,6 +1408,15 @@ input[type=range].date-slider{-webkit-appearance:auto;appearance:auto;height:20p
 </div>
 
 <script>
+function escapeHTML(str) {
+  if (!str) return '';
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
 // ─── DATA ───────────────────────────────────────
 const MONTHS_SHORT=["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
 const MONTHS_FULL=["January","February","March","April","May","June","July","August","September","October","November","December"];
@@ -3345,7 +3354,9 @@ function bulkRenderRows(){
     const row=document.createElement('div');
     row.className='bulk-row'+(verseVal?' filled':'');
     row.id='bulkRow_'+d;
-    row.innerHTML=`<div class="br-day">${d}</div><div class="br-fields"><textarea placeholder="${bulkLang==='ta'?'தமிழ் வசனம்...':'English verse...'}" oninput="bulkUpdateProgress()" id="bulkTa_${d}"></textarea><input placeholder="${bulkLang==='ta'?'Reference (எ.கா. யோவான் 3:16)':'Reference (e.g. John 3:16)'}" id="bulkRef_${d}"></div>`;
+    const txtPl = bulkLang==='ta'?'தமிழ் வசனம்...':'English verse...';
+    const refPl = bulkLang==='ta'?'Reference (எ.கா. யோவான் 3:16)':'Reference (e.g. John 3:16)';
+    row.innerHTML=`<div class="br-day">${d}</div><div class="br-fields"><textarea placeholder="${txtPl}" oninput="bulkUpdateProgress()" id="bulkTa_${d}"></textarea><input placeholder="${refPl}" id="bulkRef_${d}"></div>`;
     row.querySelector('textarea').value=verseVal;
     row.querySelector('input').value=refVal;
     wrap.appendChild(row);
@@ -3472,7 +3483,9 @@ function buildMonthList(){
     const verseText=v?(monthLang==="ta"?v.ta:v.en)||'':'வசனம் இல்லை';
     const refText=v?(monthLang==="ta"?v.ref_ta:v.ref_en)||'':'';
     const thumbId='miThumb_'+d;
-    div.innerHTML=`<canvas class="mi-thumb" id="${thumbId}" width="34" height="43"></canvas><div class="mi-day"><div class="dn" style="color:${d===day?"var(--gold)":"#fff"}">${d}</div><div class="dm">${MONTHS_SHORT[month]}</div></div><div class="mi-text" style="flex:1;"><p>${hasVerse?'':'⚠️ '}${verseText.substring(0,60)}${verseText.length>60?'...':''}</p><div class="mr">${refText}</div></div>${hasVerse?`<button class="mi-dl" onclick="event.stopPropagation();downloadDay(${d})" title="இந்த நாளுக்கு மட்டும் Download">📥</button>`:''}`;
+    const safeVerse = escapeHTML(verseText.substring(0,60) + (verseText.length>60?'...':''));
+    const safeRef = escapeHTML(refText);
+    div.innerHTML=`<canvas class="mi-thumb" id="${thumbId}" width="34" height="43"></canvas><div class="mi-day"><div class="dn" style="color:${d===day?"var(--gold)":"#fff"}">${d}</div><div class="dm">${MONTHS_SHORT[month]}</div></div><div class="mi-text" style="flex:1;"><p>${hasVerse?'':'⚠️ '}${safeVerse}</p><div class="mr">${safeRef}</div></div>${hasVerse?`<button class="mi-dl" onclick="event.stopPropagation();downloadDay(${d})" title="இந்த நாளுக்கு மட்டும் Download">📥</button>`:''}`;
     const dd=d;
     div.onclick=()=>{day=dd;switchTab("poster");document.querySelector(".tab").click();buildDayGrid();buildMonthList();redraw();};
     list.appendChild(div);
@@ -3664,16 +3677,19 @@ function vbRender(list) {
     if (!v || (!v.ta && !v.en)) return;
     const div = document.createElement('div');
     div.className = 'vb-card';
-    const tagChips = (v.tags||[]).length ? `<div class="vb-card-tags">${v.tags.map(t=>`<span class="vb-tag-chip">#${t}</span>`).join('')}</div>` : '';
+    const tagChips = (v.tags||[]).length ? `<div class="vb-card-tags">${v.tags.map(t=>`<span class="vb-tag-chip">#${escapeHTML(t)}</span>`).join('')}</div>` : '';
     const thumbId = 'vbThumb_' + i;
+    const safeRef = escapeHTML(v.ref_ta || v.ref_en || '');
+    const verseRaw = v.ta || v.en || '';
+    const safeVerse = escapeHTML(verseRaw.substring(0, 80) + (verseRaw.length > 80 ? '...' : ''));
     div.innerHTML = `
       <canvas class="vb-card-thumb" id="${thumbId}" width="46" height="58"></canvas>
       <div class="vb-card-body">
         <div class="vb-card-top">
           <span class="vb-card-day">⚡ வசனம் ${i+1}</span>
-          <span class="vb-card-ref">${v.ref_ta || v.ref_en || ''}</span>
+          <span class="vb-card-ref">${safeRef}</span>
         </div>
-        <div class="vb-card-text">${(v.ta || v.en || '').substring(0, 80)}${(v.ta||v.en||'').length > 80 ? '...' : ''}</div>
+        <div class="vb-card-text">${safeVerse}</div>
         ${tagChips}
         <div class="vb-card-actions">
           <button class="vb-use-btn" onclick="vbUse(${i})">✅ Poster-ல் Use</button>
@@ -4222,7 +4238,7 @@ function capRenderHistory(){
   }
   list.innerHTML = hist.map((h,i)=>`
     <div class="cap-hist-item">
-      <div class="cap-hist-txt">${h.text.replace(/</g,'&lt;')}</div>
+      <div class="cap-hist-txt">${escapeHTML(h.text)}</div>
       <div class="cap-hist-meta">
         <span class="cap-hist-time">${capHistTimeAgo(h.ts)}</span>
         <div class="cap-hist-actions">
@@ -4515,8 +4531,8 @@ function occRenderVBPanel() {
       item.innerHTML = `
         <div class="occ-vb-dot"></div>
         <div class="occ-vb-body">
-          <div class="occ-vb-text">${v.ta||v.en||''}</div>
-          <div class="occ-vb-ref">${v.ref_ta||v.ref_en||''}</div>
+          <div class="occ-vb-text">${escapeHTML(v.ta||v.en||'')}</div>
+          <div class="occ-vb-ref">${escapeHTML(v.ref_ta||v.ref_en||'')}</div>
           <div class="occ-vb-btns">
             <button class="vb-btn" style="font-size:0.6rem;padding:3px 8px;" onclick="occEditVerseAt(${i})">✏️</button>
             <button class="vb-btn red" style="font-size:0.6rem;padding:3px 8px;" onclick="occDeleteVerseAt(${i})">🗑</button>

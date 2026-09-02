@@ -22,3 +22,6 @@
 ## 2024-11-20 - Preconnect Requires Crossorigin for API/Fonts
 **Learning:** Preconnecting to external domains (like Firebase APIs, Google Fonts, etc.) without the `crossorigin` attribute for resources fetched via CORS means the browser won't use the pre-established connection, negating the performance benefit.
 **Action:** Always add the `crossorigin` attribute to `<link rel="preconnect">` tags for domains where resources (like ES modules or JSON APIs) will be fetched via CORS to ensure the connection overhead (DNS, TCP, TLS) is actually reduced.
+## 2024-05-24 - Prevent DOM repaints on duplicate route navigation via active state caching
+**Learning:** In a single-page application that uses DOM class toggling for routing, calling document.querySelectorAll('.tab') on every interaction creates an O(N) DOM query and repaint overhead.
+**Action:** Always maintain the locally active tab state (e.g. _activeTab) to allow for an O(1) early return if navigating to the current tab, and target only the currently active elements (like document.querySelectorAll('.tab.active')) rather than all nodes to remove classes.

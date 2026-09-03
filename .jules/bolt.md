@@ -22,3 +22,6 @@
 ## 2024-11-20 - Preconnect Requires Crossorigin for API/Fonts
 **Learning:** Preconnecting to external domains (like Firebase APIs, Google Fonts, etc.) without the `crossorigin` attribute for resources fetched via CORS means the browser won't use the pre-established connection, negating the performance benefit.
 **Action:** Always add the `crossorigin` attribute to `<link rel="preconnect">` tags for domains where resources (like ES modules or JSON APIs) will be fetched via CORS to ensure the connection overhead (DNS, TCP, TLS) is actually reduced.
+## 2025-02-12 - Debounce Canvas Renders and DB Writes on Drag
+**Learning:** Functions like `redraw()` (which re-renders a heavy canvas) and `saveAllSettings()` (which writes to IndexedDB and triggers a cloud sync) can cause severe main-thread jank when bound directly to continuous user inputs like range sliders (`oninput`). The browser attempts to execute the heavy operations for every pixel the slider moves, blocking the UI.
+**Action:** Always wrap heavy rendering functions (like `redraw()`) with `requestAnimationFrame` to ensure they execute at most once per frame. For persistence functions (like `saveAllSettings()`), wrap them in a simple `setTimeout` debounce (e.g., 500ms) so they only trigger after the user stops dragging.

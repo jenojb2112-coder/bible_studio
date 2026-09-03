@@ -1408,6 +1408,7 @@ input[type=range].date-slider{-webkit-appearance:auto;appearance:auto;height:20p
 </div>
 
 <script>
+function escapeHTML(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;'); }
 // ─── DATA ───────────────────────────────────────
 const MONTHS_SHORT=["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
 const MONTHS_FULL=["January","February","March","April","May","June","July","August","September","October","November","December"];
@@ -3472,7 +3473,7 @@ function buildMonthList(){
     const verseText=v?(monthLang==="ta"?v.ta:v.en)||'':'வசனம் இல்லை';
     const refText=v?(monthLang==="ta"?v.ref_ta:v.ref_en)||'':'';
     const thumbId='miThumb_'+d;
-    div.innerHTML=`<canvas class="mi-thumb" id="${thumbId}" width="34" height="43"></canvas><div class="mi-day"><div class="dn" style="color:${d===day?"var(--gold)":"#fff"}">${d}</div><div class="dm">${MONTHS_SHORT[month]}</div></div><div class="mi-text" style="flex:1;"><p>${hasVerse?'':'⚠️ '}${verseText.substring(0,60)}${verseText.length>60?'...':''}</p><div class="mr">${refText}</div></div>${hasVerse?`<button class="mi-dl" onclick="event.stopPropagation();downloadDay(${d})" title="இந்த நாளுக்கு மட்டும் Download">📥</button>`:''}`;
+    div.innerHTML=`<canvas class="mi-thumb" id="${thumbId}" width="34" height="43"></canvas><div class="mi-day"><div class="dn" style="color:${d===day?"var(--gold)":"#fff"}">${d}</div><div class="dm">${MONTHS_SHORT[month]}</div></div><div class="mi-text" style="flex:1;"><p>${hasVerse?'':'⚠️ '}${escapeHTML(verseText.substring(0,60))}${verseText.length>60?'...':''}</p><div class="mr">${escapeHTML(refText)}</div></div>${hasVerse?`<button class="mi-dl" onclick="event.stopPropagation();downloadDay(${d})" title="இந்த நாளுக்கு மட்டும் Download">📥</button>`:''}`;
     const dd=d;
     div.onclick=()=>{day=dd;switchTab("poster");document.querySelector(".tab").click();buildDayGrid();buildMonthList();redraw();};
     list.appendChild(div);
@@ -3664,16 +3665,16 @@ function vbRender(list) {
     if (!v || (!v.ta && !v.en)) return;
     const div = document.createElement('div');
     div.className = 'vb-card';
-    const tagChips = (v.tags||[]).length ? `<div class="vb-card-tags">${v.tags.map(t=>`<span class="vb-tag-chip">#${t}</span>`).join('')}</div>` : '';
+    const tagChips = (v.tags||[]).length ? `<div class="vb-card-tags">${v.tags.map(t=>`<span class="vb-tag-chip">#${escapeHTML(t)}</span>`).join('')}</div>` : '';
     const thumbId = 'vbThumb_' + i;
     div.innerHTML = `
       <canvas class="vb-card-thumb" id="${thumbId}" width="46" height="58"></canvas>
       <div class="vb-card-body">
         <div class="vb-card-top">
           <span class="vb-card-day">⚡ வசனம் ${i+1}</span>
-          <span class="vb-card-ref">${v.ref_ta || v.ref_en || ''}</span>
+          <span class="vb-card-ref">${escapeHTML(v.ref_ta || v.ref_en || '')}</span>
         </div>
-        <div class="vb-card-text">${(v.ta || v.en || '').substring(0, 80)}${(v.ta||v.en||'').length > 80 ? '...' : ''}</div>
+        <div class="vb-card-text">${escapeHTML((v.ta || v.en || '').substring(0, 80))}${(v.ta||v.en||'').length > 80 ? '...' : ''}</div>
         ${tagChips}
         <div class="vb-card-actions">
           <button class="vb-use-btn" onclick="vbUse(${i})">✅ Poster-ல் Use</button>
@@ -4515,8 +4516,8 @@ function occRenderVBPanel() {
       item.innerHTML = `
         <div class="occ-vb-dot"></div>
         <div class="occ-vb-body">
-          <div class="occ-vb-text">${v.ta||v.en||''}</div>
-          <div class="occ-vb-ref">${v.ref_ta||v.ref_en||''}</div>
+          <div class="occ-vb-text">${escapeHTML(v.ta||v.en||'')}</div>
+          <div class="occ-vb-ref">${escapeHTML(v.ref_ta||v.ref_en||'')}</div>
           <div class="occ-vb-btns">
             <button class="vb-btn" style="font-size:0.6rem;padding:3px 8px;" onclick="occEditVerseAt(${i})">✏️</button>
             <button class="vb-btn red" style="font-size:0.6rem;padding:3px 8px;" onclick="occDeleteVerseAt(${i})">🗑</button>
@@ -5289,7 +5290,11 @@ function fontInitLoad() {
     if (!avatar) return;
     if (currentUser) {
       if (currentUser.photoURL) {
-        avatar.innerHTML = `<img src="${currentUser.photoURL}" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">`;
+        avatar.innerHTML = '';
+        const img = document.createElement('img');
+        img.src = currentUser.photoURL;
+        img.style.cssText = 'width:100%;height:100%;border-radius:50%;object-fit:cover;';
+        avatar.appendChild(img);
       } else {
         avatar.textContent = (currentUser.displayName || currentUser.phoneNumber || '?').charAt(0).toUpperCase();
       }

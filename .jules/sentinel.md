@@ -41,3 +41,8 @@
 **Vulnerability:** User-provided inputs (`d.label` and `d.value`) for user details/history were directly interpolated into an HTML string and injected via `innerHTML` without sanitization.
 **Learning:** Any user-controlled string must be escaped for HTML entities before being injected into the DOM via `.innerHTML` or `.insertAdjacentHTML`, otherwise it leads to Cross-Site Scripting (XSS).
 **Prevention:** Use standard text escaping for sensitive characters (like `<`, `>`, `&`, `"`, `'`) or rely on safer DOM APIs like `textContent`.
+
+## 2024-05-19 - Fix XSS in innerHTML
+**Vulnerability:** User-controlled values (like `verseText`, `tags`, or `currentUser.photoURL`) were directly interpolated into strings assigned to `innerHTML`.
+**Learning:** This exposes the application to Cross-Site Scripting (XSS) if users input malicious HTML or JavaScript code.
+**Prevention:** Always escape variables before interpolating them into `innerHTML`, or create elements dynamically using `document.createElement` and set their text and attributes using safe methods like `textContent` or `element.src`.

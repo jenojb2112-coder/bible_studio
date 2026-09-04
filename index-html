@@ -1408,6 +1408,7 @@ input[type=range].date-slider{-webkit-appearance:auto;appearance:auto;height:20p
 </div>
 
 <script>
+function escapeHTML(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;'); }
 // ─── DATA ───────────────────────────────────────
 const MONTHS_SHORT=["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
 const MONTHS_FULL=["January","February","March","April","May","June","July","August","September","October","November","December"];
@@ -4121,14 +4122,13 @@ function capRenderTags(){
     list.innerHTML = '<div class="cap-tag-empty">இன்னும் detail எதுவும் add பண்ணல. மேலே ⛪/📍/📞 preset-ஐ tap பண்ணி value type பண்ணி Add பண்ணுங்க.</div>';
     return;
   }
-  const esc = s => String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');
   list.innerHTML = details.map((d,i)=>`
     <div class="cap-tag-row ${d.on?'':'off'}">
       <div class="cap-reorder">
         <button ${i===0?'disabled':''} onclick="capMoveDetail(${i},-1)">▲</button>
         <button ${i===details.length-1?'disabled':''} onclick="capMoveDetail(${i},1)">▼</button>
       </div>
-      <span class="cap-row-txt" onclick="capToggleTagAt(${i})">${d.label?('<b>'+esc(d.label)+':</b> '):''}${esc(d.value)}</span>
+      <span class="cap-row-txt" onclick="capToggleTagAt(${i})">${d.label?('<b>'+escapeHTML(d.label)+':</b> '):''}${escapeHTML(d.value)}</span>
       <div class="cap-tag-toggle ${d.on?'on':''}" onclick="capToggleTagAt(${i})"></div>
       <button class="cap-tag-del" onclick="capDeleteTagAt(${i})">✕</button>
     </div>
@@ -4222,7 +4222,7 @@ function capRenderHistory(){
   }
   list.innerHTML = hist.map((h,i)=>`
     <div class="cap-hist-item">
-      <div class="cap-hist-txt">${h.text.replace(/</g,'&lt;')}</div>
+      <div class="cap-hist-txt">${escapeHTML(h.text)}</div>
       <div class="cap-hist-meta">
         <span class="cap-hist-time">${capHistTimeAgo(h.ts)}</span>
         <div class="cap-hist-actions">

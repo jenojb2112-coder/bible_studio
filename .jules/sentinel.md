@@ -41,3 +41,8 @@
 **Vulnerability:** User-provided inputs (`d.label` and `d.value`) for user details/history were directly interpolated into an HTML string and injected via `innerHTML` without sanitization.
 **Learning:** Any user-controlled string must be escaped for HTML entities before being injected into the DOM via `.innerHTML` or `.insertAdjacentHTML`, otherwise it leads to Cross-Site Scripting (XSS).
 **Prevention:** Use standard text escaping for sensitive characters (like `<`, `>`, `&`, `"`, `'`) or rely on safer DOM APIs like `textContent`.
+
+## 2024-09-05 - [Stored XSS in innerHTML Templates]
+**Vulnerability:** User-provided verse texts and tags were being directly injected into the DOM via `innerHTML` without sanitization.
+**Learning:** Concatenating user-controlled data directly into HTML template strings leads to Stored XSS.
+**Prevention:** Always sanitize dynamic strings before passing them to `innerHTML` by using an `escapeHTML` utility function or relying on safe DOM properties like `textContent`.

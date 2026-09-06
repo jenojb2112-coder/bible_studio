@@ -27,3 +27,6 @@
 ## 2024-05-25 - Pointer Events for Visual Overlays
 **Learning:** When dynamic visual overlays (such as image previews like `.photo-preview`) are positioned on top of interactive transparent hitzone elements, they can block click events, preventing users from interacting with the underlying button (e.g., to upload a new photo).
 **Action:** Apply `pointer-events: none;` to the visual overlay to allow clicks to pass through to the underlying interactive element.
+## 2026-09-06 - Tooltips and ARIA Labels for Control Pad Buttons
+**Learning:** Icon-only navigation buttons like directional arrows (▲, ▼, ◄, ►) and reset symbols (↺) are confusing to screen readers because they lack semantic text, and for visual users they might not convey their exact action without context.
+**Action:** Always add `aria-label` and `title` attributes describing the specific action of the button, like `aria-label="Move Up"` and `title="Move Up"`.

@@ -1034,13 +1034,13 @@ input[type=range].date-slider{-webkit-appearance:auto;appearance:auto;height:20p
               <button class="vb-btn" id="ptRef" style="flex:1;" onclick="setPosTarget('ref')">🔖 Ref</button>
             </div>
             <div class="pos-pad">
-              <div><button class="arr-btn" onclick="moveText('y',-1)">▲</button></div>
+              <div><button class="arr-btn" onclick="moveText('y',-1)" aria-label="Move Up" title="Move Up">▲</button></div>
               <div style="display:flex;justify-content:center;align-items:center;gap:6px;margin:3px 0;">
-                <button class="arr-btn" onclick="moveText('x',-1)">◄</button>
-                <button class="reset-pos" onclick="resetTextPos()">↺</button>
-                <button class="arr-btn" onclick="moveText('x',1)">►</button>
+                <button class="arr-btn" onclick="moveText('x',-1)" aria-label="Move Left" title="Move Left">◄</button>
+                <button class="reset-pos" onclick="resetTextPos()" aria-label="Reset Position" title="Reset Position">↺</button>
+                <button class="arr-btn" onclick="moveText('x',1)" aria-label="Move Right" title="Move Right">►</button>
               </div>
-              <div><button class="arr-btn" onclick="moveText('y',1)">▼</button></div>
+              <div><button class="arr-btn" onclick="moveText('y',1)" aria-label="Move Down" title="Move Down">▼</button></div>
             </div>
             <p style="color:#666;font-size:0.6rem;text-align:center;margin-top:6px;">Verse-ஐ நகர்த்தினா Ref அப்படியே இருக்கும், Ref-ஐ நகர்த்தினா Verse அப்படியே இருக்கும்.</p>
           </div>
@@ -1061,13 +1061,13 @@ input[type=range].date-slider{-webkit-appearance:auto;appearance:auto;height:20p
           <div style="flex:2;">
             <label style="font-size:0.68rem;color:#C8960C;margin-bottom:3px;display:block;">📍 Date Position</label>
             <div class="pos-pad">
-              <div><button class="arr-btn" onclick="move('y',-1)">▲</button></div>
+              <div><button class="arr-btn" onclick="move('y',-1)" aria-label="Move Up" title="Move Up">▲</button></div>
               <div style="display:flex;justify-content:center;align-items:center;gap:6px;margin:3px 0;">
-                <button class="arr-btn" onclick="move('x',-1)">◄</button>
-                <button class="reset-pos" onclick="dx=0.843;dy=0.148;redraw();saveAllSettings()">↺</button>
-                <button class="arr-btn" onclick="move('x',1)">►</button>
+                <button class="arr-btn" onclick="move('x',-1)" aria-label="Move Left" title="Move Left">◄</button>
+                <button class="reset-pos" onclick="dx=0.843;dy=0.148;redraw();saveAllSettings()" aria-label="Reset Position" title="Reset Position">↺</button>
+                <button class="arr-btn" onclick="move('x',1)" aria-label="Move Right" title="Move Right">►</button>
               </div>
-              <div><button class="arr-btn" onclick="move('y',1)">▼</button></div>
+              <div><button class="arr-btn" onclick="move('y',1)" aria-label="Move Down" title="Move Down">▼</button></div>
             </div>
           </div>
         </div>

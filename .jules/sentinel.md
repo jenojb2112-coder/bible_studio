@@ -41,3 +41,7 @@
 **Vulnerability:** User-provided inputs (`d.label` and `d.value`) for user details/history were directly interpolated into an HTML string and injected via `innerHTML` without sanitization.
 **Learning:** Any user-controlled string must be escaped for HTML entities before being injected into the DOM via `.innerHTML` or `.insertAdjacentHTML`, otherwise it leads to Cross-Site Scripting (XSS).
 **Prevention:** Use standard text escaping for sensitive characters (like `<`, `>`, `&`, `"`, `'`) or rely on safer DOM APIs like `textContent`.
+## 2024-05-25 - [Stored XSS in Occasion Verses]
+**Vulnerability:** User-provided verse text and references were directly interpolated into HTML strings and injected via `innerHTML` without sanitization in `occRenderVBPanel`.
+**Learning:** Any dynamic user-provided string must be properly escaped for HTML entities before being assigned to `.innerHTML`, as it can lead to Cross-Site Scripting (XSS).
+**Prevention:** Use a global `escapeHTML` function for safe template literal injection or switch to DOM APIs like `textContent` when possible.

@@ -1408,6 +1408,10 @@ input[type=range].date-slider{-webkit-appearance:auto;appearance:auto;height:20p
 </div>
 
 <script>
+function escapeHTML(str) {
+  return String(str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+}
+
 // ─── DATA ───────────────────────────────────────
 const MONTHS_SHORT=["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
 const MONTHS_FULL=["January","February","March","April","May","June","July","August","September","October","November","December"];
@@ -3664,16 +3668,16 @@ function vbRender(list) {
     if (!v || (!v.ta && !v.en)) return;
     const div = document.createElement('div');
     div.className = 'vb-card';
-    const tagChips = (v.tags||[]).length ? `<div class="vb-card-tags">${v.tags.map(t=>`<span class="vb-tag-chip">#${t}</span>`).join('')}</div>` : '';
+    const tagChips = (v.tags||[]).length ? `<div class="vb-card-tags">${v.tags.map(t=>`<span class="vb-tag-chip">#${escapeHTML(t)}</span>`).join('')}</div>` : '';
     const thumbId = 'vbThumb_' + i;
     div.innerHTML = `
       <canvas class="vb-card-thumb" id="${thumbId}" width="46" height="58"></canvas>
       <div class="vb-card-body">
         <div class="vb-card-top">
           <span class="vb-card-day">⚡ வசனம் ${i+1}</span>
-          <span class="vb-card-ref">${v.ref_ta || v.ref_en || ''}</span>
+          <span class="vb-card-ref">${escapeHTML(v.ref_ta || v.ref_en || '')}</span>
         </div>
-        <div class="vb-card-text">${(v.ta || v.en || '').substring(0, 80)}${(v.ta||v.en||'').length > 80 ? '...' : ''}</div>
+        <div class="vb-card-text">${escapeHTML((v.ta || v.en || '').substring(0, 80))}${(v.ta||v.en||'').length > 80 ? '...' : ''}</div>
         ${tagChips}
         <div class="vb-card-actions">
           <button class="vb-use-btn" onclick="vbUse(${i})">✅ Poster-ல் Use</button>
@@ -4515,8 +4519,8 @@ function occRenderVBPanel() {
       item.innerHTML = `
         <div class="occ-vb-dot"></div>
         <div class="occ-vb-body">
-          <div class="occ-vb-text">${v.ta||v.en||''}</div>
-          <div class="occ-vb-ref">${v.ref_ta||v.ref_en||''}</div>
+          <div class="occ-vb-text">${escapeHTML(v.ta||v.en||'')}</div>
+          <div class="occ-vb-ref">${escapeHTML(v.ref_ta||v.ref_en||'')}</div>
           <div class="occ-vb-btns">
             <button class="vb-btn" style="font-size:0.6rem;padding:3px 8px;" onclick="occEditVerseAt(${i})">✏️</button>
             <button class="vb-btn red" style="font-size:0.6rem;padding:3px 8px;" onclick="occDeleteVerseAt(${i})">🗑</button>

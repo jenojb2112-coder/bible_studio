@@ -27,3 +27,6 @@
 ## 2024-05-25 - Pointer Events for Visual Overlays
 **Learning:** When dynamic visual overlays (such as image previews like `.photo-preview`) are positioned on top of interactive transparent hitzone elements, they can block click events, preventing users from interacting with the underlying button (e.g., to upload a new photo).
 **Action:** Apply `pointer-events: none;` to the visual overlay to allow clicks to pass through to the underlying interactive element.
+## 2026-08-11 - ARIA Labels and Tooltips for Canvas Position Controls
+**Learning:** Icon-only buttons used for continuous visual canvas manipulation (like ▲, ▼, ◄, ► for moving text/dates) lack semantic meaning for screen readers and discoverability for sighted users without hover tooltips. Providing just an icon makes it unclear what element is being manipulated.
+**Action:** Always ensure that visual control clusters use specific, contextual `aria-label` and `title` attributes (e.g., "Move text up" instead of just "Up") for every icon-only directional button to ensure inclusive accessibility and clear intent.

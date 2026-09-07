@@ -41,3 +41,8 @@
 **Vulnerability:** User-provided inputs (`d.label` and `d.value`) for user details/history were directly interpolated into an HTML string and injected via `innerHTML` without sanitization.
 **Learning:** Any user-controlled string must be escaped for HTML entities before being injected into the DOM via `.innerHTML` or `.insertAdjacentHTML`, otherwise it leads to Cross-Site Scripting (XSS).
 **Prevention:** Use standard text escaping for sensitive characters (like `<`, `>`, `&`, `"`, `'`) or rely on safer DOM APIs like `textContent`.
+
+## 2024-05-25 - [Stored XSS in Monthly and Verse Bank Lists]
+**Vulnerability:** User-provided verse text, references, and tags stored in `verseStore` and `quickVerses` were interpolated directly into HTML strings and injected via `.innerHTML` without proper sanitization in multiple places (`buildMonthList`, `vbRender`, `occRenderVBPanel`).
+**Learning:** Any dynamic content derived from user input or database storage (even if locally stored) must be escaped before injection into the DOM via `.innerHTML` to prevent Stored Cross-Site Scripting (XSS).
+**Prevention:** Implement and use a global `escapeHTML` function for all dynamic content interpolated into `.innerHTML` template strings.

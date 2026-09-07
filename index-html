@@ -2935,12 +2935,18 @@ function renderToCanvas(canvas,dayNum,monthIdx,verseObj,isEn){
   ctx.restore();
 }
 
-function redraw(){
+  // Debounce canvas rendering to max once per frame for smooth slider performance
+let _redrawAF = null;
+function _syncRedraw(){
   const cv=document.getElementById("cv");
   const v=verses[day-1]||verses.find(x=>x&&(x.ta||x.en))||{ta:'',en:'',ref_ta:'',ref_en:'',tags:[]};
   renderToCanvas(cv,day,month,v,lang==="en");
   renderPreview();
   capBuildSimple();
+}
+function redraw(){
+  if(_redrawAF) cancelAnimationFrame(_redrawAF);
+  _redrawAF = requestAnimationFrame(_syncRedraw);
 }
 
 // ─── LANG ────────────────────────────────────────

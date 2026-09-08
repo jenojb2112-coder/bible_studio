@@ -2274,6 +2274,10 @@ let activeBgId="default";
 let bgImg=new Image();
 let currentBgSrc=BG_DEFAULT;
 
+// Cache frequently accessed canvases
+let _cv = null;
+let _cvPreview = null;
+
 // ─── IndexedDB ──────────────────────────────────
 let db;
 function initDB(){
@@ -2936,7 +2940,8 @@ function renderToCanvas(canvas,dayNum,monthIdx,verseObj,isEn){
 }
 
 function redraw(){
-  const cv=document.getElementById("cv");
+  if(!_cv) _cv = document.getElementById("cv");
+  const cv=_cv;
   const v=verses[day-1]||verses.find(x=>x&&(x.ta||x.en))||{ta:'',en:'',ref_ta:'',ref_en:'',tags:[]};
   renderToCanvas(cv,day,month,v,lang==="en");
   renderPreview();
@@ -3539,7 +3544,8 @@ function downloadDay(d){
 
 // ─── DOWNLOAD SINGLE ─────────────────────────────
 function downloadSingle(){
-  const cv=document.getElementById("cv");
+  if(!_cv) _cv = document.getElementById("cv");
+  const cv=_cv;
   cv.toBlob(blob=>{
     const url=URL.createObjectURL(blob);
     const a=document.createElement("a");
@@ -3587,7 +3593,8 @@ async function downloadAll(){
 // ─── WHATSAPP SHARE ───────────────────────────────
 async function shareWhatsApp(){
   showMsg("⏳ Preparing...");
-  const cv=document.getElementById("cv");
+  if(!_cv) _cv = document.getElementById("cv");
+  const cv=_cv;
   const blob=await new Promise(res=>cv.toBlob(res,"image/png"));
   const fname=`verse_${MONTHS_SHORT[month]}_${day}.png`;
   const file=new File([blob],fname,{type:"image/png"});
@@ -3603,7 +3610,8 @@ async function shareWhatsApp(){
 
 // ─── MORE SHARE ───────────────────────────────────
 async function shareMore(){
-  const cv=document.getElementById("cv");
+  if(!_cv) _cv = document.getElementById("cv");
+  const cv=_cv;
   const blob=await new Promise(res=>cv.toBlob(res,"image/png"));
   const fname=`verse_${MONTHS_SHORT[month]}_${day}.png`;
   const file=new File([blob],fname,{type:"image/png"});
@@ -3628,7 +3636,8 @@ function capGetShareText(){
 
 
 function renderPreview(){
-  const cv=document.getElementById("cvPreview");
+  if(!_cvPreview) _cvPreview = document.getElementById("cvPreview");
+  const cv=_cvPreview;
   if(!cv)return;
   if(!bgImg.complete||!bgImg.width)return;
   const BW=bgImg.width,BH=bgImg.height;

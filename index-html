@@ -831,7 +831,7 @@ input[type=range].date-slider{-webkit-appearance:auto;appearance:auto;height:20p
           <option value="">— Template தேர்வு செய்யுங்க —</option>
         </select>
         <button onclick="capSaveTemplate()">💾 Save</button>
-        <button onclick="capDeleteTemplate()">🗑</button>
+        <button onclick="capDeleteTemplate()" aria-label="Delete template" title="Delete template">🗑</button>
       </div>
       <p style="color:#666;font-size:0.6rem;margin-top:-4px;margin-bottom:8px;">இப்போ இருக்குற Details + Tone-ஐ ஒரு பேருடன் Template-ஆ Save பண்ணி, அடுத்த தடவை ஒரே click-ல் Load பண்ணலாம் (எ.கா. "Sunday Service", "Special Occasion").</p>
     </div>
@@ -2588,7 +2588,7 @@ function renderBgGallery(){
   bgList.forEach(bg=>{
     const div=document.createElement("div");
     div.className="bg-thumb"+(bg.id===activeBgId?" active":"");
-    div.innerHTML=`<img src="${bg.src}" loading="lazy"><div class="label">${bg.label}</div>${(bg.id!=="default"&&!bg.id.startsWith("preset"))?'<button class="del" onclick="delBg(event,\''+bg.id+'\')">✕</button>':""}`;
+    div.innerHTML=`<img src="${bg.src}" loading="lazy"><div class="label">${bg.label}</div>${(bg.id!=="default"&&!bg.id.startsWith("preset"))?'<button class="del" onclick="delBg(event,\''+bg.id+'\')" aria-label="Delete background" title="Delete background">✕</button>':""}`;
     div.onclick=()=>selectBg(bg.id);
     scroll.insertBefore(div,addBtn);
   });
@@ -4125,12 +4125,12 @@ function capRenderTags(){
   list.innerHTML = details.map((d,i)=>`
     <div class="cap-tag-row ${d.on?'':'off'}">
       <div class="cap-reorder">
-        <button ${i===0?'disabled':''} onclick="capMoveDetail(${i},-1)">▲</button>
-        <button ${i===details.length-1?'disabled':''} onclick="capMoveDetail(${i},1)">▼</button>
+        <button ${i===0?'disabled':''} onclick="capMoveDetail(${i},-1)" aria-label="Move detail up" title="Move detail up">▲</button>
+        <button ${i===details.length-1?'disabled':''} onclick="capMoveDetail(${i},1)" aria-label="Move detail down" title="Move detail down">▼</button>
       </div>
       <span class="cap-row-txt" onclick="capToggleTagAt(${i})">${d.label?('<b>'+esc(d.label)+':</b> '):''}${esc(d.value)}</span>
       <div class="cap-tag-toggle ${d.on?'on':''}" onclick="capToggleTagAt(${i})"></div>
-      <button class="cap-tag-del" onclick="capDeleteTagAt(${i})">✕</button>
+      <button class="cap-tag-del" onclick="capDeleteTagAt(${i})" aria-label="Delete detail" title="Delete detail">✕</button>
     </div>
   `).join('');
 }
@@ -4227,7 +4227,7 @@ function capRenderHistory(){
         <span class="cap-hist-time">${capHistTimeAgo(h.ts)}</span>
         <div class="cap-hist-actions">
           <button class="use" onclick="capUseHistory(${i})">🔁 Use</button>
-          <button class="del" onclick="capDeleteHistory(${i})">✕</button>
+          <button class="del" onclick="capDeleteHistory(${i})" aria-label="Delete history entry" title="Delete history entry">✕</button>
         </div>
       </div>
     </div>
@@ -4518,8 +4518,8 @@ function occRenderVBPanel() {
           <div class="occ-vb-text">${v.ta||v.en||''}</div>
           <div class="occ-vb-ref">${v.ref_ta||v.ref_en||''}</div>
           <div class="occ-vb-btns">
-            <button class="vb-btn" style="font-size:0.6rem;padding:3px 8px;" onclick="occEditVerseAt(${i})">✏️</button>
-            <button class="vb-btn red" style="font-size:0.6rem;padding:3px 8px;" onclick="occDeleteVerseAt(${i})">🗑</button>
+            <button class="vb-btn" style="font-size:0.6rem;padding:3px 8px;" onclick="occEditVerseAt(${i})" aria-label="Edit verse" title="Edit verse">✏️</button>
+            <button class="vb-btn red" style="font-size:0.6rem;padding:3px 8px;" onclick="occDeleteVerseAt(${i})" aria-label="Delete verse" title="Delete verse">🗑</button>
           </div>
         </div>`;
       item.onclick = (e) => { if(!e.target.closest('button')){occSelectVerseAt(i);} };

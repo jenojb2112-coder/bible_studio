@@ -1409,6 +1409,10 @@ input[type=range].date-slider{-webkit-appearance:auto;appearance:auto;height:20p
 
 <script>
 // ─── DATA ───────────────────────────────────────
+window.escapeHTML = function(s) {
+  return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');
+};
+
 const MONTHS_SHORT=["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
 const MONTHS_FULL=["January","February","March","April","May","June","July","August","September","October","November","December"];
 const DATE_PATTERNS=[
@@ -3472,7 +3476,9 @@ function buildMonthList(){
     const verseText=v?(monthLang==="ta"?v.ta:v.en)||'':'வசனம் இல்லை';
     const refText=v?(monthLang==="ta"?v.ref_ta:v.ref_en)||'':'';
     const thumbId='miThumb_'+d;
-    div.innerHTML=`<canvas class="mi-thumb" id="${thumbId}" width="34" height="43"></canvas><div class="mi-day"><div class="dn" style="color:${d===day?"var(--gold)":"#fff"}">${d}</div><div class="dm">${MONTHS_SHORT[month]}</div></div><div class="mi-text" style="flex:1;"><p>${hasVerse?'':'⚠️ '}${verseText.substring(0,60)}${verseText.length>60?'...':''}</p><div class="mr">${refText}</div></div>${hasVerse?`<button class="mi-dl" onclick="event.stopPropagation();downloadDay(${d})" title="இந்த நாளுக்கு மட்டும் Download">📥</button>`:''}`;
+    const safeVerse = window.escapeHTML(verseText.substring(0,60) + (verseText.length>60?'...':''));
+    const safeRef = window.escapeHTML(refText);
+    div.innerHTML=`<canvas class="mi-thumb" id="${thumbId}" width="34" height="43"></canvas><div class="mi-day"><div class="dn" style="color:${d===day?"var(--gold)":"#fff"}">${d}</div><div class="dm">${MONTHS_SHORT[month]}</div></div><div class="mi-text" style="flex:1;"><p>${hasVerse?'':'⚠️ '}${safeVerse}</p><div class="mr">${safeRef}</div></div>${hasVerse?`<button class="mi-dl" onclick="event.stopPropagation();downloadDay(${d})" title="இந்த நாளுக்கு மட்டும் Download">📥</button>`:''}`;
     const dd=d;
     div.onclick=()=>{day=dd;switchTab("poster");document.querySelector(".tab").click();buildDayGrid();buildMonthList();redraw();};
     list.appendChild(div);
@@ -4121,14 +4127,13 @@ function capRenderTags(){
     list.innerHTML = '<div class="cap-tag-empty">இன்னும் detail எதுவும் add பண்ணல. மேலே ⛪/📍/📞 preset-ஐ tap பண்ணி value type பண்ணி Add பண்ணுங்க.</div>';
     return;
   }
-  const esc = s => String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');
   list.innerHTML = details.map((d,i)=>`
     <div class="cap-tag-row ${d.on?'':'off'}">
       <div class="cap-reorder">
         <button ${i===0?'disabled':''} onclick="capMoveDetail(${i},-1)">▲</button>
         <button ${i===details.length-1?'disabled':''} onclick="capMoveDetail(${i},1)">▼</button>
       </div>
-      <span class="cap-row-txt" onclick="capToggleTagAt(${i})">${d.label?('<b>'+esc(d.label)+':</b> '):''}${esc(d.value)}</span>
+      <span class="cap-row-txt" onclick="capToggleTagAt(${i})">${d.label?('<b>'+window.escapeHTML(d.label)+':</b> '):''}${window.escapeHTML(d.value)}</span>
       <div class="cap-tag-toggle ${d.on?'on':''}" onclick="capToggleTagAt(${i})"></div>
       <button class="cap-tag-del" onclick="capDeleteTagAt(${i})">✕</button>
     </div>
@@ -4222,7 +4227,7 @@ function capRenderHistory(){
   }
   list.innerHTML = hist.map((h,i)=>`
     <div class="cap-hist-item">
-      <div class="cap-hist-txt">${h.text.replace(/</g,'&lt;')}</div>
+      <div class="cap-hist-txt">${window.escapeHTML(h.text)}</div>
       <div class="cap-hist-meta">
         <span class="cap-hist-time">${capHistTimeAgo(h.ts)}</span>
         <div class="cap-hist-actions">
@@ -4515,8 +4520,8 @@ function occRenderVBPanel() {
       item.innerHTML = `
         <div class="occ-vb-dot"></div>
         <div class="occ-vb-body">
-          <div class="occ-vb-text">${v.ta||v.en||''}</div>
-          <div class="occ-vb-ref">${v.ref_ta||v.ref_en||''}</div>
+          <div class="occ-vb-text">${window.escapeHTML(v.ta||v.en||'')}</div>
+          <div class="occ-vb-ref">${window.escapeHTML(v.ref_ta||v.ref_en||'')}</div>
           <div class="occ-vb-btns">
             <button class="vb-btn" style="font-size:0.6rem;padding:3px 8px;" onclick="occEditVerseAt(${i})">✏️</button>
             <button class="vb-btn red" style="font-size:0.6rem;padding:3px 8px;" onclick="occDeleteVerseAt(${i})">🗑</button>

@@ -41,3 +41,7 @@
 **Vulnerability:** User-provided inputs (`d.label` and `d.value`) for user details/history were directly interpolated into an HTML string and injected via `innerHTML` without sanitization.
 **Learning:** Any user-controlled string must be escaped for HTML entities before being injected into the DOM via `.innerHTML` or `.insertAdjacentHTML`, otherwise it leads to Cross-Site Scripting (XSS).
 **Prevention:** Use standard text escaping for sensitive characters (like `<`, `>`, `&`, `"`, `'`) or rely on safer DOM APIs like `textContent`.
+## 2024-05-25 - [Stored XSS in Caption History]
+**Vulnerability:** User-provided inputs for caption history were insufficiently sanitized (only escaping <) before being injected via `innerHTML`, allowing Stored XSS.
+**Learning:** Any user-controlled string must be completely escaped for all standard HTML entities (`&`, `<`, `>`, `"`, `'`) before being injected into the DOM via `.innerHTML`, otherwise it leads to Cross-Site Scripting (XSS).
+**Prevention:** Always use a comprehensive text escaping function (like `escapeHTML`) that targets all sensitive characters before injecting data into the DOM via string interpolation.

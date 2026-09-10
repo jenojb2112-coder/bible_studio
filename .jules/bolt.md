@@ -22,3 +22,6 @@
 ## 2024-11-20 - Preconnect Requires Crossorigin for API/Fonts
 **Learning:** Preconnecting to external domains (like Firebase APIs, Google Fonts, etc.) without the `crossorigin` attribute for resources fetched via CORS means the browser won't use the pre-established connection, negating the performance benefit.
 **Action:** Always add the `crossorigin` attribute to `<link rel="preconnect">` tags for domains where resources (like ES modules or JSON APIs) will be fetched via CORS to ensure the connection overhead (DNS, TCP, TLS) is actually reduced.
+## 2025-02-05 - Debounce Heavy UI Callbacks
+**Learning:** In a single-page application, heavy operations like canvas rendering (e.g., redraw()) and IndexedDB writes (e.g., saveAllSettings()) are frequently bound directly to continuous UI events like range slider oninput handlers. This causes severe main-thread jank.
+**Action:** Always debounce or throttle these operations (e.g., using requestAnimationFrame for rendering and setTimeout for data persistence) to prevent blocking the main thread.

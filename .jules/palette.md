@@ -27,3 +27,7 @@
 ## 2024-05-25 - Pointer Events for Visual Overlays
 **Learning:** When dynamic visual overlays (such as image previews like `.photo-preview`) are positioned on top of interactive transparent hitzone elements, they can block click events, preventing users from interacting with the underlying button (e.g., to upload a new photo).
 **Action:** Apply `pointer-events: none;` to the visual overlay to allow clicks to pass through to the underlying interactive element.
+
+## 2026-09-10 - ARIA Labels for Icon-Only Actions
+**Learning:** Icon-only action buttons (like delete '🗑', edit '✏️', or remove tag '✕') without explicit text labels are completely inaccessible to screen readers and lack hover context for mouse users. This affects multiple components across the app, including the template manager, background gallery, verse editor, and history panel.
+**Action:** Always add descriptive `aria-label` and `title` attributes to icon-only buttons to ensure they are readable by screen readers and display a native tooltip on hover.

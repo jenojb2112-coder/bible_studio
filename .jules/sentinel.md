@@ -41,3 +41,7 @@
 **Vulnerability:** User-provided inputs (`d.label` and `d.value`) for user details/history were directly interpolated into an HTML string and injected via `innerHTML` without sanitization.
 **Learning:** Any user-controlled string must be escaped for HTML entities before being injected into the DOM via `.innerHTML` or `.insertAdjacentHTML`, otherwise it leads to Cross-Site Scripting (XSS).
 **Prevention:** Use standard text escaping for sensitive characters (like `<`, `>`, `&`, `"`, `'`) or rely on safer DOM APIs like `textContent`.
+## 2024-05-26 - [Stored XSS in Verse Bank]
+**Vulnerability:** User-provided inputs (`v.ta`, `v.ref_ta`, `v.tags`) were directly interpolated into an HTML string and injected into the Verse Bank UI using `innerHTML` without sanitization.
+**Learning:** Any dynamic content derived from user inputs (like verse text, references, or tags) must be properly HTML-escaped before being rendered via `innerHTML`. Failure to do so allows arbitrary script execution if a user inputs malicious tags (Stored XSS).
+**Prevention:** Implement and enforce a global `escapeHTML` utility function to neutralize sensitive HTML characters (`&`, `<`, `>`, `"`, `'`) before rendering dynamic strings in templates that use `innerHTML`.

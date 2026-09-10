@@ -2332,10 +2332,16 @@ function saveSettingsToDB(key,value){
   db.transaction("settings","readwrite").objectStore("settings").put({key,value});
 }
 
-function saveAllSettings(){
+function _saveAllSettings(){
   if(!db)return;
   const data={fx,verseSize,daySize,monSize,dateColor,verseColor,refColor,dx,dy,font,dateBoxScale,dateBoxBg,dateBoxBgOn,dateBoxBgAlpha,dateAdv,dateFormatId,dateFmtScale,dateDayScale,dateMonScale,dateYearScale,dateLineGap,datePlaceText};
   saveSettingsToDB('allSettings', JSON.stringify(data));
+}
+
+let _saveSettingsTimeout = null;
+function saveAllSettings() {
+  if (_saveSettingsTimeout) clearTimeout(_saveSettingsTimeout);
+  _saveSettingsTimeout = setTimeout(_saveAllSettings, 500);
 }
 
 function loadSettingsFromDB(){
@@ -2935,12 +2941,17 @@ function renderToCanvas(canvas,dayNum,monthIdx,verseObj,isEn){
   ctx.restore();
 }
 
-function redraw(){
+let _redrawRAF = null;
+function _redraw(){
   const cv=document.getElementById("cv");
   const v=verses[day-1]||verses.find(x=>x&&(x.ta||x.en))||{ta:'',en:'',ref_ta:'',ref_en:'',tags:[]};
   renderToCanvas(cv,day,month,v,lang==="en");
   renderPreview();
   capBuildSimple();
+}
+function redraw() {
+  if (_redrawRAF) cancelAnimationFrame(_redrawRAF);
+  _redrawRAF = requestAnimationFrame(_redraw);
 }
 
 // ─── LANG ────────────────────────────────────────

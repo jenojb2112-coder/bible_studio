@@ -22,3 +22,6 @@
 ## 2024-11-20 - Preconnect Requires Crossorigin for API/Fonts
 **Learning:** Preconnecting to external domains (like Firebase APIs, Google Fonts, etc.) without the `crossorigin` attribute for resources fetched via CORS means the browser won't use the pre-established connection, negating the performance benefit.
 **Action:** Always add the `crossorigin` attribute to `<link rel="preconnect">` tags for domains where resources (like ES modules or JSON APIs) will be fetched via CORS to ensure the connection overhead (DNS, TCP, TLS) is actually reduced.
+## 2024-11-20 - Throttling canvas redraws logic safety
+**Learning:** Throttling synchronous UI-bound updates like canvas `redraw()` to the display refresh rate using `requestAnimationFrame` is highly effective for reducing continuous-input jank (like sliders). However, changing a synchronous function to an asynchronous one can break automated loops that expect immediate synchronous results before moving to the next iteration (e.g., iterating days in a month to render and export 30 canvases in a ZIP).
+**Action:** When converting a synchronous rendering function to `requestAnimationFrame` for UI performance, ensure no other parts of the application (like bulk download scripts) rely on synchronous execution of that function. (In this case, `downloadAll` uses its own offscreen render, so it is safe).
